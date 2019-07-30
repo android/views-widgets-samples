@@ -9,5 +9,5 @@ technologies: [Android]
 categories:   [UI]
 languages:    [Kotlin]
 solutions:    [Mobile]
-github:       android-CardView
+github:       android/views-widgets
 license:      apache2
