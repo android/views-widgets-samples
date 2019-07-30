@@ -9,7 +9,7 @@ technologies: [Android]
 categories:   [UI, Views]
 languages:    [Kotlin]
 solutions:    [Mobile]
-github:       android-RecyclerView
+github:       android/views-widgets
 level:        INTERMEDIATE
 icon:         screenshots/icon-web.png
 apiRefs:
