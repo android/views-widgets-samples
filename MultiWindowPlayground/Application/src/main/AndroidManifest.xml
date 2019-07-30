@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  Copyright (C) 2016 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<manifest package="com.android.multiwindowplayground"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/MultiWindowSampleTheme">
+        <!-- The launcher Activity that is started when the application is first started.
+         Note that we are setting the task affinity to "" to ensure each activity is launched
+         into a separate task stack. -->
+        <activity
+            android:name="com.android.multiwindowplayground.MainActivity"
+            android:taskAffinity="">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- This Activity cannot be resized and is always displayed full screen. -->
+        <activity
+            android:name="com.android.multiwindowplayground.activities.UnresizableActivity"
+            android:resizeableActivity="false"
+            android:taskAffinity="" />
+
+        <!-- This Activity has a default size (750x500dp) with a minimum size
+        (500dp at its shortest side). It is launched in the top/end (top/right) corner by default.
+         These attributes are defined in the 'layout' tag within an Activity definition. -->
+        <activity
+            android:name="com.android.multiwindowplayground.activities.MinimumSizeActivity"
+            android:launchMode="singleInstance"
+            android:taskAffinity="">
+            <layout
+                android:defaultHeight="500dp"
+                android:defaultWidth="750dp"
+                android:gravity="top|end"
+                android:minWidth="500dp"
+                android:minHeight="500dp" />
+        </activity>
+
+        <!-- In split-screen mode, this Activity is launched adjacent to another Activity. This is
+          controlled via a flag set in the intent that launches this Activity. -->
+        <activity
+            android:name="com.android.multiwindowplayground.activities.AdjacentActivity"
+            android:taskAffinity="" />
+
+        <!-- This Activity is launched within an area defined in its launch intent. -->
+        <activity
+            android:name="com.android.multiwindowplayground.activities.LaunchBoundsActivity"
+            android:taskAffinity="" />
+
+        <!-- This activity handles all configuration changes itself.
+        Callbacks for configuration changes are received in 'onConfigurationChanged'. -->
+        <activity
+            android:name="com.android.multiwindowplayground.activities.CustomConfigurationChangeActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:launchMode="singleInstance"
+            android:taskAffinity="" />
+
+        <!-- This Activity is launched in a new task without any special flags or settings. -->
+        <activity
+            android:name="com.android.multiwindowplayground.activities.BasicActivity"
+            android:launchMode="singleInstance"
+            android:taskAffinity="" />
+
+    </application>
+
+</manifest>
