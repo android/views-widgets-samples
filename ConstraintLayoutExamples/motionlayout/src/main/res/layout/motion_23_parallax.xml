@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.androidstudio.motionlayoutexample.utils.ViewpagerHeader xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/motionLayout"
+    app:layoutDescription="@xml/scene_23"
+    android:layout_width="match_parent"
+    app:progress="0"
+    android:layout_height="230dp">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:lottie_rawRes="@raw/walkthrough"/>
+
+</com.google.androidstudio.motionlayoutexample.utils.ViewpagerHeader>

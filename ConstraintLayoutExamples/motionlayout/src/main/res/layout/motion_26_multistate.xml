@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2019 The Android Open Source Project
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+<androidx.constraintlayout.motion.widget.MotionLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/motionLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/scene_26">
+
+    <ImageView
+        android:id="@+id/arrow_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_keyboard_arrow_right"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/arrow_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_keyboard_arrow_up"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <View
+        android:id="@+id/dial_pad"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:background="@color/cerulean_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@color/azure"
+        android:text="@string/one"
+        app:layout_constraintEnd_toStartOf="@id/button2"
+        app:layout_constraintStart_toStartOf="@id/dial_pad"
+        app:layout_constraintTop_toTopOf="@id/button2" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@color/azure"
+        android:text="@string/two"
+        app:layout_constraintEnd_toStartOf="@id/button3"
+        app:layout_constraintStart_toEndOf="@id/button1"
+        app:layout_constraintTop_toTopOf="@id/button3" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@color/azure"
+        android:text="@string/three"
+        app:layout_constraintBottom_toTopOf="@id/button6"
+        app:layout_constraintEnd_toEndOf="@id/dial_pad"
+        app:layout_constraintStart_toEndOf="@id/button2"
+        app:layout_constraintTop_toTopOf="@id/dial_pad" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@color/azure"
+        android:text="@string/four"
+        app:layout_constraintEnd_toStartOf="@id/button5"
+        app:layout_constraintStart_toStartOf="@id/dial_pad"
+        app:layout_constraintTop_toTopOf="@id/button5" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@color/azure"
+        android:text="@string/five"
+        app:layout_constraintEnd_toStartOf="@id/button6"
+        app:layout_constraintStart_toEndOf="@id/button4"
+        app:layout_constraintTop_toTopOf="@id/button6" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@color/azure"
+        android:text="@string/six"
+        app:layout_constraintBottom_toTopOf="@id/button9"
+        app:layout_constraintEnd_toEndOf="@id/dial_pad"
+        app:layout_constraintStart_toEndOf="@id/button5"
+        app:layout_constraintTop_toBottomOf="@id/button3" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@color/azure"
+        android:text="@string/seven"
+        app:layout_constraintEnd_toStartOf="@id/button8"
+        app:layout_constraintStart_toStartOf="@id/dial_pad"
+        app:layout_constraintTop_toTopOf="@id/button8" />
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@color/azure"
+        android:text="@string/eight"
+        app:layout_constraintEnd_toStartOf="@id/button9"
+        app:layout_constraintStart_toEndOf="@id/button7"
+        app:layout_constraintTop_toTopOf="@id/button9" />
+
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@color/azure"
+        android:text="@string/nine"
+        app:layout_constraintBottom_toTopOf="@id/button12"
+        app:layout_constraintEnd_toEndOf="@id/dial_pad"
+        app:layout_constraintStart_toEndOf="@id/button8"
+        app:layout_constraintTop_toBottomOf="@id/button6" />
+
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@color/azure"
+        android:text="@string/asterisk"
+        app:layout_constraintEnd_toStartOf="@id/button11"
+        app:layout_constraintStart_toStartOf="@id/dial_pad"
+        app:layout_constraintTop_toTopOf="@id/button11" />
+
+    <Button
+        android:id="@+id/button11"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@color/azure"
+        android:text="@string/zero"
+        app:layout_constraintEnd_toStartOf="@id/button12"
+        app:layout_constraintStart_toEndOf="@id/button10"
+        app:layout_constraintTop_toTopOf="@id/button12" />
+
+    <Button
+        android:id="@+id/button12"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@color/azure"
+        android:text="@string/sharp"
+        app:layout_constraintBottom_toBottomOf="@id/dial_pad"
+        app:layout_constraintEnd_toEndOf="@id/dial_pad"
+        app:layout_constraintStart_toEndOf="@id/button11"
+        app:layout_constraintTop_toBottomOf="@id/button9" />
+
+    <View
+        android:id="@+id/people_pad"
+        android:layout_width="300dp"
+        android:layout_height="500dp"
+        android:layout_marginStart="4dp"
+        android:background="@color/brown"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterButton
+        android:id="@+id/people1"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/avatar_1_raster"
+        app:layout_constraintBottom_toTopOf="@id/people3"
+        app:layout_constraintEnd_toStartOf="@id/people2"
+        app:layout_constraintStart_toStartOf="@id/people_pad"
+        app:layout_constraintTop_toTopOf="@id/people_pad" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterButton
+        android:id="@+id/people2"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/avatar_2_raster"
+        app:layout_constraintBottom_toTopOf="@id/people4"
+        app:layout_constraintEnd_toEndOf="@id/people_pad"
+        app:layout_constraintStart_toEndOf="@id/people1"
+        app:layout_constraintTop_toTopOf="@id/people_pad" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterButton
+        android:id="@+id/people3"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/avatar_3_raster"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@id/people5"
+        app:layout_constraintEnd_toStartOf="@id/people4"
+        app:layout_constraintStart_toStartOf="@id/people_pad"
+        app:layout_constraintTop_toBottomOf="@id/people1" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterButton
+        android:id="@+id/people4"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/avatar_4_raster"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@id/people6"
+        app:layout_constraintEnd_toEndOf="@id/people_pad"
+        app:layout_constraintStart_toEndOf="@id/people3"
+        app:layout_constraintTop_toBottomOf="@id/people2" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterButton
+        android:id="@+id/people5"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/avatar_5_raster"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@id/people7"
+        app:layout_constraintEnd_toStartOf="@id/people6"
+        app:layout_constraintStart_toStartOf="@id/people_pad"
+        app:layout_constraintTop_toBottomOf="@id/people3" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterButton
+        android:id="@+id/people6"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/avatar_6_raster"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@id/people8"
+        app:layout_constraintEnd_toEndOf="@id/people_pad"
+        app:layout_constraintStart_toEndOf="@id/people5"
+        app:layout_constraintTop_toBottomOf="@id/people4" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterButton
+        android:id="@+id/people7"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/avatar_7_raster"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@id/people_pad"
+        app:layout_constraintEnd_toStartOf="@id/people8"
+        app:layout_constraintStart_toStartOf="@id/people_pad"
+        app:layout_constraintTop_toBottomOf="@id/people5" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterButton
+        android:id="@+id/people8"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/avatar_8_raster"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@id/people_pad"
+        app:layout_constraintEnd_toEndOf="@id/people_pad"
+        app:layout_constraintStart_toEndOf="@id/people7"
+        app:layout_constraintTop_toBottomOf="@id/people6" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

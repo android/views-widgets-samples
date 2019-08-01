@@ -1,0 +1,68 @@
+<!--
+  Copyright (C) 2017 The Android Open Source Project
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+       http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+<resources>
+    <string name="app_name">Constraint Layout Examples</string>
+    <string name="lake_discription">
+        Lake Tahoe is a large freshwater lake in the Sierra Nevada of the United States. At a surface
+        elevation of 6,225 ft (1,897 m), it straddles the border between California and Nevada, west
+        of Carson City. Lake Tahoe is the largest alpine lake in North America. Its depth is
+        1,645 ft (501 m), making it the second deepest in the United States after Crater Lake
+        (1,945 ft (593 m)). Additionally, Lake Tahoe is the sixth largest lake by volume in the
+        United States at 122,160,280 acre·ft (150,682,490 dam3), behind the five Great Lakes.
+
+The lake was formed about 2 million years ago and is a part of the Lake Tahoe Basin with the modern
+        lake being shaped during the ice ages. It is known for the clarity of its water and the
+        panorama of surrounding mountains on all sides. The area surrounding the lake is also
+        referred to as Lake Tahoe, or simply Tahoe. More than 75 percent of the lakes watershed is
+        national forest land, comprising the Lake Tahoe Basin Management Unit of the United States
+        Forest Service.
+    </string>
+    <string name="lake_tahoe_image">Image of Lake Tahoe</string>
+    <string name="lake_tahoe_title">Lake Tahoe</string>
+    <string name="android_button">Android Button</string>
+    <string name="centering_views">Centering Views</string>
+    <string name="centered_button">Centered Button</string>
+    <string name="basic_arrange">Basic Arrange</string>
+    <string name="advanced_arrangement">Advanced Arrangement</string>
+    <string name="aspect_ratio">Aspect Ratio</string>
+    <string name="basic_chains">Basic Chains</string>
+    <string name="constraintset">ConstraintSet</string>
+    <string name="advanced_chains">Advanced Chains</string>
+    <string name="guidelines">Guidelines</string>
+    <string name="button_1">Button 1</string>
+    <string name="button_text">Button 1234</string>
+    <string name="button_text_12">Button 12</string>
+    <string name="arrange">Arrange</string>
+    <string name="button">Button</string>
+    <string name="one">1</string>
+    <string name="four">4</string>
+    <string name="six">6</string>
+    <string name="advanced_arrange">Advanced Arrange</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="zero">0</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="five">5</string>
+    <string name="zero_point_zero">0.0</string>
+    <string name="dot">.</string>
+    <string name="centering">Basic Centering</string>
+    <string name="big_android_icon">Big Android Icon</string>
+    <string name="textview">TextView</string>
+    <string name="divide">÷</string>
+    <string name="multiply">×</string>
+    <string name="add">+</string>
+    <string name="equals">=</string>
+    <string name="subtract">−</string>
+</resources>
