@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2016 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,43 +15,46 @@
   -->
 
 <layout>
-    <android.support.percent.PercentFrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <androidx.percentlayout.widget.PercentFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
         tools:context="com.example.android.databoundrecyclerview.MainActivity">
-        <TextView app:layout_widthPercent="50%"
-                  android:text="@string/city_list"
-                  style="@style/TextAppearance.AppCompat.Headline"
-                  android:layout_height="@dimen/title_height"/>
-        <TextView app:layout_widthPercent="50%"
-                  android:text="@string/mixed_list"
-                  style="@style/TextAppearance.AppCompat.Headline"
-                  android:layout_gravity="end"
-                  android:layout_height="@dimen/title_height"/>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/city_list"
-            app:layout_widthPercent="50%"
-            android:layout_marginTop="@dimen/title_height"
-            android:layout_height="wrap_content"
-            app:layoutManager="LinearLayoutManager">
 
-        </android.support.v7.widget.RecyclerView>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/mixed_list"
-            app:layout_widthPercent="50%"
-            android:layout_marginTop="@dimen/title_height"
+        <TextView
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_height="@dimen/title_height"
+            android:text="@string/city_list"
+            app:layout_widthPercent="50%" />
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_height="@dimen/title_height"
             android:layout_gravity="end"
-            android:layout_height="wrap_content"
-            app:layoutManager="LinearLayoutManager">
+            android:text="@string/mixed_list"
+            app:layout_widthPercent="50%" />
 
-        </android.support.v7.widget.RecyclerView>
-    </android.support.percent.PercentFrameLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/city_list"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/title_height"
+            app:layoutManager="LinearLayoutManager"
+            app:layout_widthPercent="50%" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mixed_list"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/title_height"
+            app:layoutManager="LinearLayoutManager"
+            app:layout_widthPercent="50%" />
+
+    </androidx.percentlayout.widget.PercentFrameLayout>
 </layout>

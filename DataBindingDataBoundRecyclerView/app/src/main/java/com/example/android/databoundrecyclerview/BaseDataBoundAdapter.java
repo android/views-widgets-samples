@@ -16,13 +16,14 @@
 
 package com.example.android.databoundrecyclerview;
 
-import android.databinding.OnRebindCallback;
-import android.databinding.ViewDataBinding;
-import android.support.annotation.CallSuper;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
+
+import androidx.annotation.CallSuper;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
+import androidx.databinding.OnRebindCallback;
+import androidx.databinding.ViewDataBinding;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
@@ -39,7 +40,7 @@ import java.util.List;
  * It can be used for both single type lists and multiple type lists.
  *
  * @param <T> The type of the ViewDataBinding class. Can be ommitted in multiple-binding-type use
- *           case.
+ *            case.
  */
 abstract public class BaseDataBoundAdapter<T extends ViewDataBinding>
         extends RecyclerView.Adapter<DataBoundViewHolder<T>> {
@@ -77,7 +78,7 @@ abstract public class BaseDataBoundAdapter<T extends ViewDataBinding>
 
     @Override
     public final void onBindViewHolder(DataBoundViewHolder<T> holder, int position,
-            List<Object> payloads) {
+                                       List<Object> payloads) {
         // when a VH is rebound to the same item, we don't have to call the setters
         if (payloads.isEmpty() || hasNonDataBindingInvalidate(payloads)) {
             bindItem(holder, position, payloads);
@@ -88,12 +89,12 @@ abstract public class BaseDataBoundAdapter<T extends ViewDataBinding>
     /**
      * Override this method to handle binding your items into views
      *
-     * @param holder The ViewHolder that has the binding instance
+     * @param holder   The ViewHolder that has the binding instance
      * @param position The position of the item in the adapter
      * @param payloads The payloads that were passed into the onBind method
      */
     protected abstract void bindItem(DataBoundViewHolder<T> holder, int position,
-            List<Object> payloads);
+                                     List<Object> payloads);
 
     private boolean hasNonDataBindingInvalidate(List<Object> payloads) {
         for (Object payload : payloads) {

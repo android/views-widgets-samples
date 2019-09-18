@@ -15,12 +15,19 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
->
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
-        <variable name="data" type="com.example.android.databoundrecyclerview.State"/>
-        <variable name="callback" type="com.example.android.databoundrecyclerview.ActionCallback"/>
+
+        <variable
+            name="data"
+            type="com.example.android.databoundrecyclerview.State" />
+
+        <variable
+            name="callback"
+            type="com.example.android.databoundrecyclerview.ActionCallback" />
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,11 +35,18 @@
         android:onClick="@{() -> callback.onClick(data)}"
         android:orientation="vertical"
         android:padding="@dimen/item_margin">
-        <TextView style="@style/TextAppearance.AppCompat.Medium" android:layout_width="wrap_content"
-                  android:layout_height="wrap_content" android:layout_gravity="bottom"
-                  android:text="@{data.name}"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:layout_marginTop="@dimen/item_margin"
-                  android:text="@{@string/state_population(data.population)}"/>
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="@{data.name}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_margin"
+            android:text="@{@string/state_population(data.population)}" />
     </LinearLayout>
 </layout>

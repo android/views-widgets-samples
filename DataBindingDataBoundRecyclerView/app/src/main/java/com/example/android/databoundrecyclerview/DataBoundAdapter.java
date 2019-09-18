@@ -16,8 +16,8 @@
 
 package com.example.android.databoundrecyclerview;
 
-import android.databinding.ViewDataBinding;
-import android.support.annotation.LayoutRes;
+import androidx.annotation.LayoutRes;
+import androidx.databinding.ViewDataBinding;
 
 /**
  * An Adapter implementation that works with a {@link DataBoundViewHolder}.

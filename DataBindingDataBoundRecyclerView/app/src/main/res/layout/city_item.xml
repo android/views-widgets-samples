@@ -16,25 +16,39 @@
   ~ limitations under the License.
   -->
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
-        <variable name="data" type="com.example.android.databoundrecyclerview.City"/>
-        <variable name="callback" type="com.example.android.databoundrecyclerview.ActionCallback"/>
+
+        <variable
+            name="data"
+            type="com.example.android.databoundrecyclerview.City" />
+
+        <variable
+            name="callback"
+            type="com.example.android.databoundrecyclerview.ActionCallback" />
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{() -> callback.onClick(data)}"
         android:background="?attr/selectableItemBackground"
+        android:onClick="@{() -> callback.onClick(data)}"
         android:orientation="horizontal"
         android:padding="@dimen/item_margin">
-        <View android:layout_width="@dimen/fav_width"
-              android:layout_height="@dimen/fav_height"
-              android:background="@drawable/fav_button"
-              app:selected="@{data.favorite}"/>
-        <TextView style="@style/TextAppearance.AppCompat.Medium" android:layout_width="wrap_content"
-                  android:layout_height="wrap_content" android:layout_gravity="bottom"
-                  android:text="@{data.name}"/>
+
+        <View
+            android:layout_width="@dimen/fav_width"
+            android:layout_height="@dimen/fav_height"
+            android:background="@drawable/fav_button"
+            app:selected="@{data.favorite}" />
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="@{data.name}" />
 
     </LinearLayout>
 </layout>

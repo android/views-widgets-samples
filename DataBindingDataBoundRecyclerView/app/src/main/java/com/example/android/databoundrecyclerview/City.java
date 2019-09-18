@@ -16,10 +16,8 @@
 
 package com.example.android.databoundrecyclerview;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
-
-import com.example.android.databoundrecyclerview.BR;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 
 public class City extends BaseObservable {
     @Bindable
