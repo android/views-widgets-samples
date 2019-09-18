@@ -1,16 +1,17 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    compileSdkVersion 29
+
     defaultConfig {
         applicationId "com.android.example.simpletransition"
         minSdkVersion 14
-        targetSdkVersion 24
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -20,7 +21,6 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:24.2.0'
-    compile 'com.android.support:transition:24.2.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:transition:28.0.0'
 }
