@@ -16,16 +16,17 @@
 
 package com.android.example.simpletransition;
 
-import android.support.transition.ChangeBounds;
-import android.support.transition.Transition;
-import android.support.transition.TransitionManager;
-import android.support.transition.TransitionSet;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.transition.ChangeBounds;
+import androidx.transition.Transition;
+import androidx.transition.TransitionManager;
+import androidx.transition.TransitionSet;
 
 import static android.widget.RelativeLayout.ABOVE;
 import static android.widget.RelativeLayout.ALIGN_PARENT_BOTTOM;
