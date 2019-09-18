@@ -16,9 +16,10 @@
 
 package com.example.android.databoundrecyclerview;
 
-import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.example.android.databoundrecyclerview.databinding.ActivityMainBinding;
 import com.example.android.databoundrecyclerview.databinding.CityItemBinding;
@@ -26,8 +27,6 @@ import com.example.android.databoundrecyclerview.databinding.CityItemBinding;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import com.example.android.databoundrecyclerview.BR;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         binding.cityList.setAdapter(adapter);
         MixedAdapter mixedAdapter = new MixedAdapter(actionCallback,
                 cities);
-        mixedAdapter.addItem(0, new State("Kenya",  47));
+        mixedAdapter.addItem(0, new State("Kenya", 47));
         mixedAdapter.addItem(1, new State("United States", 323));
         mixedAdapter.addItem(2, new State("Brazil", 206));
         binding.mixedList.setAdapter(mixedAdapter);
@@ -69,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     private static class CityAdapter extends DataBoundAdapter<CityItemBinding> {
         List<City> mCityList = new ArrayList<>();
         private ActionCallback mActionCallback;
+
         public CityAdapter(ActionCallback actionCallback, City... cities) {
             super(R.layout.city_item);
             mActionCallback = actionCallback;
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void bindItem(DataBoundViewHolder<CityItemBinding> holder, int position,
-                List<Object> payloads) {
+                                List<Object> payloads) {
             holder.binding.setData(mCityList.get(position));
             holder.binding.setCallback(mActionCallback);
         }
@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private static class MixedAdapter extends MultiTypeDataBoundAdapter {
         private ActionCallback mActionCallback;
+
         public MixedAdapter(ActionCallback actionCallback, Object... items) {
             super(items);
             mActionCallback = actionCallback;

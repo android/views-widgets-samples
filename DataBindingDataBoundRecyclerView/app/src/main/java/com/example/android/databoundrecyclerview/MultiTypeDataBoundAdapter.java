@@ -19,7 +19,6 @@ package com.example.android.databoundrecyclerview;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import com.example.android.databoundrecyclerview.BR;
 
 /**
  * An abstraction over {@link BaseDataBoundAdapter} that keeps the list of children and can
@@ -33,7 +32,7 @@ import com.example.android.databoundrecyclerview.BR;
  * <p>
  * Note that, by using this, you lose the compile time type checking for mapping your items to
  * layout files but at run time, it will still be checked. See
- * {@link android.databinding.ViewDataBinding#setVariable(int, Object)} for details.
+ * {@link androidx.databinding.ViewDataBinding#setVariable(int, Object)} for details.
  */
 abstract public class MultiTypeDataBoundAdapter extends BaseDataBoundAdapter {
     private List<Object> mItems = new ArrayList<>();
