@@ -5,7 +5,7 @@
 ---
 status:       PUBLISHED
 technologies: [Android]
-categories:   [User Interface]
+categories:   [Views Widgets]
 languages:    [Kotlin]
 solutions:    [Mobile]
 github:       android/views-widgets-samples
