@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.androidstudio.motionlayoutexample.fragmentsdemo.FragmentExample2Activity
 import com.google.androidstudio.motionlayoutexample.fragmentsdemo.FragmentExampleActivity
+import com.google.androidstudio.motionlayoutexample.histogramdemo.HistogramActivity
 import com.google.androidstudio.motionlayoutexample.viewpagerdemo.ViewPagerActivity
 import com.google.androidstudio.motionlayoutexample.viewpagerdemo.ViewPagerActivity2
 import com.google.androidstudio.motionlayoutexample.youtubedemo.YouTubeDemoActivity
@@ -46,7 +47,8 @@ class MainActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener
             DemosAdapter.Demo("Fragment Transition Example (2/2)", "Example showing transitioning fragments within MotionLayout", FragmentExample2Activity::class.java),
             DemosAdapter.Demo("YouTube like motion Example", "Example showing a transition like YouTube", YouTubeDemoActivity::class.java),
             DemosAdapter.Demo("Example using KeyTrigger", "Example that calls a method using KeyTrigger", R.layout.motion_25_keytrigger),
-            DemosAdapter.Demo("Example using Multi State", "Example that transitions between multiple states", R.layout.motion_26_multistate)
+            DemosAdapter.Demo("Example using Multi State", "Example that transitions between multiple states", R.layout.motion_26_multistate),
+            DemosAdapter.Demo("Histogram Example", "Advanced MotionLayout example of creating transition in code and animating dynamic data.", HistogramActivity::class.java)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

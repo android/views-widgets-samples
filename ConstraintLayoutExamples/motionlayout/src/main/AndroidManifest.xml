@@ -36,6 +36,7 @@
         <activity android:name=".fragmentsdemo.FragmentExampleActivity"/>
         <activity android:name=".fragmentsdemo.FragmentExample2Activity"/>
         <activity android:name=".youtubedemo.YouTubeDemoActivity" />
+        <activity android:name=".histogramdemo.HistogramActivity" />
     </application>
 
 </manifest>

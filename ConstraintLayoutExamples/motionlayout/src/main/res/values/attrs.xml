@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HistogramWidget">
+        <attr name="columns" format="integer" />
+        <attr name="leftMarginDp" format="integer" />
+    </declare-styleable>
+</resources>
