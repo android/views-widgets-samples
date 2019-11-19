@@ -19,8 +19,7 @@
 
     <Transition
         motion:constraintSetStart="@+id/start"
-        motion:constraintSetEnd="@+id/end">
-    </Transition>
+        motion:constraintSetEnd="@+id/end" />
 
     <ConstraintSet android:id="@+id/start">
         <Constraint

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2019 The Android Open Source Project
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -23,9 +22,9 @@
         motion:motionInterpolator="linear">
 
         <OnSwipe
+            motion:dragDirection="dragUp"
             motion:touchAnchorId="@+id/motionLayout"
-            motion:touchAnchorSide="bottom"
-            motion:dragDirection="dragUp" />
+            motion:touchAnchorSide="bottom" />
 
         <KeyFrameSet>
             <!--
@@ -34,8 +33,8 @@
             -->
             <KeyTrigger
                 motion:framePosition="10"
-                motion:onPositiveCross="show"
-                motion:motionTarget="@id/fab"/>
+                motion:motionTarget="@id/fab"
+                motion:onPositiveCross="show" />
 
             <!--
             Calls FloatingActionButton.hide() when frame position is being decreased and
@@ -43,39 +42,39 @@
             -->
             <KeyTrigger
                 motion:framePosition="20"
-                motion:onNegativeCross="hide"
-                motion:motionTarget="@id/fab"/>
+                motion:motionTarget="@id/fab"
+                motion:onNegativeCross="hide" />
         </KeyFrameSet>
-
-        <ConstraintSet android:id="@+id/start">
-            <Constraint
-                android:id="@id/motionLayout"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                motion:layout_constraintTop_toTopOf="parent" />
-
-            <Constraint
-                android:id="@id/scrollable"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                motion:layout_constraintBottom_toBottomOf="parent"
-                motion:layout_constraintTop_toBottomOf="@+id/motionLayout" />
-        </ConstraintSet>
-
-        <ConstraintSet android:id="@+id/end">
-            <Constraint
-                android:id="@id/motionLayout"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                motion:layout_constraintTop_toTopOf="parent"
-                motion:progress="1" />
-
-            <Constraint
-                android:id="@id/scrollable"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                motion:layout_constraintBottom_toBottomOf="parent"
-                motion:layout_constraintTop_toBottomOf="@+id/motionLayout" />
-        </ConstraintSet>
     </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@id/motionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@id/scrollable"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/motionLayout" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@id/motionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:progress="1" />
+
+        <Constraint
+            android:id="@id/scrollable"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/motionLayout" />
+    </ConstraintSet>
 </MotionScene>

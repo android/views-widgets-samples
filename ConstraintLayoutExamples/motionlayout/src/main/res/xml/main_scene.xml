@@ -21,12 +21,13 @@
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@+id/start"
         motion:duration="1000"
-        motion:motionInterpolator="linear" />
+        motion:motionInterpolator="linear" >
 
-    <OnSwipe
-        motion:touchAnchorId="@+id/container"
-        motion:touchAnchorSide="top"
-        motion:dragDirection="dragUp" />
+        <OnSwipe
+            motion:touchAnchorId="@+id/container"
+            motion:touchAnchorSide="top"
+            motion:dragDirection="dragUp" />
+    </Transition>
 
     <ConstraintSet android:id="@+id/start">
 
