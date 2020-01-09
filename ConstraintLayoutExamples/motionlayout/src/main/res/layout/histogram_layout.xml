@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright (C) 2019 The Android Open Source Project
+  Copyright (C) 2020 The Android Open Source Project
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
@@ -60,6 +60,18 @@
         tools:showPaths="true"
         />
 
+    <Switch
+        android:id="@+id/interruptible_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Interruptible Animation"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="onClickSwitch"
+        android:checked="false"
+        />
+
     <Button
         android:id="@+id/both"
         android:layout_width="40dp"
@@ -68,6 +80,7 @@
         android:clickable="true"
         android:background="@color/colorAccent"
         android:text="\?"
+        android:textColor="@android:color/white"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,6 +94,7 @@
         android:onClick="onClickSort"
         android:clickable="true"
         android:background="@color/colorAccent"
+        android:textColor="@android:color/white"
         android:text="/"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
@@ -95,6 +109,7 @@
         android:onClick="onClickAdd"
         android:clickable="true"
         android:background="@color/colorAccent"
+        android:textColor="@android:color/white"
         android:text="+"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
