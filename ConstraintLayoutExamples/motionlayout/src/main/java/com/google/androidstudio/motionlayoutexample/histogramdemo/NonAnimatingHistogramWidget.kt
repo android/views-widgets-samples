@@ -20,23 +20,23 @@ import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
 import android.view.Gravity
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.constraintlayout.motion.widget.MotionScene
-import androidx.constraintlayout.motion.widget.TransitionBuilder
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import com.google.androidstudio.motionlayoutexample.R
-import java.util.*
 
 /**
- * Histogram widget that can animate between programmatically generated data.
+ * Histogram widget example that does not animate. Starting point for the medium article.
+ * In the end we wish to create [HistogramWidget].
+ *
+ * To try this class out, replace the usages of [HistogramWidget] in [HistogramActivity] and
+ * the layout.
  */
-class HistogramWidget : MotionLayout {
+class NonAnimatingHistogramWidget : ConstraintLayout {
     companion object {
-        private const val TAG = "HistogramWidget"
+        private const val TAG = "NonAnimatingHistogramWidget"
         private const val DEFAULT_HEIGHT_DP = 1
         private const val DEFAULT_HEIGHT_PERCENT = 0.01f
     }
@@ -46,17 +46,14 @@ class HistogramWidget : MotionLayout {
 
     // Currently state of the bars
     private var currentBars: MutableList<HistogramBarMetaData> = ArrayList()
-    // Bars to which we're animating towards.
-    private var nextBars: MutableList<HistogramBarMetaData> = ArrayList()
+    // The final positions of the bars
+    private var nextBars: ArrayList<HistogramBarMetaData> = ArrayList()
 
     // Default left margin in dp
     private var leftMarginDp = 0
 
     // Weight to use for the horizontal chain (of bars)
     private val weights: FloatArray
-
-    // The main transition of this widget. We'll rely all animation on this transition.
-    private var barTransition: MotionScene.Transition? = null
 
     /**
      * Number of bars in the histogram.
@@ -88,111 +85,52 @@ class HistogramWidget : MotionLayout {
     override fun onFinishInflate() {
         super.onFinishInflate()
         createBars(this, barsSize)
-        val scene = MotionScene(this)
-        barTransition = createTransition(scene)
-
-        /**
-         * The order matters here.
-         * [MotionScene.addTransition] adds the transition to the scene while
-         * [MotionScene.setTransition] sets the transition to be the current transition.
-         */
-        scene.addTransition(barTransition)
-        scene.setTransition(barTransition)
-        setScene(scene)
-    }
-
-    /**
-     * Create a basic transition programmatically.
-     */
-    private fun createTransition(scene: MotionScene): MotionScene.Transition {
-        val startSetId = View.generateViewId()
-        val startSet = ConstraintSet()
-        startSet.clone(this)
-        val endSetId = View.generateViewId()
-        val endSet = ConstraintSet()
-        endSet.clone(this)
-        val transitionId = View.generateViewId()
-        return TransitionBuilder.buildTransition(
-                scene,
-                transitionId,
-                startSetId, startSet,
-                endSetId, endSet)
     }
 
     /**
      * Sets data to the widget.
      */
     fun setData(newData: List<HistogramBarMetaData>) {
-        val startSet: ConstraintSet = getConstraintSet(barTransition!!.startConstraintSetId)
-        updateConstraintSet(startSet, currentBars, false)
-        val endSet: ConstraintSet = getConstraintSet(barTransition!!.endConstraintSetId)
+        val endSet = ConstraintSet()
+        endSet.clone(this)
+
         updateConstraintSet(endSet, newData)
         nextBars = ArrayList(newData)
+        endSet.applyTo(this)
+    }
+
+    fun animateWidget() {
+        // TODO: We'll be implementing this in the example.
+        // Do nothing for now.
+    }
+
+    fun sort(): ArrayList<HistogramBarMetaData> {
+        // TODO: We'll be implementing this in the example.
+        // Do nothing for now.
+        return nextBars
     }
 
     /**
      * Update the constraint set with the bar metadata.
-     * @param useHeightFromMetaData if true use the meta data height. If false use the current
-     * view heights.
      */
     private fun updateConstraintSet(
             set: ConstraintSet,
-            list: List<HistogramBarMetaData>,
-            useHeightFromMetaData: Boolean = true) {
+            list: List<HistogramBarMetaData>) {
         list.forEach { metadata ->
             val view = bars[metadata.id]!!
-            val height: Int =
-                    if (useHeightFromMetaData) (metadata.height * height).toInt()
-                    else bars[metadata.id]!!.height
+            val height: Float = metadata.height * height
             view.setTextColor(metadata.barTextColour)
             view.text = metadata.name
 
-            // These are attributes we wish to animate. We set them through ConstraintSet.
-            set.constrainHeight(view.id, height)
+            set.constrainHeight(view.id, height.toInt())
             set.setColorValue(view.id, "BackgroundColor", metadata.barColour)
         }
     }
 
     /**
-     * Animate the widget from start to the end.
-     * It'll animate based on the [.setData] and/or [.sort].
-     */
-    fun animateWidget() {
-        val startSet: ConstraintSet = getConstraintSet(barTransition!!.startConstraintSetId)
-        val endSet: ConstraintSet = getConstraintSet(barTransition!!.endConstraintSetId)
-
-        setTransition(barTransition!!.startConstraintSetId, barTransition!!.endConstraintSetId)
-        transitionToEnd()
-
-        // Update the end state to be the current.
-        startSet.clone(endSet)
-        currentBars = ArrayList(nextBars)
-    }
-
-    /**
-     * Sort the data and return the resulting state of the bars.
-     * @return List of HistogramBarData in order at which it's sorted.
-     */
-    fun sort(): ArrayList<HistogramBarMetaData> {
-        nextBars.sortBy { it.height }
-        val startSet: ConstraintSet = getConstraintSet(barTransition!!.startConstraintSetId)
-        startSet.createHorizontalChain(
-                ConstraintSet.PARENT_ID, ConstraintSet.LEFT,
-                ConstraintSet.PARENT_ID, ConstraintSet.RIGHT,
-                currentBars.map{ it.id }.toIntArray(), weights, LayoutParams.CHAIN_SPREAD)
-        val endSet: ConstraintSet = getConstraintSet(barTransition!!.endConstraintSetId)
-        endSet.createHorizontalChain(
-                ConstraintSet.PARENT_ID, ConstraintSet.LEFT,
-                ConstraintSet.PARENT_ID, ConstraintSet.RIGHT,
-                nextBars.map{ it.id }.toIntArray(), weights, LayoutParams.CHAIN_SPREAD)
-
-        return ArrayList(nextBars)
-    }
-
-    /**
      * Programmatically create views that represent histogram bars
      */
-    private fun createBars(layout: MotionLayout, columns: Int) {
+    private fun createBars(layout: ConstraintLayout, columns: Int) {
         if (columns <= 1) {
             return
         }

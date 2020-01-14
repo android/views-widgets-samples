@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,19 +16,19 @@
 
 package com.google.androidstudio.motionlayoutexample.histogramdemo
 
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
+import android.widget.Switch
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.constraintlayout.motion.widget.MotionLayout.TransitionListener
 import androidx.core.content.ContextCompat
 import com.google.androidstudio.motionlayoutexample.R
 import kotlinx.android.synthetic.main.histogram_layout.*
 import java.lang.RuntimeException
 import java.util.*
-import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.collections.ArrayList
 
 class HistogramActivity : AppCompatActivity() {
@@ -44,34 +44,21 @@ class HistogramActivity : AppCompatActivity() {
     // The main widget
     private var widget: HistogramWidget? = null
 
-    // Animation guard
-    private val animating = AtomicBoolean(false)
-    private val animationListener: TransitionListener = object : TransitionListener {
-        override fun onTransitionStarted(motionLayout: MotionLayout, startId: Int, endId: Int) {
-            animating.set(true)
-        }
-
-        override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
-            animating.set(false)
-        }
-
-        override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) { }
-        override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) { }
-    }
+    private val animationGuard: HistogramAnimationGuard = HistogramAnimationGuard()
 
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.histogram_layout)
         widget = histogram
         restoreView(savedInstanceState)
-        widget!!.setTransitionListener(animationListener)
+        widget!!.setTransitionListener(animationGuard.animationListener)
     }
 
     /**
      * Add random data to the histogram.
      */
     fun onClickAdd(view: View?) {
-        if (animating.get()) {
+        if (animationGuard.wait) {
             return
         }
         add()
@@ -79,7 +66,7 @@ class HistogramActivity : AppCompatActivity() {
     }
 
     fun onClickSort(view: View?) {
-        if (animating.get()) {
+        if (animationGuard.wait) {
             return
         }
         bars = widget!!.sort()
@@ -87,7 +74,7 @@ class HistogramActivity : AppCompatActivity() {
     }
 
     fun onClickRandom(view: View) {
-        if (animating.get()) {
+        if (animationGuard.wait) {
             return
         }
         add()
@@ -148,4 +135,33 @@ class HistogramActivity : AppCompatActivity() {
             }
         })
     }
+
+    fun onClickSwitch(view: View) {
+        val animationInterruptible = (view as Switch).isChecked
+        animationGuard.setInterruptible(animationInterruptible)
+        /**
+         * TODO: The current histogram widget does not support interruptible sort to keep it short.
+         * This can be a fun exercise to implement yourself.
+         *
+         * To support this feature, you'll want to animate from:
+         * - the current x position to
+         * - the new x position (after sorted)
+         *
+         * for each bars. It means you cannot use chain feature of constraint layout. You'll need
+         * to calculate the after-sorted x location of each bars manually and animate them.
+         */
+        sort.setEnabledAndChangeColor(!animationInterruptible)
+        both.setEnabledAndChangeColor(!animationInterruptible)
+    }
+}
+
+fun View.setEnabledAndChangeColor(enabled: Boolean) {
+    if (!enabled) {
+        background.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN)
+        isClickable = false
+    } else {
+        background.colorFilter = null
+        isClickable = true
+    }
+    invalidate()
 }
