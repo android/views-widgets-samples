@@ -35,7 +35,12 @@ class HistogramAnimationGuard {
         return animating.get()
     }
 
-    private var interruptible: Boolean = false
+    /**
+     * Allows animation to be interruptible or not. When interruptible, a new animation can start
+     * before the previous animation is finished.
+     */
+    var interruptible: Boolean = false
+
     private val animating = AtomicBoolean(false)
 
     val animationListener: MotionLayout.TransitionListener = object : MotionLayout.TransitionListener {
@@ -51,12 +56,4 @@ class HistogramAnimationGuard {
         override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) { }
     }
 
-    /**
-     * @param interruptible true if animation is interruptible. I.e. Animation does not need to be
-     * finished before the new one starts.
-     * False if animation must complete before new one can start.
-     */
-    fun setInterruptible(interruptible: Boolean) {
-        this.interruptible = interruptible
-    }
 }
