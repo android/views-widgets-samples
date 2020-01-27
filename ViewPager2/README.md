@@ -60,7 +60,7 @@ and of stateful Fragments in
 With the original ViewPager, you were able to link it to a TabLayout by using TabLayout's
 [setupWithViewPager](https://developer.android.com/reference/android/support/design/widget/TabLayout.html#setupWithViewPager(android.support.v4.view.ViewPager)).
 With ViewPager2, the integration comes in the form of
-[TabLayoutMediator](app/src/main/java/androidx/viewpager2/integration/testapp/TabLayoutMediator.java).
+[TabLayoutMediator](https://developer.android.com/reference/com/google/android/material/tabs/TabLayoutMediator).
 Simply create an instance of this class, pass an implementation of its `OnConfigureTabCallback` to the constructor, and
 call `attach()` when you've set your ViewPager2's adapter.
 
