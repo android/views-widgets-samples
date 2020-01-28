@@ -138,7 +138,7 @@ class HistogramActivity : AppCompatActivity() {
 
     fun onClickSwitch(view: View) {
         val animationInterruptible = (view as Switch).isChecked
-        animationGuard.setInterruptible(animationInterruptible)
+        animationGuard.interruptible = animationInterruptible
         /**
          * TODO: The current histogram widget does not support interruptible sort to keep it short.
          * This can be a fun exercise to implement yourself.
