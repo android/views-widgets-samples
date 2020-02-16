@@ -68,6 +68,7 @@ class ParallelNestedScrollingActivity : Activity() {
         private fun RecyclerView.setUpRecyclerView(orientation: Int) {
             layoutManager = LinearLayoutManager(context, orientation, false)
             adapter = RvAdapter(orientation)
+            allowSameDirectionScrollingInViewPager2()
         }
 
         class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
