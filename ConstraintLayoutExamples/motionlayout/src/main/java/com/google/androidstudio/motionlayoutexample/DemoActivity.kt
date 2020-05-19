@@ -18,6 +18,7 @@ package com.google.androidstudio.motionlayoutexample
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
@@ -45,7 +46,37 @@ class DemoActivity : AppCompatActivity() {
         } else {
             MotionLayout.DEBUG_SHOW_NONE
         }
-        (container as? MotionLayout)?.setDebugMode(debugMode)
+        (container as? MotionLayout)?.apply {
+            setDebugMode(debugMode)
+            setTransitionListener(object : MotionLayout.TransitionListener {
+                override fun onTransitionTrigger(
+                    motionLayout: MotionLayout,
+                    triggerId: Int,
+                    positive: Boolean,
+                    progress: Float
+                ) = Unit
+
+                override fun onTransitionStarted(
+                    motionLayout: MotionLayout,
+                    startId: Int,
+                    endId: Int
+                ) = Unit
+
+                override fun onTransitionChange(
+                    motionLayout: MotionLayout,
+                    startId: Int,
+                    endId: Int,
+                    progress: Float
+                ) = Unit
+
+                override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
+                    Log.d(
+                        "DemoActivity",
+                        "$currentId: currentId is start: ${currentId == R.id.start}, currentId is end: ${currentId == R.id.end}"
+                    )
+                }
+            })
+        }
     }
 
     fun changeState(v: View?) {

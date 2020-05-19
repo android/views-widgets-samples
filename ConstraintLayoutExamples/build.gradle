@@ -27,7 +27,7 @@ buildscript {
         targetSdkVersion = 28
 
         appCompatVersion = '1.1.0-alpha03'
-        constraintLayoutVersion = '2.0.0-beta3'
+        constraintLayoutVersion = '2.0.0-beta6'
         glideVersion = '4.8.0'
         kotlinVersion = '1.3.71'
         lifeCycleVersion = '2.0.0'
