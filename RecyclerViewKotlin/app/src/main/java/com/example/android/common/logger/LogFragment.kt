@@ -19,8 +19,6 @@ package com.example.android.common.logger
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.widget.TextViewCompat
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.Gravity
@@ -28,6 +26,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ScrollView
+import androidx.core.widget.TextViewCompat
+import androidx.fragment.app.Fragment
 
 /**
  * Simple fragment which contains a LogView and uses is to output log data it receives

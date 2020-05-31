@@ -30,7 +30,7 @@ import com.example.android.common.logger.MessageOnlyLogFilter
 
 /**
  * A simple launcher activity containing a summary sample description, sample log and a custom
- * [android.support.v4.app.Fragment] which can display a view.
+ * [androidx.fragment.app.Fragment] which can display a view.
  *
  *
  * For devices with displays with a width of 720dp or greater, the sample log is always visible,
