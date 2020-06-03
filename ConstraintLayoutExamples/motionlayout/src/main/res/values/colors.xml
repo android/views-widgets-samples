@@ -23,4 +23,6 @@
     <color name="azure">#49A9DF</color>
     <color name="cerulean_blue">#137AE2</color>
     <color name="brown">#643A07</color>
+    <color name="white">#FFFFFF</color>
+    <color name="yellow">#FFFF00</color>
 </resources>

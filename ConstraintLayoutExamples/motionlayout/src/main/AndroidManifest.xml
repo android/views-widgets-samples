@@ -35,6 +35,7 @@
         <activity android:name=".viewpagerdemo.ViewPagerActivity2"/>
         <activity android:name=".fragmentsdemo.FragmentExampleActivity"/>
         <activity android:name=".fragmentsdemo.FragmentExample2Activity"/>
+        <activity android:name=".fragmentsdemo.FragmentExample3Activity"/>
         <activity android:name=".youtubedemo.YouTubeDemoActivity" />
         <activity android:name=".histogramdemo.HistogramActivity" />
     </application>

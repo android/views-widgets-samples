@@ -18,6 +18,7 @@ package com.google.androidstudio.motionlayoutexample.utils;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -42,6 +43,21 @@ public class TouchFrameLayout extends FrameLayout implements NestedScrollingPare
 
     public NestedScrollingParent2 getMotionLayout() {
         return (NestedScrollingParent2) getParent();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_MOVE:
+                getParent().requestDisallowInterceptTouchEvent(true);
+                break;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+                getParent().requestDisallowInterceptTouchEvent(false);
+                break;
+        }
+
+        return false;
     }
 
     @Override
