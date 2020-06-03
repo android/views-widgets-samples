@@ -45,20 +45,7 @@ public class TouchFrameLayout extends FrameLayout implements NestedScrollingPare
         return (NestedScrollingParent2) getParent();
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_MOVE:
-                getParent().requestDisallowInterceptTouchEvent(true);
-                break;
-            case MotionEvent.ACTION_UP:
-            case MotionEvent.ACTION_CANCEL:
-                getParent().requestDisallowInterceptTouchEvent(false);
-                break;
-        }
 
-        return false;
-    }
 
     @Override
     public boolean onStartNestedScroll(@NonNull View child, @NonNull View target, int axes, int type) {

@@ -43,7 +43,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlinVersion"
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
 
-    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
+    implementation "androidx.constraintlayout:constraintlayout:2.0.0-beta6"
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifeCycleVersion"
     implementation "com.google.android.material:material:$rootProject.materialVersion"
     implementation "com.airbnb.android:lottie:$rootProject.lottieVersion"

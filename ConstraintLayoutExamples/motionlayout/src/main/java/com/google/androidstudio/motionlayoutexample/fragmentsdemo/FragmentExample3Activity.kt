@@ -1,6 +1,7 @@
 package com.google.androidstudio.motionlayoutexample.fragmentsdemo
 
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -39,6 +40,10 @@ class FragmentExample3Activity : AppCompatActivity(), View.OnClickListener, Moti
 
         motionLayout.setDebugMode(MotionLayout.DEBUG_SHOW_PATH)
         motionLayout.setTransitionListener(this)
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        return super.dispatchTouchEvent(ev)
     }
 
 }
