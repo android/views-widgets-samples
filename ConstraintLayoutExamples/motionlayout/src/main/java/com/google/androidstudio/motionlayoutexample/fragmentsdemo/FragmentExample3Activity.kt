@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.google.androidstudio.motionlayoutexample.R
 import com.google.androidstudio.motionlayoutexample.viewpagerdemo.ViewPagerAdapter
-import kotlinx.android.synthetic.main.hahwdhawi.*
+import kotlinx.android.synthetic.main.activity_dragon_boat.*
 
 class FragmentExample3Activity : AppCompatActivity(), View.OnClickListener, MotionLayout.TransitionListener {
     override fun onClick(p0: View?) {
@@ -27,7 +27,7 @@ class FragmentExample3Activity : AppCompatActivity(), View.OnClickListener, Moti
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.hahwdhawi)
+        setContentView(R.layout.activity_dragon_boat)
 
         val motionLayout = findViewById<MotionLayout>(R.id.motionLayout)
 
