@@ -26,24 +26,24 @@ class TestMotionLayout : MotionLayout {
     }
 
     fun init() {
-        setTransitionListener(object: TransitionListener {
-            override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
-                TODO("Not yet implemented")
-            }
-
-        })
+//        setTransitionListener(object: TransitionListener {
+//            override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
+//                TODO("Not yet implemented")
+//            }
+//
+//            override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
+//                TODO("Not yet implemented")
+//            }
+//
+//            override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
+//                TODO("Not yet implemented")
+//            }
+//
+//            override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
+//                TODO("Not yet implemented")
+//            }
+//
+//        })
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {

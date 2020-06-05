@@ -1,6 +1,8 @@
 package com.google.androidstudio.motionlayoutexample.fragmentsdemo
 
+import android.R.id.button1
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +10,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import com.google.androidstudio.motionlayoutexample.R
 import com.google.androidstudio.motionlayoutexample.viewpagerdemo.ViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_dragon_boat.*
+
 
 class FragmentExample3Activity : AppCompatActivity(), View.OnClickListener, MotionLayout.TransitionListener {
     override fun onClick(p0: View?) {
@@ -17,6 +20,7 @@ class FragmentExample3Activity : AppCompatActivity(), View.OnClickListener, Moti
     }
 
     override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
+        Log.d("hydrated", "onTransitionStarted")
     }
 
     override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
