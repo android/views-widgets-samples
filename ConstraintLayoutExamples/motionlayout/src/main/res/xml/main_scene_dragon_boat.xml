@@ -9,9 +9,12 @@
         motion:duration="500"
         motion:motionInterpolator="linear">
 
-        <OnClick
-            motion:clickAction="toggle"
-            motion:targetId="@id/sideCard" />
+
+
+        <OnSwipe
+            motion:dragDirection="dragLeft"
+            motion:touchAnchorId="@id/sideCard"
+            motion:touchRegionId="@id/sideCard" />
 
         <KeyFrameSet>
             <KeyAttribute

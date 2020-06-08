@@ -11,7 +11,7 @@
 
         <OnSwipe
             motion:dragDirection="dragUp"
-            motion:touchAnchorId="@+id/viewpager"
+            motion:touchAnchorId="@id/viewpager"
             motion:touchAnchorSide="top" />
 
     </Transition>
