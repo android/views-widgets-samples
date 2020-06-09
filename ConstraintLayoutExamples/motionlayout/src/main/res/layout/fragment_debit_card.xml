@@ -4,14 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/motionLayoutCard"
     app:layoutDescription="@xml/main_scene_dragon_boat4">
-
-    <TextView
-        android:id="@+id/meaningless_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="I am textview"
-        app:layout_constraintTop_toTopOf="parent" />
+    
 
     <ImageView
         android:id="@+id/sideCard"
@@ -20,5 +15,6 @@
         android:background="@android:color/black"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="310dp" />
+
 
 </com.google.androidstudio.motionlayoutexample.utils.TestMotionLayout>

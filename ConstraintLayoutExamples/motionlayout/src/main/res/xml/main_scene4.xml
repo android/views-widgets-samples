@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/motionLayout">
+    android:id="@+id/motionLayoutDragonBoat">
 
     <Transition
         motion:constraintSetEnd="@+id/end"

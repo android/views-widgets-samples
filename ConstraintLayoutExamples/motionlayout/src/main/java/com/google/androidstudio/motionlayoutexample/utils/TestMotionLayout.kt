@@ -2,11 +2,14 @@ package com.google.androidstudio.motionlayoutexample.utils
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.core.view.NestedScrollingChild2
+import com.google.androidstudio.motionlayoutexample.R
 
-class TestMotionLayout : MotionLayout {
+class TestMotionLayout : MotionLayout, NestedScrollingChild2 {
 
     constructor(context: Context) :
             super(context) {
@@ -26,24 +29,6 @@ class TestMotionLayout : MotionLayout {
     }
 
     fun init() {
-//        setTransitionListener(object: TransitionListener {
-//            override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
-//                TODO("Not yet implemented")
-//            }
-//
-//            override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
-//                TODO("Not yet implemented")
-//            }
-//
-//            override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
-//                TODO("Not yet implemented")
-//            }
-//
-//            override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
-//                TODO("Not yet implemented")
-//            }
-//
-//        })
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
@@ -77,5 +62,25 @@ class TestMotionLayout : MotionLayout {
 
     override fun getNestedScrollAxes(): Int {
         return super.getNestedScrollAxes()
+    }
+
+    override fun dispatchNestedScroll(dxConsumed: Int, dyConsumed: Int, dxUnconsumed: Int, dyUnconsumed: Int, offsetInWindow: IntArray?, type: Int): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun dispatchNestedPreScroll(dx: Int, dy: Int, consumed: IntArray?, offsetInWindow: IntArray?, type: Int): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun stopNestedScroll(type: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun hasNestedScrollingParent(type: Int): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun startNestedScroll(axes: Int, type: Int): Boolean {
+        TODO("Not yet implemented")
     }
 }
