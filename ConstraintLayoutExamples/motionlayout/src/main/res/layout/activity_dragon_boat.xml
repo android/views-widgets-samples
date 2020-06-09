@@ -2,10 +2,10 @@
 <com.google.androidstudio.motionlayoutexample.utils.TestMotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootMotionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/main_scene_dragon_boat"
-    android:orientation="vertical">
+    app:layoutDescription="@xml/main_scene_dragon_boat">
 
     <View
         android:id="@+id/content"
@@ -21,7 +21,6 @@
         app:layoutDescription="@xml/main_scene2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
@@ -45,7 +44,7 @@
         android:id="@+id/endingContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/white"
+        android:background="#FFFFFF"
         android:padding="24dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

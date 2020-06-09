@@ -25,10 +25,9 @@
 
     <com.google.androidstudio.motionlayoutexample.utils.TouchFrameLayout
         android:id="@+id/container"
-        android:layout_width="100dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
