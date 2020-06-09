@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/motionLayoutawdaw">
+    android:id="@+id/motionLayout">
 
     <Transition
         motion:constraintSetEnd="@+id/end"
@@ -11,7 +11,7 @@
 
         <OnSwipe
             motion:dragDirection="dragUp"
-            motion:touchAnchorId="@+id/viewpager"
+            motion:touchAnchorId="@id/viewpager"
             motion:touchAnchorSide="top" />
 
     </Transition>
@@ -28,7 +28,6 @@
             android:id="@id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="-300dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />
     </ConstraintSet>

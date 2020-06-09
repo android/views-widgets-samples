@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/motionLayoutsub">
+
+    <Transition
+        motion:constraintSetEnd="@+id/cardSceneEnd"
+        motion:constraintSetStart="@+id/cardSceneStart"
+        motion:duration="500"
+        motion:motionInterpolator="linear">
+
+        <OnSwipe
+            motion:dragDirection="dragLeft"
+            motion:touchAnchorId="@id/sideCard"
+            motion:touchRegionId="@id/sideCard" />
+
+        <KeyFrameSet>
+            <KeyAttribute
+                android:rotation="-90"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                motion:framePosition="100"
+                motion:motionTarget="@id/sideCard" />
+
+        </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/cardSceneStart">
+        <Constraint
+            android:id="@id/sideCard"
+            android:layout_width="160dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="304dp"
+            android:layout_marginLeft="304dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.131"></Constraint>
+
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/cardSceneEnd">
+        <Constraint
+            android:id="@id/sideCard"
+            android:layout_width="160dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="24dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"></Constraint>
+
+    </ConstraintSet>
+</MotionScene>
