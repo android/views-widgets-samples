@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.androidstudio.motionlayoutexample.utils.TestMotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/motionLayoutCard"
+    app:layoutDescription="@xml/main_scene_dragon_boat4">
+    
+
+    <ImageView
+        android:id="@+id/sideCard"
+        android:layout_width="200dp"
+        android:layout_height="120dp"
+        android:background="@android:color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="310dp" />
+
+
+</com.google.androidstudio.motionlayoutexample.utils.TestMotionLayout>
