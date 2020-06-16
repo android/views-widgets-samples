@@ -40,22 +40,6 @@ class MainActivity : AppCompatActivity() {
     private class MyWebViewClient(private val assetLoader: WebViewAssetLoader) :
         WebViewClientCompat() {
 
-
-        fun createResponse(request: WebResourceRequest): WebResourceResponse {
-            val path = request.url.path
-            val file = request.url.lastPathSegment
-            if (file.isNullOrBlank()) {
-                return WebResourceResponse(
-                    "text/plain", "utf-8", 404, "Not Found", emptyMap(),
-                    ByteArrayInputStream(ByteArray(0))
-                )
-            }
-            return WebResourceResponse(
-                "text/plain", "utf-8", 200, "OK", emptyMap(),
-                FileInputStream(file)
-            )
-        }
-
         override fun shouldInterceptRequest(
             view: WebView,
             request: WebResourceRequest
@@ -63,10 +47,7 @@ class MainActivity : AppCompatActivity() {
 
             return assetLoader.shouldInterceptRequest(request.getUrl());
 
-            //return createResponse(request)
-
         }
-
 
     }
 
@@ -98,8 +79,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        //configure the asset loader with default domain and path for res and assets
-        //with the asset loader we are just resetting the
+        //Configure asset loader with custom domain
         val assetLoader = WebViewAssetLoader.Builder()
             .setDomain("gcoleman799.github.io")
             .addPathHandler("/Asset-Loader/", WebViewAssetLoader.AssetsPathHandler(this))
@@ -110,48 +90,15 @@ class MainActivity : AppCompatActivity() {
         binding.webview.webViewClient = MyWebViewClient(assetLoader)
 
         //Set Title
-        title = "WebViewWeather"
+        title = "WebView Weather"
 
         //Enable Javascript
         binding.webview.settings.javaScriptEnabled = true
 
+        //Connect to Javascript Interface
         binding.webview.addJavascriptInterface(WebAppInterface(this), "Weather")
 
         binding.webview.loadUrl("https://gcoleman799.github.io/Asset-Loader/index.html")
-
-
-//        val (port1, port2) = androidx.webkit.WebViewCompat.createWebMessageChannel(binding.webview)
-//        port1.setWebMessageCallback(object : WebMessagePortCompat.WebMessageCallbackCompat() {
-//            //de serialize the data you get in
-//            override fun onMessage(port: WebMessagePortCompat, message: WebMessageCompat?) {
-//                message?.data?.also {
-//                    val data = JSONObject(it)
-//                    //handleWebEvent(data)
-//                }
-//            }
-//        })
-//
-//
-//        //send the second port over to the javascript side
-//
-//        val initMsg = WebMessageCompat("""{type: "init"}""", arrayOf(port2))
-//
-//        //send a message to the webview with the message above and the origin that this message relates to (you can pass a star if you are only loading local content)
-//        WebViewCompat.postWebMessage(binding.webview, initMsg, Uri.parse("*"))
-
-
-    }
-
-
-    //allow users to navigate back to a previous page
-    override fun onBackPressed() {
-        val binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        if (binding.webview.canGoBack()) {
-            binding.webview.goBack()
-        } else {
-            super.onBackPressed()
-        }
 
 
     }

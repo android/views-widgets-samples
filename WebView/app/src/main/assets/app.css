@@ -22,9 +22,7 @@ img {
 
     border-radius: 4px;
     padding: 5px;
-
 }
-
 
 
 .button {
@@ -42,9 +40,11 @@ img {
 	margin-left: 27%;
 	margin-top: 5%;
 }
+
 .button:hover {
 	background-color:#42b007;
 }
+
 .button:active {
 	position:relative;
 	top:1px;
