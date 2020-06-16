@@ -16,12 +16,17 @@
 
 package com.android.samples.webviewdemo
 
+import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.webkit.JavascriptInterface
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.webkit.*
 import androidx.webkit.R
 import com.android.samples.webviewdemo.databinding.ActivityMainBinding
@@ -31,7 +36,7 @@ import java.io.FileInputStream
 
 class MainActivity : AppCompatActivity() {
 
-   //Creating the custom WebView Client Class
+    //Creating the custom WebView Client Class
     private class MyWebViewClient(private val assetLoader: WebViewAssetLoader) :
         WebViewClientCompat() {
 
@@ -65,6 +70,28 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    /** Instantiate the interface and set the context  */
+    class WebAppInterface(private val mContext: Context) {
+
+
+        /** Send a message from the web page  */
+        @JavascriptInterface
+        fun sendMessage(message: String) {
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, message)
+                type = "text/plain"
+            }
+
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(mContext, shareIntent, null)
+
+
+        }
+
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
@@ -74,8 +101,8 @@ class MainActivity : AppCompatActivity() {
         //configure the asset loader with default domain and path for res and assets
         //with the asset loader we are just resetting the
         val assetLoader = WebViewAssetLoader.Builder()
-            //.setDomain("gcoleman799.github.io")
-            .addPathHandler("/assets/", WebViewAssetLoader.AssetsPathHandler(this))
+            .setDomain("gcoleman799.github.io")
+            .addPathHandler("/Asset-Loader/", WebViewAssetLoader.AssetsPathHandler(this))
             .addPathHandler("/res/", WebViewAssetLoader.ResourcesPathHandler(this))
             .build();
 
@@ -88,30 +115,29 @@ class MainActivity : AppCompatActivity() {
         //Enable Javascript
         binding.webview.settings.javaScriptEnabled = true
 
+        binding.webview.addJavascriptInterface(WebAppInterface(this), "Weather")
 
-        binding.webview.loadUrl("https://appassets.androidplatform.net/assets/index.html")
-
-
-
-        val (port1, port2) = androidx.webkit.WebViewCompat.createWebMessageChannel(binding.webview)
-        port1.setWebMessageCallback(object : WebMessagePortCompat.WebMessageCallbackCompat() {
-            //de serialize the data you get in
-            override fun onMessage(port: WebMessagePortCompat, message: WebMessageCompat?) {
-                message?.data?.also {
-                    val data = JSONObject(it)
-                    //handleWebEvent(data)
-                }
-            }
-        })
+        binding.webview.loadUrl("https://gcoleman799.github.io/Asset-Loader/index.html")
 
 
-        //send the second port over to the javascript side
-
-        val initMsg = WebMessageCompat("""{type: "init"}""", arrayOf(port2))
-
-        //send a message to the webview with the message above and the origin that this message relates to (you can pass a star if you are only loading local content)
-        WebViewCompat.postWebMessage(binding.webview, initMsg, Uri.parse("*"))
-
+//        val (port1, port2) = androidx.webkit.WebViewCompat.createWebMessageChannel(binding.webview)
+//        port1.setWebMessageCallback(object : WebMessagePortCompat.WebMessageCallbackCompat() {
+//            //de serialize the data you get in
+//            override fun onMessage(port: WebMessagePortCompat, message: WebMessageCompat?) {
+//                message?.data?.also {
+//                    val data = JSONObject(it)
+//                    //handleWebEvent(data)
+//                }
+//            }
+//        })
+//
+//
+//        //send the second port over to the javascript side
+//
+//        val initMsg = WebMessageCompat("""{type: "init"}""", arrayOf(port2))
+//
+//        //send a message to the webview with the message above and the origin that this message relates to (you can pass a star if you are only loading local content)
+//        WebViewCompat.postWebMessage(binding.webview, initMsg, Uri.parse("*"))
 
 
     }
