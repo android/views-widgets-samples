@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 function sendAndroidMessage() {
 	Weather.sendMessage("The weather in WebView City today is: " + document.getElementById("description").innerHTML);
 }
@@ -22,18 +23,8 @@ function getData() {
 		return resp.json();
 	})
 	.then(function(data) {
-	    var location = JSON.stringify(data.location).replace(/['"]+/g, '');
-	    var description = JSON.stringify(data.description).replace(/['"]+/g, '');
-	    var icon = JSON.stringify(data.icon).replace(/['"]+/g, '');
-	    document.getElementById("location").innerHTML = location;
-	    document.getElementById("description").innerHTML = description;
-	    document.getElementById("icon").src = icon;
+	    document.getElementById("location").innerText = data.location;
+	    document.getElementById("description").innerText = data.description;
+	    document.getElementById("icon").src = data.icon;
 	})
 }
-
-
-
-
-
-
-
