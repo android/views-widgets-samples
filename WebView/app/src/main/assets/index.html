@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (C) 2020 The Android Open Source Project
   ~
@@ -15,14 +14,17 @@
   ~ limitations under the License.
   -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity">
-
-    <WebView
-        android:id="@+id/webview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</FrameLayout>
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="app.css" rel="stylesheet">
+        <script src="main.js">
+        </script>
+    </head>
+    <body onLoad="getData()">
+        <h1 id="location">Today's Weather</h1>
+        <h2 class="day">Monday</h2><img id= "icon" alt="weather" class="center" src="https://gcoleman799.github.io/res/drawable/sunny.png">
+        <h2 id="description">Sunny and 75</h2>
+        <button class="button" onclick="sendAndroidMessage()" type="button" value="Send Message">Send Message </button>
+    </body>
+</html>

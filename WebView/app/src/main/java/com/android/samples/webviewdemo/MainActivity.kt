@@ -16,15 +16,82 @@
 
 package com.android.samples.webviewdemo
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+import android.content.Intent
+import android.content.pm.ApplicationInfo
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.webkit.JavascriptInterface
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
+import android.webkit.WebView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
+import androidx.webkit.*
 import com.android.samples.webviewdemo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    // Creating the custom WebView Client Class
+    private class MyWebViewClient(private val assetLoader: WebViewAssetLoader) :
+        WebViewClientCompat() {
+        override fun shouldInterceptRequest(
+            view: WebView,
+            request: WebResourceRequest
+        ): WebResourceResponse? {
+            return assetLoader.shouldInterceptRequest(request.url)
+        }
+    }
+
+    /** Instantiate the interface and set the context  */
+    class WebAppInterface(private val mContext: Context) {
+        /** Send a message from the web page  */
+        @JavascriptInterface
+        fun sendMessage(message: String) {
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, message)
+                type = "text/plain"
+            }
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(mContext, shareIntent, null)
+        }
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Configure asset loader with custom domain
+        val assetLoader = WebViewAssetLoader.Builder()
+            .setDomain("gcoleman799.github.io")
+            .addPathHandler("/Asset-Loader/", WebViewAssetLoader.AssetsPathHandler(this))
+            .addPathHandler("/res/", WebViewAssetLoader.ResourcesPathHandler(this))
+            .build()
+
+        // Set clients
+        binding.webview.webViewClient = MyWebViewClient(assetLoader)
+
+        // Set Title
+        title = getString(R.string.app_name)
+
+        // Setup debugging; See https://developers.google.com/web/tools/chrome-devtools/remote-debugging/webviews for reference
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if (0 != applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) {
+                WebView.setWebContentsDebuggingEnabled(true)
+            }
+        }
+
+        // Enable Javascript
+        binding.webview.settings.javaScriptEnabled = true
+
+        // Connect to Javascript Interface
+        binding.webview.addJavascriptInterface(WebAppInterface(this), "Weather")
+
+        // Load the content
+        binding.webview.loadUrl("https://gcoleman799.github.io/Asset-Loader/index.html")
     }
 }
