@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity() {
 
         // The JavaScript object will be injected in any frame whose origin matches one in the list created below.
         // We call the list rules because this is a set of allowed origin rules
-        val rules = setOf<String>("https://gcoleman799.github.io/Asset-Loader/", "https://gcoleman799.github.io/Asset-Loader/index.html","https://gcoleman799.github.io" )
+        val rules = setOf<String>("https://gcoleman799.github.io" )
 
         // Adds myListener to webview and injects a JavaScript object into each frame that myListener will listen on
 //        Log.i ("INFO", "Made it 1")

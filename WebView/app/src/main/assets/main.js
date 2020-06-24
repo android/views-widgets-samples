@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 function sendAndroidMessage() {
-	Weather.sendMessage("The weather in" + document.getElementById("title").innerText + "today is: " + document.getElementById("description").innerText);
+	Weather.sendMessage("The weather in " + document.getElementById("title").innerText + " today is: " + document.getElementById("description").innerText);
 }
 
 function getData() {
@@ -26,34 +25,31 @@ function getData() {
 		var currentLocation = form.options[form.selectedIndex].value;
 		console.log(currentLocation);
 		document.getElementById("title").innerText = form.options[form.selectedIndex].text;
-		//document.getElementById("description").innerText = data.currentLocation.description;
-		switch (currentLocation) {
-			case "newYork":
-				document.getElementById("description").innerText = data.newYork.description;
-				document.getElementById("icon").innerText = data.newYork.icon;
-			case "london":
-				document.getElementById("description").innerText = data.london.description;
-			case "sanFrancisco":
-				document.getElementById("description").innerText = data.sanFrancisco.description;
+		if (currentLocation == "london") {
+			document.getElementById("description").innerText = data.london.description;
+			document.getElementById("icon").src = data.london.icon;
+		} else if (currentLocation == "newYork") {
+			document.getElementById("description").innerText = data.newYork.description;
+			document.getElementById("icon").src = data.newYork.icon;
+		} else {
+			document.getElementById("description").innerText = data.sanFrancisco.description;
+			document.getElementById("icon").src = data.sanFrancisco.icon;
 		}
+
+		//		switch (currentLocation) {
+		//			case "newYork":
+		//				document.getElementById("description").innerText = data.newYork.description;
+		//				document.getElementById("icon").innerText = data.newYork.icon;
+		//			case "london":
+		//				document.getElementById("description").innerText = data.london.description;
+		//              document.getElementById("icon").innerText = data.london.icon;
+		//			case "sanFrancisco":
+		//				document.getElementById("description").innerText = data.sanFrancisco.description;
+	    //                document.getElementById("icon").innerText = data.sanFrancisco.icon;
+		//		}
 	})
 }
 
-//function changeLocation() {
-////get the location from the drop down menu
-////call get data passing in that param
-////call get data
-//	fetch("https://gcoleman799.github.io/Asset-Loader/weather.json").then(function(resp) {
-//		//console.log("Hello")
-//		return resp.json();
-//	})
-//	.then(function(data) {
-//	//console.log(data.one)
-//	    document.getElementById("title").innerText = data.one.location;
-//	    document.getElementById("description").innerText = data.one.monday.description;
-//	   // document.getElementById("icon").src = data.icon;
-//	})
-//}
 function postMessage(myObject) {
 	myObject.onmessage = function(event) {
 		// prints "Got it!" when we receive the app's response.
