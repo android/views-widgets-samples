@@ -13,27 +13,52 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 function sendAndroidMessage() {
-	Weather.sendMessage("The weather in WebView City today is: " + document.getElementById("description").innerHTML);
+	Weather.sendMessage("The weather in" + document.getElementById("title").innerText + "today is: " + document.getElementById("description").innerText);
 }
 
 function getData() {
 	fetch("https://gcoleman799.github.io/Asset-Loader/weather.json").then(function(resp) {
 		return resp.json();
-	})
-	.then(function(data) {
-	    var location = JSON.stringify(data.location).replace(/['"]+/g, '');
-	    var description = JSON.stringify(data.description).replace(/['"]+/g, '');
-	    var icon = JSON.stringify(data.icon).replace(/['"]+/g, '');
-	    document.getElementById("location").innerHTML = location;
-	    document.getElementById("description").innerHTML = description;
-	    document.getElementById("icon").src = icon;
+	}).then(function(data) {
+		var form = document.getElementById("location");
+		var currentLocation = form.options[form.selectedIndex].value;
+		console.log(currentLocation);
+		document.getElementById("title").innerText = form.options[form.selectedIndex].text;
+		//document.getElementById("description").innerText = data.currentLocation.description;
+		switch (currentLocation) {
+			case "newYork":
+				document.getElementById("description").innerText = data.newYork.description;
+				document.getElementById("icon").innerText = data.newYork.icon;
+			case "london":
+				document.getElementById("description").innerText = data.london.description;
+			case "sanFrancisco":
+				document.getElementById("description").innerText = data.sanFrancisco.description;
+		}
 	})
 }
 
-
-
-
-
-
-
+//function changeLocation() {
+////get the location from the drop down menu
+////call get data passing in that param
+////call get data
+//	fetch("https://gcoleman799.github.io/Asset-Loader/weather.json").then(function(resp) {
+//		//console.log("Hello")
+//		return resp.json();
+//	})
+//	.then(function(data) {
+//	//console.log(data.one)
+//	    document.getElementById("title").innerText = data.one.location;
+//	    document.getElementById("description").innerText = data.one.monday.description;
+//	   // document.getElementById("icon").src = data.icon;
+//	})
+//}
+function postMessage(myObject) {
+	myObject.onmessage = function(event) {
+		// prints "Got it!" when we receive the app's response.
+		console.log("Hello");
+	}
+	myObject.postMessage("I'm ready!");
+	//does this need more parameters?
+}

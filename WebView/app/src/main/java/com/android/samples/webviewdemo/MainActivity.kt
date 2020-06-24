@@ -19,22 +19,23 @@ package com.android.samples.webviewdemo
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.webkit.JavascriptInterface
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
-import androidx.webkit.WebViewAssetLoader
-import androidx.webkit.WebViewClientCompat
+import androidx.webkit.*
 import com.android.samples.webviewdemo.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
-    //Creating the custom WebView Client Class
+    //Creating the custom WebViewClient Class
     private class MyWebViewClient(private val assetLoader: WebViewAssetLoader) :
         WebViewClientCompat() {
         override fun shouldInterceptRequest(
@@ -61,6 +62,20 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    class MyListener() : WebViewCompat.WebMessageListener {
+        override fun onPostMessage(
+            view: WebView,
+            message: WebMessageCompat,
+            sourceOrigin: Uri,
+            isMainFrame: Boolean,
+            replyProxy: JavaScriptReplyProxy
+        ) {
+            // do something about view, message, sourceOrigin and isMainFrame.
+            replyProxy.postMessage("Got it!")
+            android.util.Log.i("grcoleman", "received onPostMessage in app")
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
@@ -69,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         //Configure asset loader with custom domain
         val assetLoader = WebViewAssetLoader.Builder()
             .setDomain("gcoleman799.github.io")
-            .addPathHandler("/Asset-Loader/", WebViewAssetLoader.AssetsPathHandler(this))
+            .addPathHandler("/Asset-Loader/assets/", WebViewAssetLoader.AssetsPathHandler(this))
             .addPathHandler("/res/", WebViewAssetLoader.ResourcesPathHandler(this))
             .build();
 
@@ -94,7 +109,16 @@ class MainActivity : AppCompatActivity() {
         //Connect to Javascript Interface
         binding.webview.addJavascriptInterface(WebAppInterface(this), "Weather")
 
+        // The JavaScript object will be injected in any frame whose origin matches one in the list created below.
+        // We call the list rules because this is a set of allowed origin rules
+        val rules = setOf<String>("https://gcoleman799.github.io/Asset-Loader/", "https://gcoleman799.github.io/Asset-Loader/index.html","https://gcoleman799.github.io" )
+
+        // Adds myListener to webview and injects a JavaScript object into each frame that myListener will listen on
+//        Log.i ("INFO", "Made it 1")
+//        if (WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)) Log.i ("INFO", "Made it 2")
+//        if (WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)) WebViewCompat.addWebMessageListener(binding.webview, "myObject", rules, MyListener() )
+
         //Load the content
-        binding.webview.loadUrl("https://gcoleman799.github.io/Asset-Loader/index.html")
+        binding.webview.loadUrl("https://gcoleman799.github.io/Asset-Loader/assets/index.html")
     }
 }

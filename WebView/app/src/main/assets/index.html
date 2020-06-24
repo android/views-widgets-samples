@@ -21,13 +21,27 @@
         <title></title>
     </head>
     <body onload="getData()">
-        <h1 id="location">Today's Weather</h1>
-        <h2 class="day">Monday</h2><img id= "icon" alt="weather" class="center" src="https://gcoleman799.github.io/res/drawable/sunny.png">
+    <label for="location">Choose a location:</label>
+
+    <select name="location" id="location" onchange="getData()">
+        <option value="newYork">New York</option>
+        <option value="sanFrancisco">San Francisco</option>
+        <option value="london">London</option>
+    </select>
+
+        <h1 id="title">Today's Weather</h1>
+
+
+        <h2 class="day">Monday</h2>
+        <img id= "icon" alt="weather" class="center" src="https://gcoleman799.github.io/res/drawable/sunny.png">
         <h2 id="description">Sunny and 75</h2>
         <form>
-            <input class="button" onclick="sendAndroidMessage()" type="button" value="Send Message">
+            <input class="button" onclick="sendAndroidMessage()" type="button" value="Send Android Message">
+            <input class="button" onclick="postMessage(myObject)" type="button" value="Send Web Message">
+
         </form>
         <script src="main.js">
+
         </script>
     </body>
 </html>
