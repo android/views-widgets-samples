@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 function sendAndroidMessage() {
-	Weather.sendMessage("The weather in " + document.getElementById("title").innerText + " today is: " + document.getElementById("description").innerText);
+	Weather.sendMessage("The weather in " + document.getElementById("title").innerText + " today is: " + document.getElementById("shortDescription").innerText + " and " + document.getElementById("currentTemp").innerText);
 }
 
 function getData() {
@@ -23,38 +23,26 @@ function getData() {
 	}).then(function(data) {
 		var form = document.getElementById("location");
 		var currentLocation = form.options[form.selectedIndex].value;
-		console.log(currentLocation);
 		document.getElementById("title").innerText = form.options[form.selectedIndex].text;
+
 		if (currentLocation == "london") {
-			document.getElementById("description").innerText = data.london.description;
+			document.getElementById("currentTemp").innerText = data.london.currentTemp;
+			document.getElementById("shortDescription").innerText = data.london.description;
+			document.getElementById("longDescription").innerText = "Today in London there is a " + data.london.chancePercip + " chance of percipitation and the humidity is  " +
+			data.london.humidity + ".";
 			document.getElementById("icon").src = data.london.icon;
 		} else if (currentLocation == "newYork") {
-			document.getElementById("description").innerText = data.newYork.description;
+		    document.getElementById("currentTemp").innerText = data.newYork.currentTemp;
+			document.getElementById("shortDescription").innerText = data.newYork.description;
+			document.getElementById("longDescription").innerText = "Today in New York there is a " + data.newYork.chancePercip + " chance of percipitation and the humidity is  " +
+            			data.newYork.humidity+ ".";
 			document.getElementById("icon").src = data.newYork.icon;
 		} else {
-			document.getElementById("description").innerText = data.sanFrancisco.description;
+		    document.getElementById("currentTemp").innerText = data.sanFrancisco.currentTemp;
+			document.getElementById("shortDescription").innerText = data.sanFrancisco.description;
+			document.getElementById("longDescription").innerText = "Today in San Francisco there is a " + data.sanFrancisco.chancePercip + " chance of percipitation and the humidity is  " +
+            			data.sanFrancisco.humidity + ".";
 			document.getElementById("icon").src = data.sanFrancisco.icon;
 		}
-
-		//		switch (currentLocation) {
-		//			case "newYork":
-		//				document.getElementById("description").innerText = data.newYork.description;
-		//				document.getElementById("icon").innerText = data.newYork.icon;
-		//			case "london":
-		//				document.getElementById("description").innerText = data.london.description;
-		//              document.getElementById("icon").innerText = data.london.icon;
-		//			case "sanFrancisco":
-		//				document.getElementById("description").innerText = data.sanFrancisco.description;
-	    //                document.getElementById("icon").innerText = data.sanFrancisco.icon;
-		//		}
 	})
-}
-
-function postMessage(myObject) {
-	myObject.onmessage = function(event) {
-		// prints "Got it!" when we receive the app's response.
-		console.log("Hello");
-	}
-	myObject.postMessage("I'm ready!");
-	//does this need more parameters?
 }
