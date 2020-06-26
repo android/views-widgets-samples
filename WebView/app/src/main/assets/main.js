@@ -26,27 +26,10 @@ function getData() {
 		var form = document.getElementById("location");
 		var currentLocation = form.options[form.selectedIndex].value;
 		document.getElementById("title").innerText = form.options[form.selectedIndex].text;
-		if (currentLocation == "london") {
-			document.getElementById("currentTemp").innerText = data.london.currentTemp;
-			document.getElementById("shortDescription").innerText = data.london.description;
-			document.getElementById("longDescription").innerText = "Today in London there is a " +
-			data.london.chancePrecip + " chance of precipitation and the humidity is  " +
-			data.london.humidity + ".";
-			document.getElementById("icon").src = data.london.icon;
-		} else if (currentLocation == "newYork") {
-		    document.getElementById("currentTemp").innerText = data.newYork.currentTemp;
-			document.getElementById("shortDescription").innerText = data.newYork.description;
-			document.getElementById("longDescription").innerText = "Today in New York there is a " +
-			data.newYork.chancePrecip + " chance of precipitation and the humidity is  " +
-			data.newYork.humidity+ ".";
-			document.getElementById("icon").src = data.newYork.icon;
-		} else {
-		    document.getElementById("currentTemp").innerText = data.sanFrancisco.currentTemp;
-			document.getElementById("shortDescription").innerText = data.sanFrancisco.description;
-			document.getElementById("longDescription").innerText = "Today in San Francisco there is a " +
-			data.sanFrancisco.chancePrecip + " chance of precipitation and the humidity is  "  +
-			data.sanFrancisco.humidity + ".";
-			document.getElementById("icon").src = data.sanFrancisco.icon;
-		}
+		document.getElementById("currentTemp").innerText = data[currentLocation].currentTemp;
+        document.getElementById("shortDescription").innerText = data[currentLocation].description;
+        document.getElementById("longDescription").innerText = `Today in  ${form.options[form.selectedIndex].text} there is a
+        ${data[currentLocation].chancePrecip} chance of precipitation and the humidity is ${data[currentLocation].humidity}.`;
+        document.getElementById("icon").src = data[currentLocation].icon;
 	})
 }

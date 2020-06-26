@@ -36,7 +36,7 @@ import com.android.samples.webviewdemo.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
-    //Creating the custom WebViewClient Class
+    //Creating the custom WebView Client Class
     private class MyWebViewClient(private val assetLoader: WebViewAssetLoader) :
         WebViewClientCompat() {
         override fun shouldInterceptRequest(
@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         //Configure asset loader with custom domain
         val assetLoader = WebViewAssetLoader.Builder()
             .setDomain("gcoleman799.github.io")
-            .addPathHandler("/Asset-Loader/assets/", WebViewAssetLoader.AssetsPathHandler(this))
+            .addPathHandler("/assets/", WebViewAssetLoader.AssetsPathHandler(this))
             .addPathHandler("/res/", WebViewAssetLoader.ResourcesPathHandler(this))
             .build();
 
@@ -97,6 +97,6 @@ class MainActivity : AppCompatActivity() {
         binding.webview.addJavascriptInterface(WebAppInterface(this), "Weather")
 
         //Load the content
-        binding.webview.loadUrl("https://gcoleman799.github.io/Asset-Loader/assets/index.html")
+        binding.webview.loadUrl("https://gcoleman799.github.io/assets/index.html")
     }
 }
