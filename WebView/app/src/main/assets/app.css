@@ -14,29 +14,28 @@
  * limitations under the License.
  */
 body {
-  background-color: white;
+  background-color: lightblue;
 }
 h1 {
-  color: #116085;
+  color: white;
   text-align: center;
-  padding-top: 10%;
 }
 h2 {
   color: grey;
   text-align: center;
-  position: relative;
 }
 p {
   font-family: verdana;
   font-size: 20px;
 }
-label {
+
+label{
   font-family: verdana;
   font-size: 20px;
 }
-.selectMenu {
-  font-family: verdana;
-  font-size: 16px;
+img {
+  border-radius: 4px;
+  padding: 5px;
 }
 .button {
   font-family: verdana;
@@ -55,13 +54,13 @@ label {
   margin-top: 5%;
 }
 .button:hover {
-  background-color: #42b007;
+  background-color:#42b007;
 }
 .button:active {
-  position: relative;
-  top: 1px;
+  position:relative;
+  top:1px;
 }
-.day {
+.day{
   margin-top: 50px;
 }
 .center {
@@ -69,29 +68,4 @@ label {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
-}
-.share {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-}
-.icon {
-  float: left;
-  width: 40%;
-  margin-left: 10%;
-}
-.currentTemp {
-  float: right;
-  margin-right: 10%;
-  width: 30%;
-}
-.shortDescription {
-  position: relative;
-  margin-top: 10%;
-}
-.longDescription {
-  text-align: left;
-  padding-top: 20%;
-  padding-left: 5%;
-  padding-right: 5%;
 }
