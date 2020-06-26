@@ -29,9 +29,10 @@ import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
-import androidx.webkit.*
+import androidx.webkit.WebViewAssetLoader
+import androidx.webkit.WebViewClientCompat
 import com.android.samples.webviewdemo.databinding.ActivityMainBinding
-import kotlinx.android.synthetic.main.activity_main.*
+
 
 
 class MainActivity : AppCompatActivity() {

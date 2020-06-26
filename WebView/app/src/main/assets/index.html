@@ -13,30 +13,30 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
 <!DOCTYPE html>
 <html>
-<head>
-    <link href="app.css" rel="stylesheet">
-    <title></title>
-</head>
-<body onload="getData()">
-<label for="location">Current Location:</label> <select class="selectMenu" id="location" name="location" onchange="getData()">
-    <option value="newYork">
-        New York
-    </option>
-    <option value="sanFrancisco">
-        San Francisco
-    </option>
-    <option value="london">
-        London
-    </option>
-</select>
-<h1 id="title">Location</h1><img alt="weather" class="icon" id="icon" src="https://gcoleman799.github.io/res/drawable/sunny.png">
-<h2 class="currentTemp" id="currentTemp">Current Temp</h2>
-<h2 class="shortDescription" id="shortDescription">Short Description</h2>
-<p class="longDescription" id="longDescription">Long Description</p><button class="button" onclick="sendAndroidMessage()" type="button" value="Send Message">Share</button>
-<script src="main.js">
-</script>
-</body>
+    <head>
+        <link href="app.css" rel="stylesheet" />
+    </head>
+    <body onload="getData()">
+        <label for="location">Current Location:</label>
+        <select class="selectMenu" id="location" name="location" onchange="getData()">
+            <option value="newYork">
+                 New York
+            </option>
+            <option value="sanFrancisco">
+                San Francisco
+            </option>
+            <option value="london">
+                London
+            </option>
+        </select>
+        <h1 id="title">Location</h1>
+        <img alt="weather" class="icon" id="icon" src="https://gcoleman799.github.io/res/drawable/sunny.png" />
+        <h2 class="currentTemp" id="currentTemp">Current Temp</h2>
+        <h2 class="shortDescription" id="shortDescription">Short Description</h2>
+        <p class="longDescription" id="longDescription">Long Description</p>
+        <button class="button" onclick="sendAndroidMessage()" type="button" value="Send Message">Share</button>
+        <script src="main.js"></script>
+    </body>
 </html>

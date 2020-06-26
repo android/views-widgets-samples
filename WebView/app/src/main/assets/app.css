@@ -14,85 +14,84 @@
  * limitations under the License.
  */
 body {
-	background-color: white;
+  background-color: white;
 }
 h1 {
-	color: #116085;
-	text-align: center;
-	padding-top: 10%;
+  color: #116085;
+  text-align: center;
+  padding-top: 10%;
 }
 h2 {
-	color: grey;
-	text-align: center;
-	position: relative;
+  color: grey;
+  text-align: center;
+  position: relative;
 }
 p {
-	font-family: verdana;
-	font-size: 20px;
+  font-family: verdana;
+  font-size: 20px;
 }
 label {
-	font-family: verdana;
-	font-size: 20px;
+  font-family: verdana;
+  font-size: 20px;
 }
 .selectMenu {
-	font-family: verdana;
-	font-size: 16px;
+  font-family: verdana;
+  font-size: 16px;
 }
 .button {
-	font-family: verdana;
-	background-color: #44c767;
-	border-radius: 8px;
-	border: 1px solid #18ab29;
-	display: inline-block;
-	cursor: pointer;
-	color: #ffffff;
-	font-size: 18px;
-	padding: 16px 31px;
-	text-decoration: none;
-	text-shadow: 0px 1px 0px #2f6627;
-	float: right;
-	margin-right: 5%;
-	margin-top: 5%;
+  font-family: verdana;
+  background-color: #44c767;
+  border-radius: 8px;
+  border: 1px solid #18ab29;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 18px;
+  padding: 16px 31px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #2f6627;
+  float: right;
+  margin-right: 5%;
+  margin-top: 5%;
 }
 .button:hover {
-	background-color: #42b007;
+  background-color: #42b007;
 }
 .button:active {
-	position: relative;
-	top: 1px;
+  position: relative;
+  top: 1px;
 }
 .day {
-	margin-top: 50px;
+  margin-top: 50px;
 }
 .center {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 .share {
-	position: fixed;
-	bottom: 0;
-	right: 0;
+  position: fixed;
+  bottom: 0;
+  right: 0;
 }
 .icon {
-	float: left;
-	width: 40%;
-	margin-left: 10%;
+  float: left;
+  width: 40%;
+  margin-left: 10%;
 }
 .currentTemp {
-	float: right;
-	margin-right: 10%;
-	width: 30%;
+  float: right;
+  margin-right: 10%;
+  width: 30%;
 }
 .shortDescription {
-	position: relative;
-	margin-top: 10%;
+  position: relative;
+  margin-top: 10%;
 }
 .longDescription {
-	text-align: left;
-	padding-top: 20%;
-	padding-left: 5%;
-	padding-right: 5%
+  text-align: left;
+  padding-top: 20%;
+  padding-left: 5%;
+  padding-right: 5%;
 }
-​
