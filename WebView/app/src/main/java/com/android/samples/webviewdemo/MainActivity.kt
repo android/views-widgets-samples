@@ -19,17 +19,16 @@ package com.android.samples.webviewdemo
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.webkit.JavascriptInterface
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
-import androidx.webkit.*
+import androidx.webkit.WebViewAssetLoader
+import androidx.webkit.WebViewClientCompat
 import com.android.samples.webviewdemo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

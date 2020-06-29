@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 function sendAndroidMessage() {
 	Weather.sendMessage("The weather in " + `${document.getElementById("title").innerText}` + " today is " + 
 	`${document.getElementById("description").innerText} `);
