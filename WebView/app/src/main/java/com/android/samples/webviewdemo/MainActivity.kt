@@ -29,21 +29,18 @@ import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
-import androidx.webkit.WebViewAssetLoader
-import androidx.webkit.WebViewClientCompat
+import androidx.webkit.*
 import com.android.samples.webviewdemo.databinding.ActivityMainBinding
 
-
-
 class MainActivity : AppCompatActivity() {
-    //Creating the custom WebView Client Class
+    // Creating the custom WebView Client Class
     private class MyWebViewClient(private val assetLoader: WebViewAssetLoader) :
         WebViewClientCompat() {
         override fun shouldInterceptRequest(
             view: WebView,
             request: WebResourceRequest
         ): WebResourceResponse? {
-            return assetLoader.shouldInterceptRequest(request.getUrl());
+            return assetLoader.shouldInterceptRequest(request.url)
         }
     }
 
@@ -68,29 +65,27 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //Configure asset loader with custom domain
+        // Configure asset loader with custom domain
         val assetLoader = WebViewAssetLoader.Builder()
             .setDomain("gcoleman799.github.io")
             .addPathHandler("/Asset-Loader/assets/", WebViewAssetLoader.AssetsPathHandler(this))
             .addPathHandler("/res/", WebViewAssetLoader.ResourcesPathHandler(this))
-            .build();
+            .build()
 
-        //Set clients
+        // Set clients
         binding.webview.webViewClient = MyWebViewClient(assetLoader)
 
-        //Set Title
-        title = "WebView Weather"
+        // Set Title
+        title = getString(R.string.app_name)
 
-        //Setup debugging
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            WebView.setWebContentsDebuggingEnabled(true);
-        }
+        // Setup debugging; See https://developers.google.com/web/tools/chrome-devtools/remote-debugging/webviews for reference
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             if (0 != applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) {
                 WebView.setWebContentsDebuggingEnabled(true)
             }
         }
-        //Enable Javascript
+
+        // Enable Javascript
         binding.webview.settings.javaScriptEnabled = true
 
         //Connect to WebApp Interface
