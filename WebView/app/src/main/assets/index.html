@@ -15,22 +15,20 @@
   -->
 <!DOCTYPE html>
 <html>
-<head>
-     <link href="app.css" rel="stylesheet">
-     <script async src="main.js"></script>
-</head>
-<body onload="getData()">
+  <head>
+    <link href="app.css" rel="stylesheet">
+    <script async src="main.js"></script>
+  </head>
+  <body onload="getData()">
     <label for="location">Choose a location:</label>
     <select name="location" id="location" onchange="getData()">
-        <option value="newYork">New York</option>
-        <option value="sanFrancisco">San Francisco</option>
-        <option value="london">London</option>
+      <option value="newYork">New York</option>
+      <option value="sanFrancisco">San Francisco</option>
+      <option value="london">London</option>
     </select>
     <h1 id="title">Today's Weather</h1>
     <img id= "icon" alt="weather" class="center" src="https://gcoleman799.github.io/res/drawable/sunny.png">
     <h2 id="description">Sunny and 75</h2>
-    <form>
-        <input class="button" onclick="sendAndroidMessage()" type="button" value="Share">
-    </form>
-</body>
+      <input class="button" onclick="sendAndroidMessage()" type="button" value="Share">
+  </body>
 </html>
