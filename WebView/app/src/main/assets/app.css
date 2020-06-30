@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 body {
-    background-color: lightblue;
+    background-color: light-blue;
 }
 h1 {
     color: white;
@@ -28,9 +28,7 @@ p {
     font-family: verdana;
     font-size: 20px;
 }
-
-label{
-
+label {
     font-family: verdana;
     font-size: 20px;
 }

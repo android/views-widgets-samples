@@ -87,10 +87,10 @@ class MainActivity : AppCompatActivity() {
         // Enable Javascript
         binding.webview.settings.javaScriptEnabled = true
 
-        //Connect to WebApp Interface
+        // Connect to WebAppInterface
         binding.webview.addJavascriptInterface(WebAppInterface(this), "Weather")
 
-        //Load the content
+        // Load the content
         binding.webview.loadUrl("https://gcoleman799.github.io/Asset-Loader/assets/index.html")
     }
 }
