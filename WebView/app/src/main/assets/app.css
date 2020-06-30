@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 body {
-    background-color: lightblue;
+    background-color: light-blue;
 }
 h1 {
     color: white;
@@ -25,6 +25,10 @@ h2 {
     text-align: center;
 }
 p {
+    font-family: verdana;
+    font-size: 20px;
+}
+label {
     font-family: verdana;
     font-size: 20px;
 }
@@ -63,4 +67,3 @@ img {
     margin-right: auto;
     width: 50%;
 }
-​

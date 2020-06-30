@@ -13,18 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 function sendAndroidMessage() {
-	Weather.sendMessage("The weather in WebView City today is: " + document.getElementById("description").innerHTML);
+	Weather.sendMessage("The weather in " + `${document.getElementById("title").innerText}` + " today is " + 
+	`${document.getElementById("description").innerText} `);
 }
 
 function getData() {
 	fetch("https://gcoleman799.github.io/Asset-Loader/weather.json").then(function(resp) {
 		return resp.json();
-	})
-	.then(function(data) {
-	    document.getElementById("location").innerText = data.location;
-	    document.getElementById("description").innerText = data.description;
-	    document.getElementById("icon").src = data.icon;
+	}).then(function(data) {
+		var form = document.getElementById("location");
+		var currentLocation = form.options[form.selectedIndex].value;
+		document.getElementById("title").innerText = form.options[form.selectedIndex].text;
+        document.getElementById("description").innerText = data[currentLocation].description;
+        document.getElementById("icon").src = data[currentLocation].icon;
 	})
 }

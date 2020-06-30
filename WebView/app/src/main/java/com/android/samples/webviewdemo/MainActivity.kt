@@ -19,17 +19,16 @@ package com.android.samples.webviewdemo
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.webkit.JavascriptInterface
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
-import androidx.webkit.*
+import androidx.webkit.WebViewAssetLoader
+import androidx.webkit.WebViewClientCompat
 import com.android.samples.webviewdemo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -66,9 +65,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Configure asset loader with custom domain
+        // * NOTE THAT *:
+        // The assets path handler is set with the sub path /Asset-Loader/ here because we are tyring to ensure
+        // that the address loaded with loadUrl("https://gcoleman799.github.io/Asset-Loader/assets/index.html") does
+        // not conflict with a real web address. In this case, if the path were only /assests/ we would need to load
+        // "https://gcoleman799.github.io/assets/index.html" in order to access our local index.html file.
+        // However we cannot guarantee "https://gcoleman799.github.io/assets/index.html" is not a valid web address.
+        // Therefore we must let the AssetLoader know to expect the /Asset-Loader/ sub path as well as the /assets/.
         val assetLoader = WebViewAssetLoader.Builder()
             .setDomain("gcoleman799.github.io")
-            .addPathHandler("/Asset-Loader/", WebViewAssetLoader.AssetsPathHandler(this))
+            .addPathHandler("/Asset-Loader/assets/", WebViewAssetLoader.AssetsPathHandler(this))
             .addPathHandler("/res/", WebViewAssetLoader.ResourcesPathHandler(this))
             .build()
 
@@ -88,10 +94,10 @@ class MainActivity : AppCompatActivity() {
         // Enable Javascript
         binding.webview.settings.javaScriptEnabled = true
 
-        // Connect to Javascript Interface
+        // Connect to WebAppInterface
         binding.webview.addJavascriptInterface(WebAppInterface(this), "Weather")
 
         // Load the content
-        binding.webview.loadUrl("https://gcoleman799.github.io/Asset-Loader/index.html")
+        binding.webview.loadUrl("https://gcoleman799.github.io/Asset-Loader/assets/index.html")
     }
 }
