@@ -32,3 +32,4 @@ function getData() {
         + `${data[currentLocation].humidity}.`;
         document.getElementById("icon").src = data[currentLocation].icon;
 	})
+}
