@@ -15,7 +15,7 @@
  */
 function sendAndroidMessage() {
 	Weather.sendMessage("The weather in " + `${document.getElementById("title").innerText}` + " today is " + 
-	`${document.getElementById("description").innerText} `);
+	`${document.getElementById("shortDescription").innerText} `);
 }
 
 function getData() {
@@ -25,7 +25,10 @@ function getData() {
 		var form = document.getElementById("location");
 		var currentLocation = form.options[form.selectedIndex].value;
 		document.getElementById("title").innerText = form.options[form.selectedIndex].text;
-        document.getElementById("description").innerText = data[currentLocation].description;
+        document.getElementById("currentTemp").innerText = data[currentLocation].currentTemp;
+        document.getElementById("shortDescription").innerText = data[currentLocation].description;
+        document.getElementById("longDescription").innerText = "Today in " + `${form.options[form.selectedIndex].text}`
+        + " there is a " + `${data[currentLocation].chancePrecip}` + " chance of precipitation and the humidity is "
+        + `${data[currentLocation].humidity}.`;
         document.getElementById("icon").src = data[currentLocation].icon;
 	})
-}
