@@ -1,0 +1,29 @@
+{
+  "newYork":{
+    "currentTemp":"75°",
+    "highTemp":"83°",
+    "lowTemp":"64°",
+    "chancePrecip":"90%",
+    "humidity":"23%",
+    "description":"Rainy",
+    "icon":"https://gcoleman799.github.io/res/drawable/rain.png"
+  },
+  "sanFrancisco":{
+    "currentTemp":"70°",
+    "highTemp":"75°",
+    "lowTemp":"61°",
+    "chancePrecip":"0%",
+    "humidity":"2%",
+    "description":"Clear Sky",
+    "icon": "https://gcoleman799.github.io/res/drawable/sunny.png"
+  },
+  "london":{
+    "currentTemp":"88°",
+    "highTemp":"89°",
+    "lowTemp":"67°",
+    "chancePrecip":"15%",
+    "humidity":"36%",
+    "description":"Partly Cloudy",
+    "icon":"https://gcoleman799.github.io/res/drawable/partly_cloudy.png"
+  }
+}
