@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         fun createJsObject(webview : WebView , context: Context) {
             // If the application is running on a version that supports WebMessageListener then use it.
             // WebMessageListener is preferred because it is more secure
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 // The JavaScript object will be injected in any frame whose origin matches one in the list created below.
                 // We call the list rules because this is a set of allowed origin rules
                 val rules = setOf<String>("https://gcoleman799.github.io")
@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
                     MyListener()
                 )
             } else {
-            //Falls back to JavascriptInterface if the application is running on a lower API level
+            // Falls back to JavascriptInterface if the application is running on a lower API level
             webview.addJavascriptInterface(WebAppInterface(context), "myObject") }
         }
     }

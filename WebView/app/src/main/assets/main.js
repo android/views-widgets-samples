@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 function sendAndroidMessage() {
-    console.log("Entered sendAndroidMessage the JS object is: ");
-    console.log (myObject);
+    myObject.sendMessage("The weather in " + `${document.getElementById("title").innerText}` + " today is " +
+    	`${document.getElementById("description").innerText} `);
 }
 
 function getData() {
