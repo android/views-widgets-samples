@@ -28,8 +28,8 @@ function getData() {
         document.getElementById("currentTemp").innerText = data[currentLocation].currentTemp;
         document.getElementById("shortDescription").innerText = data[currentLocation].description;
         document.getElementById("longDescription").innerText = "Today in " + `${form.options[form.selectedIndex].text}`
-        + " there is a " + `${data[currentLocation].chancePrecip}` + " chance of precipitation and the humidity is "
-        + `${data[currentLocation].humidity}.`;
+            + " there is a " + `${data[currentLocation].chancePrecip}` + " chance of precipitation and the humidity is "
+            + `${data[currentLocation].humidity}.`;
         document.getElementById("icon").src = data[currentLocation].icon;
 	})
 }
