@@ -80,15 +80,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     /** Instantiate a class to determine which JS-Java API to use based on the version the application is running on */
-    class ApiVersion() {
-        fun determineVersion(webview : WebView , context: Context) {
-            //Checks to see if the API the applicatoin is running on is high enough to support the new API
+    class JsObject() {
+        fun createJsObject(webview : WebView , context: Context) {
+            // If the application is running on a version that supports WebMessageListener then use it.
+            // WebMessageListener is preferred because it is more secure
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 // The JavaScript object will be injected in any frame whose origin matches one in the list created below.
                 // We call the list rules because this is a set of allowed origin rules
                 val rules = setOf<String>("https://gcoleman799.github.io")
-
-                // Adds myListener to webview and injects a JavaScript object into each frame that myListener will listen on
                 if (WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)) WebViewCompat.addWebMessageListener(
                     webview,
                     "myObject",
@@ -96,7 +95,7 @@ class MainActivity : AppCompatActivity() {
                     MyListener()
                 )
             } else {
-            //Falls back to JavascriptInterface if WebMessageListener is not available
+            //Falls back to JavascriptInterface if the application is running on a lower API level
             webview.addJavascriptInterface(WebAppInterface(context), "myObject") }
         }
     }
@@ -136,8 +135,9 @@ class MainActivity : AppCompatActivity() {
         // Enable Javascript
         binding.webview.settings.javaScriptEnabled = true
 
-        //create JS object to be injected into frames
-        val myObject = ApiVersion().determineVersion(binding.webview, this)
+        // Create a JS object to be injected into frames; regardless of which API is used
+        // (WebMessageListener or WebAppInterface) the JS object will be named myObject in this case.
+        JsObject().createJsObject(binding.webview, this)
 
         // Load the content
         binding.webview.loadUrl("https://gcoleman799.github.io/Asset-Loader/assets/index.html")
