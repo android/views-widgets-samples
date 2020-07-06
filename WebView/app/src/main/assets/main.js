@@ -14,11 +14,8 @@
  * limitations under the License.
  */
 function sendAndroidMessage() {
-    console.log ("starting sendAndroidMessage");
-    //Should be null when app running below Q lower API
-    console.log(myObject1);
-    //Should be null when app running on Q
-    console.log(myObject2);
+    console.log("Entered sendAndroidMessage the JS object is: ");
+    console.log (myObject);
 }
 
 function getData() {
