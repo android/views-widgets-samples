@@ -1,5 +1,4 @@
-Android Views and Widgets Samples Repository
+WebView Weather Sample Data
 ============================================
 
-This repository contains a set of individual Android Studio projects to help you get
-started writing/understanding Android views and widgets features.
+This repository contains the sample data used in the WebView sample. 
