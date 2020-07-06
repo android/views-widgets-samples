@@ -19,16 +19,22 @@ package com.android.samples.webviewdemo
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.webkit.JavascriptInterface
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
+import androidx.webkit.JavaScriptReplyProxy
+import androidx.webkit.WebMessageCompat
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewClientCompat
+import androidx.webkit.WebViewCompat
+import androidx.webkit.WebViewFeature
 import com.android.samples.webviewdemo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -57,6 +63,42 @@ class MainActivity : AppCompatActivity() {
             startActivity(mContext, shareIntent, null)
         }
 
+    }
+
+    /** Instantiate the Listener  */
+    class MyListener() : WebViewCompat.WebMessageListener {
+        override fun onPostMessage(
+            view: WebView,
+            message: WebMessageCompat,
+            sourceOrigin: Uri,
+            isMainFrame: Boolean,
+            replyProxy: JavaScriptReplyProxy
+        ) {
+            replyProxy.postMessage("Got it!")
+            Log.i("grcoleman", "received onPostMessage in app")
+        }
+    }
+
+    /** Instantiate a class to determine which JS-Java API to use based on the version the application is running on */
+    class ApiVersion() {
+        fun determineVersion(webview : WebView , context: Context) {
+            //Checks to see if the API the applicatoin is running on is high enough to support the new API
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                // The JavaScript object will be injected in any frame whose origin matches one in the list created below.
+                // We call the list rules because this is a set of allowed origin rules
+                val rules = setOf<String>("https://gcoleman799.github.io")
+
+                // Adds myListener to webview and injects a JavaScript object into each frame that myListener will listen on
+                if (WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)) WebViewCompat.addWebMessageListener(
+                    webview,
+                    "myObject1",
+                    rules,
+                    MyListener()
+                )
+            }
+            //Falls back to JavascriptInterface if WebMessageListener is not available
+            webview.addJavascriptInterface(WebAppInterface(context), "myObject2")
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -94,8 +136,8 @@ class MainActivity : AppCompatActivity() {
         // Enable Javascript
         binding.webview.settings.javaScriptEnabled = true
 
-        // Connect to WebAppInterface
-        binding.webview.addJavascriptInterface(WebAppInterface(this), "Weather")
+        //create JS object to be injected into frames
+        val myObject = ApiVersion().determineVersion(binding.webview, this)
 
         // Load the content
         binding.webview.loadUrl("https://gcoleman799.github.io/Asset-Loader/assets/index.html")

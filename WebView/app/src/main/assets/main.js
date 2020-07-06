@@ -14,8 +14,11 @@
  * limitations under the License.
  */
 function sendAndroidMessage() {
-	Weather.sendMessage("The weather in " + `${document.getElementById("title").innerText}` + " today is " + 
-	`${document.getElementById("description").innerText} `);
+    console.log ("starting sendAndroidMessage");
+    //Should be null when app running below Q lower API
+    console.log(myObject1);
+    //Should be null when app running on Q
+    console.log(myObject2);
 }
 
 function getData() {
