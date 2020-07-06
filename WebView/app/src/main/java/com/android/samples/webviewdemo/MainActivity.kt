@@ -91,13 +91,13 @@ class MainActivity : AppCompatActivity() {
                 // Adds myListener to webview and injects a JavaScript object into each frame that myListener will listen on
                 if (WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)) WebViewCompat.addWebMessageListener(
                     webview,
-                    "myObject1",
+                    "myObject",
                     rules,
                     MyListener()
                 )
-            }
+            } else {
             //Falls back to JavascriptInterface if WebMessageListener is not available
-            webview.addJavascriptInterface(WebAppInterface(context), "myObject2")
+            webview.addJavascriptInterface(WebAppInterface(context), "myObject") }
         }
     }
 
