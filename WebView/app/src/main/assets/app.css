@@ -67,3 +67,28 @@ img {
   margin-right: auto;
   width: 50%;
 }
+.share {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+.icon {
+  float: left;
+  width: 40%;
+  margin-left: 10%;
+}
+.currentTemp {
+  float: right;
+  margin-right: 10%;
+  width: 30%;
+}
+.shortDescription {
+  position: relative;
+  margin-top: 10%;
+}
+.longDescription {
+  text-align: left;
+  padding-top: 20%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
