@@ -16,6 +16,7 @@
 
 package com.android.samples.webviewdemo
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
@@ -23,6 +24,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.webkit.JavascriptInterface
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
@@ -36,9 +38,10 @@ import androidx.webkit.WebViewClientCompat
 import androidx.webkit.WebViewCompat
 import androidx.webkit.WebViewFeature
 import com.android.samples.webviewdemo.databinding.ActivityMainBinding
+import java.lang.invoke.LambdaConversionException
 
 class MainActivity : AppCompatActivity() {
-    val jsObjName = "jsObject"
+
 
     // Creating the custom WebView Client Class
     private class MyWebViewClient(private val assetLoader: WebViewAssetLoader) :
@@ -51,55 +54,55 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /** Instantiate the interface and set the context  */
-    class WebAppInterface(private val mContext: Context) {
-        /** Send a message from the web page  */
-        @JavascriptInterface
-        fun sendMessage(message: String) {
-            val sendIntent: Intent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, message)
-                type = "text/plain"
-            }
-            val shareIntent = Intent.createChooser(sendIntent, null)
-            startActivity(mContext, shareIntent, null)
+    private fun createJsObject(
+        webview: WebView,
+        mContext: Context,
+        jsObjName: String,
+        rules: Set<String>,
+        sendAndroidMessage: (message: String, mContext: Context) -> Unit
+    ) {
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)) {
+            WebViewCompat.addWebMessageListener(
+                webview, jsObjName, rules,
+                object : WebViewCompat.WebMessageListener {
+                    override fun onPostMessage(
+                        webview: WebView,
+                        message: WebMessageCompat,
+                        sourceOrigin: Uri,
+                        isMainFrame: Boolean,
+                        replyProxy: JavaScriptReplyProxy
+                    ) {
+                        sendAndroidMessage(message.data, mContext)
+                    }
+                })
+        } else {
+            webview.addJavascriptInterface(object {
+                @JavascriptInterface
+                fun postMessage(message: String?) {
+                    sendAndroidMessage(message, mContext)
+                }
+            }, jsObjName)
         }
     }
 
-    /** Instantiate the Listener  */
-    class WebMessageListener() : WebViewCompat.WebMessageListener {
-        override fun onPostMessage(
-            view: WebView,
-            message: WebMessageCompat,
-            sourceOrigin: Uri,
-            isMainFrame: Boolean,
-            replyProxy: JavaScriptReplyProxy
-        ) {
-            replyProxy.postMessage("Got it!")
-            Log.i("grcoleman", "received onPostMessage in app")
+    // Invokes native android sharing
+    val sendAndroidMessage = { message: String?, mContext: Context ->
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, message)
+            type = "text/plain"
         }
-    }
-
-    private fun createJsObject(webview: WebView, context: Context) {
-        // The JavaScript object will be injected in any frame whose origin matches one in the list created below.
-        // We call the list rules because this is a set of allowed origin rules
-        val rules = setOf<String>("https://gcoleman799.github.io")
-        if (WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)) WebViewCompat.addWebMessageListener(
-            webview,
-            jsObjName,
-            rules,
-            WebMessageListener()
-        )
-        else {
-            // Falls back to JavascriptInterface if the application is running on a lower API level
-            webview.addJavascriptInterface(WebAppInterface(context), jsObjName)
-        }
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(mContext, shareIntent, null)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val jsObjName = "jsObject"
+        val rules = setOf<String>("https://gcoleman799.github.io")
+
 
         // Configure asset loader with custom domain
         // * NOTE THAT *:
@@ -131,9 +134,9 @@ class MainActivity : AppCompatActivity() {
         // Enable Javascript
         binding.webview.settings.javaScriptEnabled = true
 
-        // Create a JS object to be injected into frames; regardless of which API is used
-        // (WebMessageListener or WebAppInterface) the JS object will be named myObject in this case.
-        createJsObject(binding.webview, this)
+        // Create a JS object to be injected into frames; Determines if WebMessageListener
+        // or WebAppInterface should be used
+        createJsObject(binding.webview, this, jsObjName, rules, sendAndroidMessage)
 
         // Load the content
         binding.webview.loadUrl("https://gcoleman799.github.io/Asset-Loader/assets/index.html")

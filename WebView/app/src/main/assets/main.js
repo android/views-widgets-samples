@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 function sendAndroidMessage() {
-	Weather.sendMessage("The weather in " + `${document.getElementById("title").innerText}` + " today is " + 
+	jsObject.postMessage("The weather in " + `${document.getElementById("title").innerText}` + " today is " +
 	`${document.getElementById("shortDescription").innerText} `);
 }
 
