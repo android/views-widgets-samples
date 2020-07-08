@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity() {
             val shareIntent = Intent.createChooser(sendIntent, null)
             startActivity(mContext, shareIntent, null)
         }
-
     }
 
     /** Instantiate the Listener  */
@@ -81,7 +80,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     private fun createJsObject(webview: WebView, context: Context) {
         // The JavaScript object will be injected in any frame whose origin matches one in the list created below.
         // We call the list rules because this is a set of allowed origin rules
@@ -97,7 +95,6 @@ class MainActivity : AppCompatActivity() {
             webview.addJavascriptInterface(WebAppInterface(context), jsObjName)
         }
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
