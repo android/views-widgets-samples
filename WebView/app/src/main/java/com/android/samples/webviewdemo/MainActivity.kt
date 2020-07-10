@@ -16,12 +16,13 @@
 
 package com.android.samples.webviewdemo
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.webkit.JavascriptInterface
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
@@ -37,7 +38,8 @@ import androidx.webkit.WebViewFeature
 import com.android.samples.webviewdemo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
+    // Create a handler that runs on the UI thread
+    private val handler: Handler = Handler(Looper.getMainLooper())
 
     // Creating the custom WebView Client Class
     private class MyWebViewClient(private val assetLoader: WebViewAssetLoader) :
@@ -51,21 +53,31 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * This method checks to see if WebMessageListener is supported. This method is prefered
-     * for security reasons. If this feature is supported, then it is used to create a
-     * Javascript object to be injected into every iframe. If it is not supported then
-     * then the app will fall back to JavascriptInterface.Here, the custom object that is inserted
-     * using JavascriptInterface is setup to mimic the object that would be created by WebMessageListener
-     * if it were available. This is so that the that Javascript will not have to behave
-     * any differently whether it is passed an object by WebMessageListener or JavascriptInterface.
-     * @param webview the component that is
-     * @param mContext the amount of incoming damage
+     * Injects a JavaScript object which supports a {@code postMessage()} method.
+     * A feature check is used to determine if the preferred API, WebMessageListener, is supported.
+     * If it is, then WebMessageListener will be used to create a JavaScript object. The object will be
+     * injected into all of the frames that have an origin matching those in {@code allowedOriginRules}.
+     *
+     * If WebMessageListener is not supported then the method will defer to using JavascriptInterface
+     * to create the JavaScript object.
+     *
+     * The {@code postMessage()} methods in the Javascript objects created by WebMessageListener and
+     * JavascriptInterface both make calls to the same callback, {@code onMessageReceived()}.
+     * In this case, the callback invokes native Android sharing.
+     *
+     * The WebMessageListener invokes callbacks on the UI thread by default. However,
+     * JavascriptInterface invokes callbacks on a background thread by default. In order to
+     * guarantee thread safety and that the caller always gets consistent behavior the the callback
+     * should always be called on the UI thread. To change the default behavior of JavascriptInterface,
+     * the callback is wrapped in a handler which will tell it to run on the UI thread instead of the default
+     * background thread it would otherwise be invoked on.
+     *
+     * @param webview the component that WebMessageListener or JavascriptInterface will be added to
      * @param jsObjName the name that will be given to the Javascript objects created by either
      *        WebMessageListener or JavascriptInterface
      * @param allowedOriginRules a set of rules, a frame must match an Origin in this set to have
-     *        the JS object injected into it
-     * @param onMessageReceived a callback which invokes native android sharing
-     * @return void
+     *        the JS object injected into it. This is only used when WebMessageListener is supported
+     * @param onMessageReceived invoked on UI thread with message passed in from JavaScript postMessage() call
      */
     private fun createJsObject(
         webview: WebView,
@@ -91,20 +103,22 @@ class MainActivity : AppCompatActivity() {
             webview.addJavascriptInterface(object {
                 @JavascriptInterface
                 fun postMessage(message: String) {
-                    onMessageReceived(message)
+                    // Use the handler to invoke method on UI thread
+                    handler.post(Runnable { onMessageReceived(message) })
                 }
             }, jsObjName)
         }
     }
 
     // Invokes native android sharing
-    private val onMessageReceived = { message: String ->
+    private fun onMessageReceived ()= { message: String ->
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, message)
             type = "text/plain"
         }
         val shareIntent = Intent.createChooser(sendIntent, null)
+        // Below, the first parameter, this, refers to the context of MainActivity
         startActivity(this, shareIntent, null)
     }
 
@@ -114,7 +128,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         val jsObjName = "jsObject"
         val allowedOriginRules = setOf<String>("https://gcoleman799.github.io")
-
 
         // Configure asset loader with custom domain
         // * NOTE THAT *:
@@ -148,7 +161,7 @@ class MainActivity : AppCompatActivity() {
 
         // Create a JS object to be injected into frames; Determines if WebMessageListener
         // or WebAppInterface should be used
-        createJsObject(binding.webview, jsObjName, allowedOriginRules, onMessageReceived)
+        createJsObject(binding.webview, jsObjName, allowedOriginRules, onMessageReceived())
 
         // Load the content
         binding.webview.loadUrl("https://gcoleman799.github.io/Asset-Loader/assets/index.html")

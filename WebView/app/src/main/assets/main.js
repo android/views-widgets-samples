@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 function sendAndroidMessage() {
+    /* In this implementation, only the single-arg version of postMessage is supported. As noted
+     * in the WebViewCompat reference doc, the second parameter, MessagePorts, is optional.
+     * Also note that onmessage, addEventListener and removeEventListener are not supported.
+     */
 	jsObject.postMessage("The weather in " + `${document.getElementById("title").innerText}` + " today is " +
 	`${document.getElementById("shortDescription").innerText} `);
 }
