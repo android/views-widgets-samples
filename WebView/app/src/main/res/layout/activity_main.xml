@@ -19,8 +19,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity"
-    android:configChanges="uiMode">
+    tools:context=".MainActivity">
 
     <WebView
         android:id="@+id/webview"

@@ -17,14 +17,11 @@
 package com.android.samples.webviewdemo
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.webkit.JavascriptInterface
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
@@ -38,7 +35,6 @@ import androidx.webkit.WebViewClientCompat
 import androidx.webkit.WebViewCompat
 import androidx.webkit.WebViewFeature
 import com.android.samples.webviewdemo.databinding.ActivityMainBinding
-import java.lang.invoke.LambdaConversionException
 
 class MainActivity : AppCompatActivity() {
 
@@ -54,16 +50,32 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * This method checks to see if WebMessageListener is supported. This method is prefered
+     * for security reasons. If this feature is supported, then it is used to create a
+     * Javascript object to be injected into every iframe. If it is not supported then
+     * then the app will fall back to JavascriptInterface.Here, the custom object that is inserted
+     * using JavascriptInterface is setup to mimic the object that would be created by WebMessageListener
+     * if it were available. This is so that the that Javascript will not have to behave
+     * any differently whether it is passed an object by WebMessageListener or JavascriptInterface.
+     * @param webview the component that is
+     * @param mContext the amount of incoming damage
+     * @param jsObjName the name that will be given to the Javascript objects created by either
+     *        WebMessageListener or JavascriptInterface
+     * @param allowedOriginRules a set of rules, a frame must match an Origin in this set to have
+     *        the JS object injected into it
+     * @param onMessageReceived a callback which invokes native android sharing
+     * @return void
+     */
     private fun createJsObject(
         webview: WebView,
-        mContext: Context,
         jsObjName: String,
-        rules: Set<String>,
-        sendAndroidMessage: (message: String, mContext: Context) -> Unit
+        allowedOriginRules: Set<String>,
+        onMessageReceived: (message: String) -> Unit
     ) {
         if (WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)) {
             WebViewCompat.addWebMessageListener(
-                webview, jsObjName, rules,
+                webview, jsObjName, allowedOriginRules,
                 object : WebViewCompat.WebMessageListener {
                     override fun onPostMessage(
                         webview: WebView,
@@ -72,28 +84,28 @@ class MainActivity : AppCompatActivity() {
                         isMainFrame: Boolean,
                         replyProxy: JavaScriptReplyProxy
                     ) {
-                        sendAndroidMessage(message.data, mContext)
+                        onMessageReceived(message.data!!)
                     }
                 })
         } else {
             webview.addJavascriptInterface(object {
                 @JavascriptInterface
-                fun postMessage(message: String?) {
-                    sendAndroidMessage(message, mContext)
+                fun postMessage(message: String) {
+                    onMessageReceived(message)
                 }
             }, jsObjName)
         }
     }
 
     // Invokes native android sharing
-    val sendAndroidMessage = { message: String?, mContext: Context ->
+    private val onMessageReceived = { message: String ->
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, message)
             type = "text/plain"
         }
         val shareIntent = Intent.createChooser(sendIntent, null)
-        startActivity(mContext, shareIntent, null)
+        startActivity(this, shareIntent, null)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -101,7 +113,7 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val jsObjName = "jsObject"
-        val rules = setOf<String>("https://gcoleman799.github.io")
+        val allowedOriginRules = setOf<String>("https://gcoleman799.github.io")
 
 
         // Configure asset loader with custom domain
@@ -136,7 +148,7 @@ class MainActivity : AppCompatActivity() {
 
         // Create a JS object to be injected into frames; Determines if WebMessageListener
         // or WebAppInterface should be used
-        createJsObject(binding.webview, this, jsObjName, rules, sendAndroidMessage)
+        createJsObject(binding.webview, jsObjName, allowedOriginRules, onMessageReceived)
 
         // Load the content
         binding.webview.loadUrl("https://gcoleman799.github.io/Asset-Loader/assets/index.html")
