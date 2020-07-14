@@ -15,9 +15,6 @@
  */
 body{
   background-color: white;
-  @media(prefers-color-scheme:dark){
-    background: blue
-  }
 }
 h1 {
   color: white;
