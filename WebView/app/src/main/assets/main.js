@@ -18,11 +18,13 @@ function sendAndroidMessage() {
      * in the WebViewCompat reference doc, the second parameter, MessagePorts, is optional.
      * Also note that onmessage, addEventListener and removeEventListener are not supported.
      */
+     // TODO: Change message to account for changes in data
 	jsObject.postMessage("The weather in " + `${document.getElementById("title").innerText}` + " today is " +
 	`${document.getElementById("shortDescription").innerText} `);
 }
 
 function getData() {
+    // TODO: Change the path to grab data from new location; Change longDescription and currentTemp to work with changes in data
 	fetch("https://gcoleman799.github.io/Asset-Loader/weather.json").then(function(resp) {
 		return resp.json();
 	}).then(function(data) {
@@ -37,3 +39,5 @@ function getData() {
         document.getElementById("icon").src = data[currentLocation].icon;
 	})
 }
+
+// TODO: Create getIcon() function to decide which icon to render.
