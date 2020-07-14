@@ -13,8 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-body {
-  background-color: light-blue;
+body{
+  background-color: white;
+  @media(prefers-color-scheme:dark){
+    background: black
+  }
 }
 h1 {
   color: white;
