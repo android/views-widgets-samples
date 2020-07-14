@@ -16,7 +16,6 @@
 
 package com.android.samples.webviewdemo
 
-import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.res.Configuration
@@ -30,14 +29,10 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.core.content.ContextCompat.startActivity
 import androidx.webkit.JavaScriptReplyProxy
 import androidx.webkit.WebMessageCompat
 import androidx.webkit.WebSettingsCompat
-import androidx.webkit.WebSettingsCompat.DARK_STRATEGY_USER_AGENT_DARKENING_ONLY
-import androidx.webkit.WebSettingsCompat.DARK_STRATEGY_WEB_THEME_DARKENING_ONLY
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewClientCompat
 import androidx.webkit.WebViewCompat
@@ -136,9 +131,8 @@ class MainActivity : AppCompatActivity() {
         val allowedOriginRules = setOf<String>("https://gcoleman799.github.io")
 
         // Check if the system is set to light or dark mode
-        val nightModeFlag1 = resources.configuration.uiMode
-        val nightModeFlag2 = Configuration.UI_MODE_NIGHT_MASK
-        if (nightModeFlag1.and(nightModeFlag2) == Configuration.UI_MODE_NIGHT_YES) {
+        val nightModeFlag = resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)
+        if (nightModeFlag == Configuration.UI_MODE_NIGHT_YES) {
             // Switch WebView to dark mode; uses default dark theme
             if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
                 WebSettingsCompat.setForceDark(
