@@ -131,7 +131,7 @@ class MainActivity : AppCompatActivity() {
         val allowedOriginRules = setOf<String>("https://gcoleman799.github.io")
 
         // Check if the system is set to light or dark mode
-        val nightModeFlag = resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)
+        val nightModeFlag = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         if (nightModeFlag == Configuration.UI_MODE_NIGHT_YES) {
             // Switch WebView to dark mode; uses default dark theme
             if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
@@ -140,6 +140,7 @@ class MainActivity : AppCompatActivity() {
                     WebSettingsCompat.FORCE_DARK_ON
                 )
             }
+            // TODO: set darkening strategy and use custom CSS for dark theme
         }
 
         // Configure asset loader with custom domain
