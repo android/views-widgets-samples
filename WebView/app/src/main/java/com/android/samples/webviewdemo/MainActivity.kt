@@ -33,6 +33,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.webkit.JavaScriptReplyProxy
 import androidx.webkit.WebMessageCompat
 import androidx.webkit.WebSettingsCompat
+import androidx.webkit.WebSettingsCompat.DARK_STRATEGY_WEB_THEME_DARKENING_ONLY
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewClientCompat
 import androidx.webkit.WebViewCompat
@@ -130,6 +131,8 @@ class MainActivity : AppCompatActivity() {
         val jsObjName = "jsObject"
         val allowedOriginRules = setOf<String>("https://gcoleman799.github.io")
 
+
+        // FORCE DARK
         // Check if the system is set to light or dark mode
         val nightModeFlag = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         if (nightModeFlag == Configuration.UI_MODE_NIGHT_YES) {
@@ -141,6 +144,15 @@ class MainActivity : AppCompatActivity() {
                 )
             }
             // TODO: set darkening strategy and use custom CSS for dark theme
+        }
+
+        // Custom Dark Theme
+        // DARK_STRATEGY_WEB_THEME_DARKENING_ONLY - it never applies automatic darkening and uses web page only darkening.
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK_STRATEGY)) {
+            WebSettingsCompat.setForceDarkStrategy(
+                binding.webview.settings,
+                DARK_STRATEGY_WEB_THEME_DARKENING_ONLY
+            )
         }
 
         // Configure asset loader with custom domain
