@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         webview: WebView,
         jsObjName: String,
         allowedOriginRules: Set<String>,
-        invokeShareIntent: (message: String) -> Unit
+        onMessageReceived: (message: String) -> Unit
     ) {
         if (WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)) {
             WebViewCompat.addWebMessageListener(
@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity() {
                         isMainFrame: Boolean,
                         replyProxy: JavaScriptReplyProxy
                     ) {
-                        invokeShareIntent(message.data!!)
+                        onMessageReceived(message.data!!)
                     }
                 })
         } else {
@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity() {
                 @JavascriptInterface
                 fun postMessage(message: String) {
                     // Use the handler to invoke method on UI thread
-                    handler.post(Runnable { invokeShareIntent(message) })
+                    handler.post(Runnable { onMessageReceived(message) })
                 }
             }, jsObjName)
         }
