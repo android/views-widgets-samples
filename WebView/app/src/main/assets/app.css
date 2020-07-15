@@ -14,20 +14,34 @@
  * limitations under the License.
  */
 
-body {
-  background-color: white;
-}
+/* Dark Theme */
 @media (prefers-color-scheme: dark) {
-   body {
-     background: blue;
+  body {
+     background: #121212;
+  }
+   h1 {
+     color: white;
+   }
+   h2 {
+     color: white;
    }
 }
-h1 {
-  color: white;
-  text-align: center;
+
+/* Light Theme */
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: white;
+  }
+  h1 {
+    color: black;
+  }
+  h2 {
+    color: grey;
+  }
 }
-h2 {
-  color: grey;
+
+/* Layout */
+h1, h2 {
   text-align: center;
 }
 p {
@@ -43,22 +57,19 @@ img {
   padding: 5px;
 }
 .button {
+  color: black;
+  background-color:#03DAC6;
   font-family: verdana;
-  background-color:#44c767;
   border-radius:8px;
-  border:1px solid #18ab29;
+  border:1px solid #03DAC6;
   display:inline-block;
   cursor:pointer;
-  color:#ffffff;
   font-size:18px;
   padding:16px 31px;
   text-decoration:none;
   text-shadow:0px 1px 0px #2f6627;
   margin-left: 27%;
   margin-top: 5%;
-}
-.button:hover {
-  background-color:#42b007;
 }
 .button:active {
   position:relative;

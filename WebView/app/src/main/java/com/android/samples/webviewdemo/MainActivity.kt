@@ -133,9 +133,6 @@ class MainActivity : AppCompatActivity() {
         val jsObjName = "jsObject"
         val allowedOriginRules = setOf<String>("https://gcoleman799.github.io")
 
-        // App level dark theme
-        AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_FOLLOW_SYSTEM)
-
         // FORCE DARK
         // Check if the system is set to light or dark mode
         val nightModeFlag = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
@@ -156,7 +153,6 @@ class MainActivity : AppCompatActivity() {
                 )
             }
         }
-
 
         // Configure asset loader with custom domain
         // * NOTE THAT *:
