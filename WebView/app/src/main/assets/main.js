@@ -25,9 +25,10 @@ function sendAndroidMessage() {
 
 function getData() {
     // TODO: Change the path to grab data from new location; Change longDescription and currentTemp to work with changes in data
-	fetch("https://gcoleman799.github.io/Asset-Loader/weather.json").then(function(resp) {
+   	fetch("https://raw.githubusercontent.com/android/views-widgets-samples/webview/WebView/sampleData/weather.json").then(function(resp) {
 		return resp.json();
 	}).then(function(data) {
+	console.log(data);
 		var form = document.getElementById("location");
 		var currentLocation = form.options[form.selectedIndex].value;
 		document.getElementById("title").innerText = form.options[form.selectedIndex].text;
@@ -36,8 +37,17 @@ function getData() {
         document.getElementById("longDescription").innerText = "Today in " + `${form.options[form.selectedIndex].text}`
             + " there is a " + `${data[currentLocation].chancePrecip}` + " chance of precipitation and the humidity is "
             + `${data[currentLocation].humidity}.`;
-        document.getElementById("icon").src = data[currentLocation].icon;
+        document.getElementById("icon").src = getIcon(data[currentLocation].shortDescription);
 	})
 }
 
-// TODO: Create getIcon() function to decide which icon to render.
+function getIcon(description){
+    switch(description) {
+        case "Rainy":
+            return "https://gcoleman799.github.io/res/drawable/rain.png";
+        case "Clear Sky":
+            return "https://gcoleman799.github.io/res/drawable/sunny.png";
+        default:
+            return "https://gcoleman799.github.io/res/drawable/partly_cloudy.png";
+    }
+}
