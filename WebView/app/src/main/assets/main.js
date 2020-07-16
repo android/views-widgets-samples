@@ -23,7 +23,7 @@ function sendAndroidMessage() {
 }
 
 function getData() {
-   	fetch("https://raw.githubusercontent.com/gcoleman799/Asset-Loader/master/weather.json").then(function(resp) {
+   	fetch("https://raw.githubusercontent.com/android/views-widgets-samples/webview/WebView/sampleData/weather.json").then(function(resp) {
 		return resp.json();
 	}).then(function(data) {
 		var form = document.getElementById("location");
