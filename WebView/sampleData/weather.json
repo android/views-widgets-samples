@@ -5,7 +5,7 @@
     "lowTemp":64,
     "chancePrecip":90,
     "humidity":23,
-    "description":"Rainy",
+    "description":"Rainy"
   },
   "sanFrancisco":{
     "currentTemp":70,
@@ -13,7 +13,7 @@
     "lowTemp":61,
     "chancePrecip":0,
     "humidity":2,
-    "description":"Clear Sky",
+    "description":"Clear Sky"
   },
   "london":{
     "currentTemp":88,
@@ -21,6 +21,6 @@
     "lowTemp":67,
     "chancePrecip":15,
     "humidity":36,
-    "description":"Partly Cloudy",
+    "description":"Partly Cloudy"
   }
 }
