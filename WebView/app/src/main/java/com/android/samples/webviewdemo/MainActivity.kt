@@ -142,6 +142,7 @@ class MainActivity : AppCompatActivity() {
                     WebSettingsCompat.FORCE_DARK_ON
                 )
             }
+
             /* Set how WebView content should be darkened. There are three options for how to darken
              * a WebView.
              * PREFER_WEB_THEME_OVER_USER_AGENT_DARKENING- checks for the "color-scheme" <meta> tag.

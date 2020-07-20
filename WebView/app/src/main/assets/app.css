@@ -17,7 +17,7 @@
 /* Dark Theme */
 @media (prefers-color-scheme: dark) {
   body {
-     background: #121212;
+     background: #383838;
   }
    h1 {
      color: white;
