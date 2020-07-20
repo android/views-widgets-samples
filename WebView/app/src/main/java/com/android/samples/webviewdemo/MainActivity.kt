@@ -144,8 +144,18 @@ class MainActivity : AppCompatActivity() {
                     WebSettingsCompat.FORCE_DARK_ON
                 )
             }
-            // Use custom Dark Theme
-            // DARK_STRATEGY_WEB_THEME_DARKENING_ONLY - it never applies automatic darkening and uses web page only darkening.
+
+            /* Set how WebView content should be darkened. There are three options for how to darken
+             * a WebView.
+             * PREFER_WEB_THEME_OVER_USER_AGENT_DARKENING- checks for the "color-scheme" <meta> tag.
+             * If present, it uses media queries. If absent, it applies user-agent (automatic) darkening
+             * DARK_STRATEGY_WEB_THEME_DARKENING_ONLY - uses media queries always, even if there's
+             * no "color-scheme" <meta> tag present.
+             * DARK_STRATEGY_USER_AGENT_DARKENING_ONLY - it ignores web page theme and always applies
+             * user-agent (automatic) darkening.
+             * More information about Force Dark Strategy can be found here:
+             * https://developer.android.com/reference/androidx/webkit/WebSettingsCompat#setForceDarkStrategy(android.webkit.WebSettings,%20int)
+             */
             if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK_STRATEGY)) {
                 WebSettingsCompat.setForceDarkStrategy(
                     binding.webview.settings,
