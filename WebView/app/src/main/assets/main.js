@@ -22,7 +22,9 @@ function sendAndroidMessage() {
 	`${document.getElementById("shortDescription").innerText} `);
 }
 
+
 function getData() {
+    // This JSON files is hosted over the web
    	fetch("https://raw.githubusercontent.com/android/views-widgets-samples/webview/WebView/sampleData/weather.json").then(function(resp) {
 		return resp.json();
 	}).then(function(data) {
@@ -39,6 +41,10 @@ function getData() {
 	})
 }
 
+/* These icons are hosted locally, in the res/drawable folder. However, we can call them using
+ * http(s)://URLs because we have configured AssetLoader in MainActivity. It is desirable to
+ * call access the files in this way because it is compatible with the Same-Origin policy.
+ */
 function getIcon(description){
     switch(description) {
         case "Rainy":

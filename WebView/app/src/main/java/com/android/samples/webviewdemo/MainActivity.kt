@@ -144,9 +144,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Configure asset loader with custom domain
+        // * NOTE THAT *:
+        // The assets path handler is set with the sub path /views-widgets-samples/ here because we are tyring to ensure
+        // that the address loaded with loadUrl("https://raw.githubusercontent.com/views-widgets-samples/assets/index.html") does
+        // not conflict with a real web address. In this case, if the path were only /assests/ we would need to load
+        // "https://raw.githubusercontent.com/assets/index.html" in order to access our local index.html file.
+        // However we cannot guarantee "https://raw.githubusercontent.com/assets/index.html" is not a valid web address.
+        // Therefore we must let the AssetLoader know to expect the /views-widgets-samples/ sub path as well as the /assets/.
         val assetLoader = WebViewAssetLoader.Builder()
             .setDomain("raw.githubusercontent.com")
-            .addPathHandler("/assets/", WebViewAssetLoader.AssetsPathHandler(this))
+            .addPathHandler("/views-widgets-samples/assets/", WebViewAssetLoader.AssetsPathHandler(this))
             .addPathHandler("/res/", WebViewAssetLoader.ResourcesPathHandler(this))
             .build()
 
@@ -175,6 +182,6 @@ class MainActivity : AppCompatActivity() {
         ) { message -> invokeShareIntent(message) }
 
         // Load the content
-        binding.webview.loadUrl("https://raw.githubusercontent.com/assets/index.html")
+        binding.webview.loadUrl("https://raw.githubusercontent.com/views-widgets-samples/assets/index.html")
     }
 }
