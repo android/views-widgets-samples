@@ -154,7 +154,7 @@ class MainActivity : AppCompatActivity() {
         val assetLoader = WebViewAssetLoader.Builder()
             .setDomain("raw.githubusercontent.com")
             .addPathHandler("/views-widgets-samples/assets/", WebViewAssetLoader.AssetsPathHandler(this))
-            .addPathHandler("/res/", WebViewAssetLoader.ResourcesPathHandler(this))
+            .addPathHandler("/views-widgets-samples/res/", WebViewAssetLoader.ResourcesPathHandler(this))
             .build()
 
         // Set clients

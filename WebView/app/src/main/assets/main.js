@@ -42,16 +42,16 @@ function getData() {
 }
 
 /* These icons are hosted locally, in the res/drawable folder. However, we can call them using
- * http(s)://URLs because we have configured AssetLoader in MainActivity. It is desirable to
- * call access the files in this way because it is compatible with the Same-Origin policy.
+ * http(s):// URLs because we have configured AssetLoader in MainActivity. It is desirable to
+ * access the files in this way because it is compatible with the Same-Origin policy.
  */
 function getIcon(description){
     switch(description) {
         case "Rainy":
-            return "https://raw.githubusercontent.com/res/drawable/rain.png";
+            return "https://raw.githubusercontent.com/views-widgets-samples/res/drawable/rain.png";
         case "Clear Sky":
-            return "https://raw.githubusercontent.com/res/drawable/sunny.png";
+            return "https://raw.githubusercontent.com/views-widgets-samples/res/drawable/sunny.png";
         default:
-            return "https://raw.githubusercontent.com/res/drawable/partly_cloudy.png";
+            return "https://raw.githubusercontent.com/views-widgets-samples/res/drawable/partly_cloudy.png";
     }
 }
