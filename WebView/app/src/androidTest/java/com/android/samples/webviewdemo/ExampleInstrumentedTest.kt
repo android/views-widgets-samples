@@ -15,14 +15,19 @@
  */
 
 package com.android.samples.webviewdemo
-
-import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.espresso.web.assertion.WebViewAssertions.webMatches
+import androidx.test.espresso.web.sugar.Web.onWebView
+import androidx.test.espresso.web.webdriver.DriverAtoms.findElement
+import androidx.test.espresso.web.webdriver.DriverAtoms.getText
+import androidx.test.espresso.web.webdriver.DriverAtoms.webClick
+import androidx.test.espresso.web.webdriver.Locator
 import androidx.test.ext.junit.runners.AndroidJUnit4
-
+import androidx.test.rule.ActivityTestRule
+import org.hamcrest.CoreMatchers.containsString
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import org.junit.Assert.*
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -31,10 +36,53 @@ import org.junit.Assert.*
  */
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
+
+    @Rule @JvmField
+    val activityRule = ActivityTestRule(MainActivity::class.java)
+
+     fun afterActivityLaunched() {
+//         Technically we do not need to do this - MainActivity has javascript turned on.
+//         Other WebViews in your app may have javascript turned off, however since the only way
+//         to automate WebViews is through javascript, it must be enabled.
+        onWebView().forceJavascriptEnabled()
+    }
+
+
     @Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.android.samples.webviewdemo", appContext.packageName)
+    fun webViewTest() {
+
+        activityRule.getActivity()
+
+
+        onWebView()
+            .withElement(findElement(Locator.ID, "title"))
+            .check(webMatches(getText(), containsString("New York")))
+//            .perform(webClick())
+//            .withElement(findElement(Locator.TAG_NAME, "h1"))
+//            .check(webMatches(getText(), containsString("Apple")))
+
+
+    }
+
+
+// Test for calling postMessage
+    @Test
+    fun callPostMessage() {
+        onWebView()
+                // Click on the share button
+            .withElement(findElement(Locator.ID, "share")) // similar to onView(withId(...))
+            .perform(webClick()) // Similar to perform(click())
+
+            // check that an intent was created
+
+            // verify that the data send to post message looks correct
+
+            //.get()
+            //.value
+
+
+            // Similar to check(matches(...))
+            //.check(webMatches(executeScript)
+
     }
 }
