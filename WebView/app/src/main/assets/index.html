@@ -24,7 +24,7 @@
     <label for="location">Choose a location:</label>
     <select name="location" id="location" onchange="getData()">
       <option value="newYork">New York</option>
-      <option value="sanFrancisco">San Francisco</option>
+      <option id= "SF" value="sanFrancisco">San Francisco</option>
       <option value="london">London</option>
     </select>
     <h1 id="title">Location</h1>
@@ -32,6 +32,6 @@
     <h2 class="currentTemp" id="currentTemp">Current Temp</h2>
     <h2 class="shortDescription" id="shortDescription">Short Description</h2>
     <p class="longDescription" id="longDescription">Long Description</p>
-    <button id="share" class="button" onclick="sendAndroidMessage()" type="button" value="Send Message">Share</button>
+    <button class="button" onclick="sendAndroidMessage()" type="button" value="Send Message">Share</button>
   </body>
 </html>
