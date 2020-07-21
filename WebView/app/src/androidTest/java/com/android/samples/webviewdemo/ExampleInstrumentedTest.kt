@@ -32,9 +32,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * Instrumented test, which will execute on an Android device.
- *
- * See [testing documentation](http://d.android.com/tools/testing).
+ * Launch, interact, and verify conditions in an activity that has a WebView instance.
  */
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
