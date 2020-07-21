@@ -16,6 +16,8 @@
 
 package com.android.samples.webviewdemo
 import androidx.test.espresso.web.assertion.WebViewAssertions.webMatches
+import androidx.test.espresso.web.model.Atoms.castOrDie
+import androidx.test.espresso.web.model.Atoms.script
 import androidx.test.espresso.web.sugar.Web.onWebView
 import androidx.test.espresso.web.webdriver.DriverAtoms.findElement
 import androidx.test.espresso.web.webdriver.DriverAtoms.getText
@@ -23,11 +25,11 @@ import androidx.test.espresso.web.webdriver.DriverAtoms.webClick
 import androidx.test.espresso.web.webdriver.Locator
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
+import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.containsString
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -38,51 +40,37 @@ import org.junit.runner.RunWith
 class ExampleInstrumentedTest {
 
     @Rule @JvmField
-    val activityRule = ActivityTestRule(MainActivity::class.java)
-
-     fun afterActivityLaunched() {
-//         Technically we do not need to do this - MainActivity has javascript turned on.
-//         Other WebViews in your app may have javascript turned off, however since the only way
-//         to automate WebViews is through javascript, it must be enabled.
+    val mainActivityRule = ActivityTestRule(MainActivity::class.java)
+    fun afterActivityLaunched() {
+      // Technically we do not need to do this - MainActivity has javascript turned on.
+      // Other WebViews in your app may have javascript turned off, however since the only way
+      // to automate WebViews is through javascript, it must be enabled.
         onWebView().forceJavascriptEnabled()
     }
 
-
+    // Test to check that the drop down menu behaves as expected
     @Test
-    fun webViewTest() {
-
-        activityRule.getActivity()
-
-
+    fun dropDownMenu_SanFran() {
+        mainActivityRule.getActivity()
         onWebView()
+            .withElement(findElement(Locator.ID, "location"))
+            .perform(webClick()) // Similar to perform(click())
+            .withElement(findElement(Locator.ID, "SF"))
+            .perform(webClick()) // Similar to perform(click())
             .withElement(findElement(Locator.ID, "title"))
-            .check(webMatches(getText(), containsString("New York")))
-//            .perform(webClick())
-//            .withElement(findElement(Locator.TAG_NAME, "h1"))
-//            .check(webMatches(getText(), containsString("Apple")))
-
-
+            .check(webMatches(getText(), containsString("San Francisco")))
     }
 
-
-// Test for calling postMessage
+    // Test for checking createJsObject
     @Test
-    fun callPostMessage() {
-        onWebView()
-                // Click on the share button
-            .withElement(findElement(Locator.ID, "share")) // similar to onView(withId(...))
-            .perform(webClick()) // Similar to perform(click())
-
-            // check that an intent was created
-
-            // verify that the data send to post message looks correct
-
-            //.get()
-            //.value
-
-
-            // Similar to check(matches(...))
-            //.check(webMatches(executeScript)
-
+    fun jsObjectIsInjectedAndContainsPostMessage() {
+    mainActivityRule.getActivity()
+    onWebView()
+        .check(
+            webMatches(
+                script("return jsObject && jsObject.postMessage != null;", castOrDie(Boolean::class.javaObjectType)),
+                `is`(true)
+            )
+        )
     }
 }
