@@ -18,26 +18,40 @@ function sendAndroidMessage() {
      * in the WebViewCompat reference doc, the second parameter, MessagePorts, is optional.
      * Also note that onmessage, addEventListener and removeEventListener are not supported.
      */
-     // TODO: Change message to account for changes in data
 	jsObject.postMessage("The weather in " + `${document.getElementById("title").innerText}` + " today is " +
 	`${document.getElementById("shortDescription").innerText} `);
 }
 
+
 function getData() {
-    // TODO: Change the path to grab data from new location; Change longDescription and currentTemp to work with changes in data
-	fetch("https://gcoleman799.github.io/Asset-Loader/weather.json").then(function(resp) {
+    // This JSON files is hosted over the web
+   	fetch("https://raw.githubusercontent.com/android/views-widgets-samples/webview/WebView/sampleData/weather.json").then(function(resp) {
 		return resp.json();
 	}).then(function(data) {
 		var form = document.getElementById("location");
 		var currentLocation = form.options[form.selectedIndex].value;
+		console.log(data[currentLocation].description);
 		document.getElementById("title").innerText = form.options[form.selectedIndex].text;
-        document.getElementById("currentTemp").innerText = data[currentLocation].currentTemp;
+        document.getElementById("currentTemp").innerText = `${data[currentLocation].currentTemp}`+ "\xB0 F";
         document.getElementById("shortDescription").innerText = data[currentLocation].description;
         document.getElementById("longDescription").innerText = "Today in " + `${form.options[form.selectedIndex].text}`
-            + " there is a " + `${data[currentLocation].chancePrecip}` + " chance of precipitation and the humidity is "
-            + `${data[currentLocation].humidity}.`;
-        document.getElementById("icon").src = data[currentLocation].icon;
+            + " there is a " + `${data[currentLocation].chancePrecip}` + "% chance of precipitation and the humidity is "
+            + `${data[currentLocation].humidity}` + "%.";
+        document.getElementById("icon").src = getIcon(data[currentLocation].description);
 	})
 }
 
-// TODO: Create getIcon() function to decide which icon to render.
+/* These icons are hosted locally, in the res/drawable folder. However, we can call them using
+ * http(s):// URLs because we have configured AssetLoader in MainActivity. It is desirable to
+ * access the files in this way because it is compatible with the Same-Origin policy.
+ */
+function getIcon(description){
+    switch(description) {
+        case "Rainy":
+            return "https://raw.githubusercontent.com/views-widgets-samples/res/drawable/rain.png";
+        case "Clear Sky":
+            return "https://raw.githubusercontent.com/views-widgets-samples/res/drawable/sunny.png";
+        default:
+            return "https://raw.githubusercontent.com/views-widgets-samples/res/drawable/partly_cloudy.png";
+    }
+}
