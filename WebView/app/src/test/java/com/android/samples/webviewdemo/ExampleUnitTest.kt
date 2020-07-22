@@ -16,18 +16,36 @@
 
 package com.android.samples.webviewdemo
 
+import org.junit.Assert.assertThat
 import org.junit.Test
-
-import org.junit.Assert.*
+import java.util.Objects
 
 /**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
+ * Tests to ensure that callbacks are behaving as expected
  */
-class ExampleUnitTest {
+
+
+class EmailValidatorTest {
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun testConvertFahrenheitToCelsius() {
+        val actual: Float = ConverterUtil.convertCelsiusToFahrenheit(100)
+        // expected value is 212
+        val expected = 212f
+        // use this method because float is not precise
+       // assertEquals("Conversion from celsius to fahrenheit failed", expected, actual, 0.001)
+    }
+    @Test
+    fun postMessage_CorrectStringFormat_ReturnsTrue() {
+        // create object
+                // what object do we need to create?
+                // we need to create a js object to call postMessage on
+        
+        val jsObject: Objects =
+
+            // create expected return
+        // call post message
+        // check that post message
+
+       // assertEquals("Hi", jsObject.postMessage("Hi"))
     }
 }
