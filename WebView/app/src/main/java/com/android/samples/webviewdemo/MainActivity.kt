@@ -130,7 +130,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         val jsObjName = "jsObject"
         val allowedOriginRules = setOf<String>("https://gcoleman799.github.io")
-
+        
         // Configuring Dark Theme
         // *NOTE* : The force dark setting is not persistent. You must call the static
         // method every time your app process is started.
