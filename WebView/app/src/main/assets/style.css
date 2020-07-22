@@ -13,36 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-/* Dark Theme */
-@media (prefers-color-scheme: dark) {
-  body {
-     background: #383838;
-  }
-   h1 {
-     color: white;
-   }
-   h2 {
-     color: white;
-   }
-}
-
-/* Light Theme */
-@media (prefers-color-scheme: light) {
-  body {
-    background-color: white;
-  }
-  h1 {
-    color: black;
-  }
-  h2 {
-    color: grey;
-  }
-}
-
-/* Layout */
 h1, h2 {
   text-align: center;
+  color: black;
 }
 p {
   font-family: verdana;
