@@ -74,6 +74,4 @@ dependencies {
     androidTestImplementation 'androidx.test:rules:1.1.1'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation "androidx.webkit:webkit:$webkit_version"
-
-
 }
