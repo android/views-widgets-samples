@@ -73,6 +73,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-intents:3.0.2'
     androidTestImplementation 'androidx.test:rules:1.1.1'
     androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation "androidx.webkit:webkit:$webkit_version"
 
 
 }
