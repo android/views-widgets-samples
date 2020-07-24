@@ -108,8 +108,7 @@ class MainActivityTest {
                     webView,
                     jsObjName,
                     allowedOriginRules
-                ) { message ->
-                    callback
+                ) { message -> callback
                 }
                 //Inject JsObject into Html
                 webView.loadDataWithBaseURL(
