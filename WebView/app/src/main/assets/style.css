@@ -13,7 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+body {
+  background-color: white;
+}
 h1, h2 {
+  text-align: center;
+  color: black;
   text-align: center;
 }
 p {
@@ -80,4 +85,20 @@ img {
   padding-top: 20%;
   padding-left: 5%;
   padding-right: 5%;
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #383838;
+  }
+  h1 {
+    color: white;
+  }
+  h2 {
+    color: white;
+  }
+  select {
+    color: white;
+    background-color: #1f1f1f;
+    border-color: #121212;
+  }
 }

@@ -18,23 +18,6 @@
   <head>
     <script async src="main.js"></script>
     <meta name="color-scheme" content="dark light">
-    <script>
-      // If dark mode is not supported then load light.css
-      if (window.matchMedia('(prefers-color-scheme: dark)').media === 'not all') {
-      document.head.insertAdjacentHTML(
-        'beforeend',
-        '<link rel="stylesheet" href="light.css" onload="document.documentElement.style.display = \'\'">'
-       );
-     }
-    </script>
-    <!--
-      If dark mode is supported, conditionally either load the light or the dark stylesheet. If
-      `prefers-color-scheme` is not supported the media query is unknown and the files are loaded
-       with `lowest` priority.
-    -->
-    <link rel="stylesheet" href="dark.css" media="(prefers-color-scheme: dark)">
-    <link rel="stylesheet" href="light.css" media="(prefers-color-scheme: light)">
-    <!-- The main stylesheet with generic rules used universally -->
     <link rel="stylesheet" href="style.css">
   </head>
   <body onload="getData()">
