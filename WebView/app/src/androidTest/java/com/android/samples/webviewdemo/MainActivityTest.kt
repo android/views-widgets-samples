@@ -16,6 +16,7 @@
 
 package com.android.samples.webviewdemo
 import android.content.Context
+import android.os.Handler
 import android.os.Looper
 import android.webkit.WebView
 import androidx.test.core.app.ApplicationProvider
@@ -86,67 +87,65 @@ class MainActivityTest {
     @Test
     fun valueInCallback_compareValueInput_returnsTrue(){
         mainActivityRule.getActivity()
-
         // Setup
-        val webView = WebView(context)
         val jsObjName = "jsObject"
         val allowedOriginRules = setOf<String>("https://example.com")
-
-        // Create HTML
-        val htmlPage = "<!DOCTYPE html><html><body>" + "    <script>" + "        myObject.postMessage('hello');" + "    </script>" + "</body></html>"
-
-        // Create JsObject
-        MainActivity.createJsObject(
-            webView,
-            jsObjName,
-            allowedOriginRules
-        ) { message -> MainActivity.invokeShareIntent(message) }
-
-        //Inject JsObject into Html
-        webView.loadData(htmlPage, "text/html", "UTF-8")
-
-
-        //Call js code to invoke callback (in script tag of htmlPage)
-
+        val message = "hello"
+        // Get a handler that can be used to post to the main thread
+        val mainHandler = Handler (Looper.getMainLooper());
+        val myRunnable = Runnable() {
+            val webView = WebView(context)
+            // Create JsObject
+            createJsObject(
+                webView,
+                jsObjName,
+                allowedOriginRules
+            ) { message -> //save message; call .set()
+            }
+            run() {
+                //Inject JsObject into Html
+                webView.loadDataWithBaseURL("https://example.com","<html></html>",
+                    "text/html", "UTF-8","https://example.com")
+                //Call js code to invoke callback
+                webView.evaluateJavascript("${jsObjName}.postMessage(${message})", null)
+            }
+        }
+        mainHandler.post(myRunnable)
         // evaluate what comes out -> it should be hello
-        // *Note: "response from callback" is a place holder here I am unsure what should be placed there
-        assertEquals("response from callback", "hello")
-
+        // *Note: //.get() is a place holder
+        assertEquals("hello"
+            , "//.get()"
+             )
     }
 
     @Test
     // Checks that postMessage runs on the UI thread
     fun checkingThreadCallbackRunsOn() {
         mainActivityRule.getActivity()
-
         // Setup
-        val webView = WebView(context)
         val jsObjName = "jsObject"
         val allowedOriginRules = setOf<String>("https://example.com")
-
-        // Create HTML
-        val htmlPage =
-            "<!DOCTYPE html><html><body>" + "    <script>" + "        jsObject.postMessage('hello');" + "    </script>" + "</body></html>"
-
-
-        // Create JsObject
-        MainActivity.createJsObject(
-            webView,
-            jsObjName,
-            allowedOriginRules
-        ) { message -> MainActivity.invokeShareIntent(message) }
-
-
-        // Inject JsObject into Html by loading it in the webview
-        webView.loadData(htmlPage, "text/html", "UTF-8")
-
-
-        // Use coroutine to go onto UI thread here?
-        // Call js code to invoke callback (in script tag of htmlPage)
-
-
-        // check that method is running on the UI thread
-        assertTrue(isUiThread())
+        val message = "hello"
+        // Get a handler that can be used to post to the main thread
+        val mainHandler = Handler (Looper.getMainLooper())
+        // Start Interacting with webView on UI thread
+        val myRunnable = Runnable() {
+            run() {
+                val webView = WebView(context)
+                // Create JsObject
+                createJsObject(
+                    webView,
+                    jsObjName,
+                    allowedOriginRules
+                ) { message -> assertTrue(isUiThread()) }
+                //Inject JsObject into Html
+                webView.loadDataWithBaseURL("https://example.com","<html></html>",
+                    "text/html", "UTF-8","https://example.com")
+                //Call js code to invoke callback
+                webView.evaluateJavascript("${jsObjName}.postMessage(${message})", null)
+            }
+        }
+        mainHandler.post(myRunnable)
     }
 
     /**
