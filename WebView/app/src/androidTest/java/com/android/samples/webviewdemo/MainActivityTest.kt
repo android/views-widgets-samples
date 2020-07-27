@@ -15,6 +15,7 @@
  */
 
 package com.android.samples.webviewdemo
+
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
@@ -49,12 +50,13 @@ class MainActivityTest {
 
     val context = ApplicationProvider.getApplicationContext<Context>()
 
-    @Rule @JvmField
+    @Rule
+    @JvmField
     val mainActivityRule = ActivityTestRule(MainActivity::class.java)
     fun afterActivityLaunched() {
-      // Technically we do not need to do this - MainActivity has javascript turned on.
-      // Other WebViews in your app may have javascript turned off, however since the only way
-      // to automate WebViews is through javascript, it must be enabled.
+        // Technically we do not need to do this - MainActivity has javascript turned on.
+        // Other WebViews in your app may have javascript turned off, however since the only way
+        // to automate WebViews is through javascript, it must be enabled.
         onWebView().forceJavascriptEnabled()
     }
 
@@ -74,63 +76,67 @@ class MainActivityTest {
     // Test for checking createJsObject
     @Test
     fun jsObjectIsInjectedAndContainsPostMessage() {
-    mainActivityRule.getActivity()
-    onWebView()
-        .check(
-            webMatches(
-                script("return jsObject && jsObject.postMessage != null;", castOrDie(Boolean::class.javaObjectType)),
-                `is`(true)
+        mainActivityRule.getActivity()
+        onWebView()
+            .check(
+                webMatches(
+                    script(
+                        "return jsObject && jsObject.postMessage != null;",
+                        castOrDie(Boolean::class.javaObjectType)
+                    ),
+                    `is`(true)
+                )
             )
-        )
     }
 
     @Test
-    fun valueInCallback_compareValueInput_returnsTrue(){
-        mainActivityRule.getActivity()
+    fun valueInCallback_compareValueInput_returnsTrue() {
+        mainActivityRule.activity
         // Setup
         val jsObjName = "jsObject"
         val allowedOriginRules = setOf<String>("https://example.com")
-        val message = "hello"
+        val expectedMessage = "hello"
         // Get a handler that can be used to post to the main thread
-        val mainHandler = Handler (Looper.getMainLooper());
-        val myRunnable = Runnable() {
-            val webView = WebView(context)
-            // Create JsObject
-            createJsObject(
-                webView,
-                jsObjName,
-                allowedOriginRules
-            ) { message -> //save message; call .set()
-            }
-            run() {
+        val mainHandler = Handler(Looper.getMainLooper());
+        mainHandler.post {
+            run {
+                val webView = WebView(context)
+                // Create JsObject
+                createJsObject(
+                    webView,
+                    jsObjName,
+                    allowedOriginRules
+                ) { message -> //save message; call .set()
+                }
                 //Inject JsObject into Html
-                webView.loadDataWithBaseURL("https://example.com","<html></html>",
-                    "text/html", "UTF-8","https://example.com")
+                webView.loadDataWithBaseURL(
+                    "https://example.com", "<html></html>",
+                    "text/html", null, null
+                )
                 //Call js code to invoke callback
-                webView.evaluateJavascript("${jsObjName}.postMessage(${message})", null)
+                webView.evaluateJavascript("${jsObjName}.postMessage(`hello`)", null)
             }
         }
-        mainHandler.post(myRunnable)
         // evaluate what comes out -> it should be hello
         // *Note: //.get() is a place holder
-        assertEquals("hello"
+        assertEquals(
+            expectedMessage
             , "//.get()"
-             )
+        )
     }
 
     @Test
     // Checks that postMessage runs on the UI thread
     fun checkingThreadCallbackRunsOn() {
-        mainActivityRule.getActivity()
+        mainActivityRule.activity
         // Setup
         val jsObjName = "jsObject"
         val allowedOriginRules = setOf<String>("https://example.com")
-        val message = "hello"
         // Get a handler that can be used to post to the main thread
-        val mainHandler = Handler (Looper.getMainLooper())
+        val mainHandler = Handler(Looper.getMainLooper())
         // Start Interacting with webView on UI thread
-        val myRunnable = Runnable() {
-            run() {
+        mainHandler.post {
+            run {
                 val webView = WebView(context)
                 // Create JsObject
                 createJsObject(
@@ -139,13 +145,14 @@ class MainActivityTest {
                     allowedOriginRules
                 ) { message -> assertTrue(isUiThread()) }
                 //Inject JsObject into Html
-                webView.loadDataWithBaseURL("https://example.com","<html></html>",
-                    "text/html", "UTF-8","https://example.com")
+                webView.loadDataWithBaseURL(
+                    "https://example.com", "<html></html>",
+                    "text/html", "UTF-8", null
+                )
                 //Call js code to invoke callback
-                webView.evaluateJavascript("${jsObjName}.postMessage(${message})", null)
+                webView.evaluateJavascript("${jsObjName}.postMessage(`hello`)", null)
             }
         }
-        mainHandler.post(myRunnable)
     }
 
     /**
