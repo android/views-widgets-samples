@@ -33,6 +33,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertTrue
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.`is`
@@ -97,7 +98,8 @@ class MainActivityTest {
         val jsObjName = "jsObject"
         val allowedOriginRules = setOf<String>("https://example.com")
         val expectedMessage = "hello"
-        val callback = async { return@async "hello" }
+       // val callback = async { return@async "hello" }
+        val callback = CompletableDeferred<String>()
         // Get a handler that can be used to post to the main thread
         val mainHandler = Handler(Looper.getMainLooper());
         mainHandler.post {
@@ -108,7 +110,9 @@ class MainActivityTest {
                     webView,
                     jsObjName,
                     allowedOriginRules
-                ) { message -> callback
+                ) { message ->
+                    // check the value of message
+                    callback.complete(message)
                 }
                 //Inject JsObject into Html
                 webView.loadDataWithBaseURL(
@@ -130,7 +134,7 @@ class MainActivityTest {
         // Setup
         val jsObjName = "jsObject"
         val allowedOriginRules = setOf<String>("https://example.com")
-        val callback = async { isUiThread() }
+        val callback = CompletableDeferred<Looper>()
         // Get a handler that can be used to post to the main thread
         val mainHandler = Handler(Looper.getMainLooper())
         // Start Interacting with webView on UI thread
@@ -142,7 +146,8 @@ class MainActivityTest {
                     webView,
                     jsObjName,
                     allowedOriginRules
-                ) { message -> callback }
+                ) { message -> callback.complete(Looper.myLooper()!!) }
+                // want the callback complete the deferred
                 //Inject JsObject into Html
                 webView.loadDataWithBaseURL(
                     "https://example.com", "<html></html>",
@@ -152,14 +157,6 @@ class MainActivityTest {
                 webView.evaluateJavascript("${jsObjName}.postMessage(`hello`)", null)
             }
         }
-        assertTrue(callback.await())
-    }
-
-    /**
-     * Returns true if the current thread is the UI thread based on the
-     * Looper.
-     */
-    private fun isUiThread(): Boolean {
-        return Looper.myLooper() == Looper.getMainLooper()
+        assertTrue(callback.await() == Looper.getMainLooper())
     }
 }
