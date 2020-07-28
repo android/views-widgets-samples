@@ -90,10 +90,7 @@ img {
   body {
     background: #383838;
   }
-  h1 {
-    color: white;
-  }
-  h2 {
+  h1, h2 {
     color: white;
   }
   select {
