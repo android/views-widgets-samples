@@ -108,7 +108,8 @@ class MainActivityTest {
                     webView,
                     jsObjName,
                     allowedOriginRules
-                ) { message -> onMessageReceived.complete(message)
+                ) { message ->
+                    onMessageReceived.complete(message)
                 }
                 webView.loadDataWithBaseURL(
                     "https://example.com",
@@ -119,8 +120,8 @@ class MainActivityTest {
                 )
             }
         }
-            // evaluate what comes out -> it should be hello
-            assertEquals(expectedMessage, onMessageReceived.await())
+        // evaluate argument being passed into onMessageReceived
+        assertEquals(expectedMessage, onMessageReceived.await())
     }
 
     @Test
@@ -146,8 +147,11 @@ class MainActivityTest {
                 ) { message -> onMessageReceived.complete(Looper.myLooper()!!) }
                 //Inject JsObject into Html
                 webView.loadDataWithBaseURL(
-                    "https://example.com", "<html><script>${jsObjName}.postMessage(`${expectedMessage}`)</script></html>",
-                    "text/html", "UTF-8", null
+                    "https://example.com",
+                    "<html><script>${jsObjName}.postMessage(`${expectedMessage}`)</script></html>",
+                    "text/html",
+                    "UTF-8",
+                    null
                 )
             }
         }
