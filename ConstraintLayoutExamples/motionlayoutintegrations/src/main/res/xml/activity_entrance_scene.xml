@@ -188,13 +188,11 @@
             android:translationX="-100dp"
             android:translationY="100dp" />
     </ConstraintSet>
-    <!--
-    This transition doesn't autoTransition as it will be started in Activity.onCreate manually
-    -->
     <Transition
         motion:constraintSetStart="@+id/Welcome"
         motion:constraintSetEnd="@+id/empty"
         motion:motionInterpolator="linear"
+        motion:autoTransition="animateToEnd"
         motion:duration="200" >
     </Transition>
     <Transition
