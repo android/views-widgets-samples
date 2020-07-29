@@ -1,1 +1,2 @@
 include ':constraintlayout', 'motionlayout'
+include ':motionlayoutintegrations'
