@@ -1,0 +1,26 @@
+{
+  "newYork":{
+    "currentTemp":75,
+    "highTemp":83,
+    "lowTemp":64,
+    "chancePrecip":90,
+    "humidity":23,
+    "description":"Rainy"
+  },
+  "sanFrancisco":{
+    "currentTemp":70,
+    "highTemp":75,
+    "lowTemp":61,
+    "chancePrecip":0,
+    "humidity":2,
+    "description":"Clear Sky"
+  },
+  "london":{
+    "currentTemp":88,
+    "highTemp":89,
+    "lowTemp":67,
+    "chancePrecip":15,
+    "humidity":36,
+    "description":"Partly Cloudy"
+  }
+}
