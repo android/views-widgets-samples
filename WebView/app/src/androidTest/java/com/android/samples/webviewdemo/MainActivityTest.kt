@@ -30,11 +30,11 @@ import androidx.test.espresso.web.webdriver.DriverAtoms.getText
 import androidx.test.espresso.web.webdriver.DriverAtoms.webClick
 import androidx.test.espresso.web.webdriver.Locator
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.containsString
@@ -46,8 +46,7 @@ import org.junit.runner.RunWith
  * Launch, interact, and verify conditions in an activity that has a WebView instance.
  */
 @RunWith(AndroidJUnit4::class)
-
-
+@LargeTest
 class MainActivityTest {
 
     val context = ApplicationProvider.getApplicationContext<Context>()
@@ -92,16 +91,15 @@ class MainActivityTest {
     }
 
     @Test
-    fun valueInCallback_compareValueInput_returnsTrue() = runBlocking() {
+    fun valueInCallback_compareValueInput_returnsTrue() = runBlocking {
         mainActivityRule.activity
         // Setup
         val jsObjName = "jsObject"
         val allowedOriginRules = setOf<String>("https://example.com")
         val expectedMessage = "hello"
-       // val callback = async { return@async "hello" }
-        val callback = CompletableDeferred<String>()
+        val onMessageReceived = CompletableDeferred<String>()
         // Get a handler that can be used to post to the main thread
-        val mainHandler = Handler(Looper.getMainLooper());
+        val mainHandler = Handler(Looper.getMainLooper())
         mainHandler.post {
             run {
                 val webView = WebView(context)
@@ -110,21 +108,19 @@ class MainActivityTest {
                     webView,
                     jsObjName,
                     allowedOriginRules
-                ) { message ->
-                    // check the value of message
-                    callback.complete(message)
+                ) { message -> onMessageReceived.complete(message)
                 }
-                //Inject JsObject into Html
                 webView.loadDataWithBaseURL(
-                    "https://example.com", "<html></html>",
-                    "text/html", null, null
+                    "https://example.com",
+                    "<html><script>${jsObjName}.postMessage(`${expectedMessage}`)</script></html>",
+                    "text/html",
+                    null,
+                    null
                 )
-                //Call js code to invoke callback
-                webView.evaluateJavascript("${jsObjName}.postMessage(`hello`)", null)
             }
         }
-        // evaluate what comes out -> it should be hello
-        assertEquals(expectedMessage, callback.await())
+            // evaluate what comes out -> it should be hello
+            assertEquals(expectedMessage, onMessageReceived.await())
     }
 
     @Test
@@ -134,7 +130,8 @@ class MainActivityTest {
         // Setup
         val jsObjName = "jsObject"
         val allowedOriginRules = setOf<String>("https://example.com")
-        val callback = CompletableDeferred<Looper>()
+        val expectedMessage = "hello"
+        val onMessageReceived = CompletableDeferred<Looper>()
         // Get a handler that can be used to post to the main thread
         val mainHandler = Handler(Looper.getMainLooper())
         // Start Interacting with webView on UI thread
@@ -146,17 +143,14 @@ class MainActivityTest {
                     webView,
                     jsObjName,
                     allowedOriginRules
-                ) { message -> callback.complete(Looper.myLooper()!!) }
-                // want the callback complete the deferred
+                ) { message -> onMessageReceived.complete(Looper.myLooper()!!) }
                 //Inject JsObject into Html
                 webView.loadDataWithBaseURL(
-                    "https://example.com", "<html></html>",
+                    "https://example.com", "<html><script>${jsObjName}.postMessage(`${expectedMessage}`)</script></html>",
                     "text/html", "UTF-8", null
                 )
-                //Call js code to invoke callback
-                webView.evaluateJavascript("${jsObjName}.postMessage(`hello`)", null)
             }
         }
-        assertTrue(callback.await() == Looper.getMainLooper())
+        assertTrue(onMessageReceived.await() == Looper.getMainLooper())
     }
 }
