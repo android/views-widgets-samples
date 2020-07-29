@@ -82,6 +82,7 @@ class MainActivity : AppCompatActivity() {
      * origin in this set then it will have the JS object injected into it
      * @param onMessageReceived invoked on UI thread with message passed in from JavaScript postMessage() call
      */
+
     private fun createJsObject(
         webview: WebView,
         jsObjName: String,
@@ -129,8 +130,8 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val jsObjName = "jsObject"
-        val allowedOriginRules = setOf<String>("https://gcoleman799.github.io")
-        
+        val allowedOriginRules = setOf<String>("https://raw.githubusercontent.com")
+
         // Configuring Dark Theme
         // *NOTE* : The force dark setting is not persistent. You must call the static
         // method every time your app process is started.

@@ -30,7 +30,6 @@ function getData() {
 	}).then(function(data) {
 		var form = document.getElementById("location");
 		var currentLocation = form.options[form.selectedIndex].value;
-		console.log(data[currentLocation].description);
 		document.getElementById("title").innerText = form.options[form.selectedIndex].text;
         document.getElementById("currentTemp").innerText = `${data[currentLocation].currentTemp}`+ "\xB0 F";
         document.getElementById("shortDescription").innerText = data[currentLocation].description;
