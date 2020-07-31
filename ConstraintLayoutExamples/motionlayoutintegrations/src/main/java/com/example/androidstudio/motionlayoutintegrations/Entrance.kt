@@ -16,7 +16,15 @@ class Entrance : AppCompatActivity() {
         setContentView(binding.root)
 
         savedInstanceState?.let {
-            binding.motionLayout.transitionState = savedInstanceState.getBundle(SIS_MOTION_LAYOUT_STATE)
+
+        }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        val motionLayoutState = savedInstanceState?.getBundle(SIS_MOTION_LAYOUT_STATE)
+        motionLayoutState?.let {
+            binding.motionLayout.transitionState = motionLayoutState
         }
     }
 
