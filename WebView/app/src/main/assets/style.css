@@ -1,0 +1,101 @@
+/*
+ * Copyright (C) 2020 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+body {
+  background-color: white;
+}
+h1, h2 {
+  text-align: center;
+  color: black;
+  text-align: center;
+}
+p {
+  font-family: verdana;
+  font-size: 20px;
+}
+label {
+  font-family: verdana;
+  font-size: 20px;
+}
+img {
+  border-radius: 4px;
+  padding: 5px;
+}
+.button {
+  color: black;
+  background-color:#03DAC6;
+  font-family: verdana;
+  border-radius:8px;
+  border:1px solid #03DAC6;
+  display:inline-block;
+  cursor:pointer;
+  font-size:18px;
+  padding:16px 31px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #2f6627;
+  margin-left: 27%;
+  margin-top: 5%;
+}
+.button:active {
+  position:relative;
+  top:1px;
+}
+.day{
+  margin-top: 50px;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+.share {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+.icon {
+  float: left;
+  width: 40%;
+  margin-left: 10%;
+}
+.currentTemp {
+  float: right;
+  margin-right: 10%;
+  width: 30%;
+}
+.shortDescription {
+  position: relative;
+  margin-top: 10%;
+}
+.longDescription {
+  text-align: left;
+  padding-top: 20%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #383838;
+  }
+  h1, h2 {
+    color: white;
+  }
+  select {
+    color: white;
+    background-color: #1f1f1f;
+    border-color: #121212;
+  }
+}
