@@ -49,7 +49,7 @@
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:alpha="1.0"
+            android:alpha=".99"
             android:layout_marginTop="24dp"
             />
         <Constraint
@@ -59,7 +59,7 @@
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:alpha="1.0"
+            android:alpha=".99"
             android:layout_marginTop="16dp"
             />
         <Constraint
@@ -191,8 +191,8 @@
     <Transition
         motion:constraintSetStart="@+id/Welcome"
         motion:constraintSetEnd="@+id/empty"
-        motion:autoTransition="animateToEnd"
         motion:motionInterpolator="linear"
+        motion:autoTransition="animateToEnd"
         motion:duration="200" >
     </Transition>
     <Transition

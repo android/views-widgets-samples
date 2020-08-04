@@ -3,4 +3,29 @@
     <string name="view_pager">View Pager</string>
     <string name="entrance">Entrance</string>
     <string name="toolbar">Toolbar</string>
+    <string name="long_text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua. Proin nibh nisl condimentum id venenatis a. Est placerat in
+        egestas erat imperdiet sed. Ut lectus arcu bibendum at varius. Purus in mollis nunc sed id
+        semper risus in hendrerit. Volutpat est velit egestas dui. Id diam vel quam elementum
+        pulvinar etiam non. Tristique magna sit amet purus gravida quis blandit. Gravida in
+        fermentum et sollicitudin ac orci. Sed augue lacus viverra vitae congue eu. Sapien nec
+        sagittis aliquam malesuada bibendum. Tortor aliquam nulla facilisi cras fermentum odio.
+        Egestas sed tempus urna et pharetra pharetra massa. Amet purus gravida quis blandit. Orci a
+        scelerisque purus semper eget duis at tellus.
+
+        Volutpat lacus laoreet non curabitur.
+        Urna cursus eget nunc scelerisque viverra mauris. Turpis massa sed elementum tempus egestas
+        sed sed risus pretium. Quam nulla porttitor massa id neque aliquam. Tempus quam pellentesque
+        nec nam aliquam sem et. Ut eu sem integer vitae justo. Commodo sed egestas egestas fringilla
+        phasellus faucibus scelerisque eleifend donec. Cras fermentum odio eu feugiat pretium nibh
+        ipsum. Posuere morbi leo urna molestie at elementum eu facilisis sed. Augue eget arcu dictum
+        varius duis at. Lacinia at quis risus sed vulputate odio. Massa tincidunt dui ut ornare.
+        Auctor augue mauris augue neque gravida in fermentum et. Varius vel pharetra vel turpis nunc
+        eget. Condimentum mattis pellentesque id nibh tortor id aliquet. In massa tempor nec feugiat
+        nisl pretium fusce. Dolor sed viverra ipsum nunc aliquet bibendum. Potenti nullam ac tortor
+        vitae purus faucibus ornare suspendisse sed. Mauris a diam maecenas sed. Tortor aliquam
+        nulla facilisi cras fermentum. Mattis rhoncus urna neque viverra. Dui sapien eget mi proin
+        sed.
+    </string>
 </resources>

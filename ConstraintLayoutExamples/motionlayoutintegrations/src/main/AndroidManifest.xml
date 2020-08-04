@@ -12,7 +12,10 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ViewPagerCarousel" />
         <activity android:name=".Entrance" />
-        <activity android:name=".CollapsingToolbar" />
+        <activity android:name=".CollapsingToolbar"
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
+            />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
