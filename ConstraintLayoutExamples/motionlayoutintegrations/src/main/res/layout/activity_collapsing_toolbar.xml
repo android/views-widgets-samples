@@ -10,62 +10,87 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/long_text"
-            android:textSize="24sp" />
+        <include layout="@layout/lots_of_cards" />
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"
         android:background="#00000000"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="200dp">
 
         <androidx.constraintlayout.motion.widget.MotionLayout
             android:id="@+id/motion_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ff00ff"
-            android:minHeight="80dp"
+            android:minHeight="100dp"
             app:layoutDescription="@xml/collapsing_toolbar"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <com.example.androidstudio.motionlayoutintegrations.CutoutImage
+                android:id="@+id/background"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/star_paralax"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/expanded_bottom"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:bottomCut="120dp"
+                app:cutoutColor="#FFFFFFFF"
+                app:layout_constraintVertical_bias="0.52" />
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center_vertical"
+                android:textColor="#FFFFFFFF"
                 android:text="Ringed Planet"
                 android:textAppearance="?attr/textAppearanceHeadline5"
-                android:gravity="center_vertical"
-                android:paddingTop="50dp"
-                android:paddingBottom="16dp"
                 app:layout_constraintBottom_toTopOf="@id/icon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.24000001" />
 
             <TextView
                 android:id="@+id/subtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:textColor="#FFFFFFFF"
                 android:text="Added in 2019 in Unicode 12.0"
                 android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary"
                 android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="@id/title"
                 app:layout_constraintTop_toBottomOf="@id/title" />
 
-            <View
-                android:id="@+id/space"
-                android:layout_height="50dp"
-                android:layout_width="0dp"
-                android:background="#ff0000"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/collapsed_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="100dp"
+                />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/expanded_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintGuide_end="60dp"
+                android:orientation="horizontal"
+                />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/inset"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="0dp"
                 />
 
             <TextView
@@ -74,9 +99,19 @@
                 android:layout_height="100dp"
                 android:gravity="center"
                 android:text="🪐"
-                app:autoSizeTextType="uniform"
-                tools:layout_editor_absoluteX="362dp"
-                tools:layout_editor_absoluteY="98dp" />
+                app:autoSizeTextType="uniform" />
+
+            <View
+                android:id="@+id/systembar_overlay"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:background="#0E328F"
+                app:layout_constraintTop_toTopOf="@id/collapsed_top"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:alpha="0.5"
+                />
+
         </androidx.constraintlayout.motion.widget.MotionLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

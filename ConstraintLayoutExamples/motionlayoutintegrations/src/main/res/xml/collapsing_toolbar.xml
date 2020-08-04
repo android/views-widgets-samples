@@ -5,25 +5,134 @@
     <Transition
         app:constraintSetEnd="@+id/end"
         app:constraintSetStart="@id/start"
-        />
+        >
+        <KeyFrameSet >
+            <KeyAttribute
+                app:motionTarget="@+id/subtitle"
+                app:framePosition="55"
+                android:alpha="0" />
+            <KeyPosition
+                app:motionTarget="@+id/title"
+                app:framePosition="25"
+                app:percentX="0.0"
+                app:percentY=".2" />
+            <KeyPosition
+                app:motionTarget="@+id/title"
+                app:framePosition="55"
+                app:percentX="0" />
+            <KeyAttribute
+                app:motionTarget="@+id/icon"
+                app:framePosition="50"
+                android:scaleX="0"
+                android:scaleY="0"
+                android:translationY="30dp"
+                android:translationX="0dp"
+                app:curveFit="linear" />
+            <KeyPosition
+                app:motionTarget="@+id/icon"
+                app:framePosition="50"
+                app:percentX="0"
+                app:percentY="0"
+                app:curveFit="linear" />
+            <KeyPosition
+                app:motionTarget="@+id/icon"
+                app:framePosition="51"
+                app:percentX="1"
+                app:percentY="1"
+                app:curveFit="linear" />
+            <KeyAttribute
+                app:motionTarget="@+id/icon"
+                app:framePosition="51"
+                android:translationY="-30dp"
+                android:translationX="20dp"
+                app:curveFit="linear" />
+            <KeyPosition
+                app:motionTarget="@+id/subtitle"
+                app:framePosition="55"
+                app:percentX="0" />
+<!--            <KeyAttribute-->
+<!--                app:motionTarget="@id/background"-->
+<!--                app:framePosition="20">-->
+<!--                <CustomAttribute app:attributeName="bottomCutSize" app:customDimension="130dp" />-->
+<!--            </KeyAttribute>-->
+
+            <KeyAttribute
+                app:motionTarget="@id/background"
+                app:framePosition="60">
+                <CustomAttribute app:attributeName="bottomCutSize" app:customDimension="0dp" />
+            </KeyAttribute>
+            <KeyAttribute
+                app:motionTarget="@id/background"
+                app:framePosition="80">
+                <CustomAttribute app:attributeName="endCutSize" app:customDimension="200dp" />
+            </KeyAttribute>
+            <KeyPosition
+                app:motionTarget="@+id/title"
+                app:framePosition="75"
+                app:percentX=".5" />
+            <KeyPosition
+                app:motionTarget="@+id/subtitle"
+                app:framePosition="75"
+                app:percentX=".5" />
+            <KeyPosition
+                app:motionTarget="@+id/systembar_overlay"
+                app:framePosition="45"
+                app:percentY=".50"
+                app:sizePercent="0.50" />
+        </KeyFrameSet>
+    </Transition>
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
             android:id="@+id/icon"
+            app:layout_constraintTop_toTopOf="@id/expanded_bottom"
+            app:layout_constraintBottom_toTopOf="@id/expanded_bottom"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            app:layout_constraintBottom_toTopOf="@id/space"
-            app:layout_constraintTop_toTopOf="@id/space"
-            app:layout_constraintStart_toStartOf="parent" />
+            />
 
         <Constraint
-            android:id="@+id/space"
+            android:id="@+id/subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintStart_toStartOf="@id/title"
+            android:visibility="invisible"
+            android:layout_marginTop="8dp"
+            android:alpha="0" />
+        <Constraint
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/parent"
+            app:layout_constraintBottom_toTopOf="@id/icon"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_height="50dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="0dp"
+            />
+        <Constraint
+            android:id="@+id/background"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/expanded_bottom"
+            app:layout_constraintStart_toStartOf="parent">
+            <CustomAttribute app:attributeName="bottomCutSize" app:customDimension="120dp" />
+            <CustomAttribute app:attributeName="endCutSize" app:customDimension="0dp" />
+        </Constraint>
+        <Constraint
+            android:id="@id/systembar_overlay"
+            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:alpha="0.5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end" >
@@ -33,17 +142,52 @@
             android:layout_height="50dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp" />
+            app:layout_constraintTop_toTopOf="@id/inset"
+            android:layout_marginEnd="16dp" />
 
         <Constraint
-            android:id="@+id/space"
-            android:layout_height="1dp"
-            android:layout_width="0dp"
+            android:id="@+id/title"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="0dp"
             android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintTop_toTopOf="@+id/inset"
+            app:layout_constraintBottom_toTopOf="@id/subtitle"
             app:layout_constraintStart_toStartOf="parent"
+            />
+        <Constraint
+            android:id="@+id/subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="0dp" />
+        <Constraint
+            android:id="@+id/background"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/collapsed_top"
+            app:layout_constraintStart_toStartOf="parent">
+            <CustomAttribute app:attributeName="bottomCutSize" app:customDimension="0dp" />
+            <CustomAttribute app:attributeName="endCutSize" app:customDimension="140dp" />
+        </Constraint>
+        <Constraint
+            android:id="@id/systembar_overlay"
+            android:layout_height="0dp"
+            android:layout_width="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/inset"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:alpha="0.5"
             />
     </ConstraintSet>
 </MotionScene>
