@@ -4,7 +4,7 @@
     android:id="@+id/motionLayout"
     app:layoutDescription="@xml/scene_23"
     android:layout_width="match_parent"
-    app:progress="0"
+    app:motionProgress="0"
     android:layout_height="230dp">
 
     <com.airbnb.lottie.LottieAnimationView
