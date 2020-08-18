@@ -22,7 +22,7 @@
                 app:percentX="0" />
             <KeyAttribute
                 app:motionTarget="@+id/icon"
-                app:framePosition="50"
+                app:framePosition="35"
                 android:scaleX="0"
                 android:scaleY="0"
                 android:translationY="30dp"
@@ -30,19 +30,19 @@
                 app:curveFit="linear" />
             <KeyPosition
                 app:motionTarget="@+id/icon"
-                app:framePosition="50"
+                app:framePosition="35"
                 app:percentX="0"
                 app:percentY="0"
                 app:curveFit="linear" />
             <KeyPosition
                 app:motionTarget="@+id/icon"
-                app:framePosition="51"
+                app:framePosition="36"
                 app:percentX="1"
                 app:percentY="1"
                 app:curveFit="linear" />
             <KeyAttribute
                 app:motionTarget="@+id/icon"
-                app:framePosition="51"
+                app:framePosition="36"
                 android:translationY="-30dp"
                 android:translationX="20dp"
                 app:curveFit="linear" />
@@ -50,12 +50,6 @@
                 app:motionTarget="@+id/subtitle"
                 app:framePosition="55"
                 app:percentX="0" />
-<!--            <KeyAttribute-->
-<!--                app:motionTarget="@id/background"-->
-<!--                app:framePosition="20">-->
-<!--                <CustomAttribute app:attributeName="bottomCutSize" app:customDimension="130dp" />-->
-<!--            </KeyAttribute>-->
-
             <KeyAttribute
                 app:motionTarget="@id/background"
                 app:framePosition="60">

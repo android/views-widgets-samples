@@ -20,9 +20,9 @@ class Entrance : AppCompatActivity() {
         }
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        val motionLayoutState = savedInstanceState?.getBundle(SIS_MOTION_LAYOUT_STATE)
+        val motionLayoutState = savedInstanceState.getBundle(SIS_MOTION_LAYOUT_STATE)
         motionLayoutState?.let {
             binding.motionLayout.transitionState = motionLayoutState
         }
