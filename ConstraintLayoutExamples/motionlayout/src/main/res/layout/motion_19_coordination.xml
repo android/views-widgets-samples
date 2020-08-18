@@ -28,6 +28,6 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_add_a_photo_24dp"/>
+        app:srcCompat="@drawable/ic_add_a_photo_24dp"/>
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
