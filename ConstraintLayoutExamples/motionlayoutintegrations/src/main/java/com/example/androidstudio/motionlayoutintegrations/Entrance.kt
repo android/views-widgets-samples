@@ -14,22 +14,5 @@ class Entrance : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEntranceBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        savedInstanceState?.let {
-
-        }
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        val motionLayoutState = savedInstanceState.getBundle(SIS_MOTION_LAYOUT_STATE)
-        motionLayoutState?.let {
-            binding.motionLayout.transitionState = motionLayoutState
-        }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putBundle(SIS_MOTION_LAYOUT_STATE, binding.motionLayout.transitionState)
     }
 }

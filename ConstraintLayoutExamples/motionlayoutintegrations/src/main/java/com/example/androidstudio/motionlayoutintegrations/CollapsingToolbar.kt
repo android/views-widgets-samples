@@ -8,59 +8,91 @@ import android.os.Bundle
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
+import android.view.Window
 import android.view.WindowManager
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.androidstudio.motionlayoutintegrations.databinding.ActivityCollapsingToolbarBinding
 import com.google.android.material.appbar.AppBarLayout
+import kotlinx.android.synthetic.main.activity_entrance.*
 
 class CollapsingToolbar : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window.apply {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-            }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-                statusBarColor = Color.TRANSPARENT
-            }
-            decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-        }
+
+        window.goEdgeToEdge()
 
         val binding = ActivityCollapsingToolbarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // When the AppBarLayout progress changes, snap MotionLayout to the current progress
         val listener = AppBarLayout.OnOffsetChangedListener { appBar, verticalOffset ->
+            // convert offset into % scrolled
             val seekPosition = -verticalOffset / appBar.totalScrollRange.toFloat()
+            // inform both both MotionLayout and CutoutImage of the animation progress.
             binding.motionLayout.progress = seekPosition
             binding.background.translationProgress = (100 * seekPosition).toInt()
         }
         binding.appbarLayout.addOnOffsetChangedListener(listener)
 
+        // get the collapsed height from the motion layout specified in XML
+        val desiredToolbarHeight = binding.motionLayout.minHeight
+
+        // Set two guidelines in the collapsed state for displaying a scrim based on the inset. Also
+        // resize the MotionLayout when collapsed to add the inset height.
+        //
+        // You could also set a similar inset guide for the expanded state if your animation uses
+        // the top of the screen when expanded.
         ViewCompat.setOnApplyWindowInsetsListener(binding.motionLayout) { _, insets: WindowInsetsCompat ->
-            val collapsedTop = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100f, resources.displayMetrics).toInt()
+            // resize the motionLayout in collapsed state to add the needed inset height
+            val insetTopHeight = insets.systemWindowInsetTop
+            binding.motionLayout.minimumHeight = desiredToolbarHeight + insetTopHeight
+
+            // modify the end ConstraintSet to set a guideline at the top and bottom of inset
             val endConstraintSet = binding.motionLayout.getConstraintSet(R.id.end)
-            endConstraintSet.setGuidelineEnd(R.id.collapsed_top, collapsedTop)
-            endConstraintSet.setGuidelineEnd(R.id.inset, collapsedTop - insets.systemWindowInsetTop)
+            // this guideline is the bottom of the inset area
+            endConstraintSet.setGuidelineEnd(R.id.inset, desiredToolbarHeight)
+            // this guideline is the top of the inset area (top of screen)
+            endConstraintSet.setGuidelineEnd(R.id.collapsed_top, desiredToolbarHeight + insetTopHeight)
+
             insets
         }
     }
+
+    private fun Window.goEdgeToEdge() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            statusBarColor = Color.TRANSPARENT
+        }
+        decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+    }
 }
 
-private val INFLECTION_PART = 8
-private val PI_OVER_2 = Math.PI / 2
-
+/**
+ * A custom view to display a circular cutout on an image that can be controlled by MotionLayout.
+ *
+ * Animation of this view is driven by motionLayout controlling [bottomCutSize] and [endCutSize]
+ * and [translationProgress].
+ *
+ * This View will overwrite scaleType from XML to be matrix to allow custom translation.
+ */
 class CutoutImage @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : androidx.appcompat.widget.AppCompatImageView(context, attrs, defStyleAttr) {
 
     private val scratchRect = RectF()
 
     private var _bottomCutSize: Float
 
-    // this is just to make Kotlin happy
+    /**
+     * Set the size of the bottomCut.
+     *
+     * This can directly be called by MotionLayout to animate the size.
+     */
     var bottomCutSize: Float
         get() = _bottomCutSize
         set(value) {
@@ -69,6 +101,12 @@ class CutoutImage @JvmOverloads constructor(
         }
 
     private var _endCutSize: Float
+
+    /**
+     * Set the size of the endCut.
+     *
+     * This can directly be called by MotionLayout to animate the size.
+     */
     var endCutSize: Float
         get() = _endCutSize
         set(value) {
@@ -76,6 +114,14 @@ class CutoutImage @JvmOverloads constructor(
             invalidate()
         }
 
+    /**
+     * Fixed image translation progress to make the image scroll as animation progresses.
+     *
+     * This uses a Matrix to scale then translate the image based on the current progress.
+     *
+     * This can be directly called by MotionLayout, or be called in response to progress change like
+     * we do in this sample.
+     */
     var translationProgress: Int = 0
         set(value) {
             field = value
@@ -90,10 +136,13 @@ class CutoutImage @JvmOverloads constructor(
     private val painter = Paint()
 
     private val grayPainter = Paint().also {
-        it.color = 0x33000000.toInt()
+        it.color = 0x33000000
         it.strokeWidth = dpToF(1)
     }
 
+    /**
+     * Read the endCut, bottomCut, and cutoutColor from XML
+     */
     init {
         val typedArray = context.theme.obtainStyledAttributes(
                 attrs,
@@ -108,6 +157,9 @@ class CutoutImage @JvmOverloads constructor(
         typedArray.recycle()
     }
 
+    /**
+     * Force the scaleType to matrix
+     */
     init {
         scaleType = ScaleType.MATRIX // ignore any other scale types
     }
@@ -118,45 +170,39 @@ class CutoutImage @JvmOverloads constructor(
         resources.displayMetrics
     )
 
+    /**
+     * Draw the image with current cutouts applied
+     */
     override fun onDraw(canvas: Canvas?) {
         // let the parent draw the bitmap
         super.onDraw(canvas)
 
+        // draw the bottom circle at the correct position and size
         canvas?.drawCircle(
-            width.toFloat() / 2,
-            height.toFloat(),
-            _bottomCutSize / 2,
+            width.toFloat() / 2, // midpoint of view
+            height.toFloat(), // bottom of view
+            _bottomCutSize / 2, // radius from diameter
             painter
         )
 
+        // draw the end circle at the correct position and size
         val margin = dpToF(16)
-        if (height.toFloat() <= _endCutSize) {
-            // this is to fill in the area to the right of the circle to avoid showing a small
-            // triangle of background in (bottom right & top left) during expansion
-            val centerV = 2 * height.toFloat() / 3
-            scratchRect.set(
-                    width - margin,
-                    centerV - _endCutSize / 2,
-                    width.toFloat(),
-                    centerV + _endCutSize / 2
-            )
-            canvas?.drawRect(scratchRect, painter)
-        }
-
         canvas?.drawCircle(
-            width - margin,
-            2 * height.toFloat() / 3,
-            _endCutSize / 2,
+            width - margin, // end of view, with custom margin applied
+            2 * height.toFloat() / 3, // 2/3 down on view (determined by designer)
+            _endCutSize / 2, // radius from diameter
             painter
         )
 
-        // add a 1px gray line to the bottom of the circle region so it clearly divides from
-        // surrounding region
+        // add a 1px gray line to the bottom of the end circle region so it clearly divides from
+        // surrounding region (this effectively brings the shadow in early on the end circle)
         canvas?.drawLine(
+            // start at the left edge of circle (this could do trig to calculate intersection
+            // between circle and bottom, but visually this works fine)
             width - margin - _endCutSize / 2,
-            height.toFloat(),
-            width.toFloat(),
-            height.toFloat(),
+            height.toFloat(), // bottom of view
+            width.toFloat(), // to end of view X
+            height.toFloat(), // bottom of view
             grayPainter
         )
     }
