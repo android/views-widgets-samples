@@ -28,4 +28,7 @@
         nulla facilisi cras fermentum. Mattis rhoncus urna neque viverra. Dui sapien eget mi proin
         sed.
     </string>
+    <string name="entrance_secondary_text">Display a complex entrance animation when entering a screen</string>
+    <string name="view">View</string>
+    <string name="toolbar_secondary_text">Display a complex collapsing toolbar with insets</string>
 </resources>

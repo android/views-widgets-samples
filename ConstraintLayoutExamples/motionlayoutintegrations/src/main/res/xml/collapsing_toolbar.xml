@@ -7,10 +7,6 @@
         app:constraintSetStart="@id/start"
         >
         <KeyFrameSet >
-            <KeyAttribute
-                app:motionTarget="@+id/subtitle"
-                app:framePosition="55"
-                android:alpha="0" />
             <KeyPosition
                 app:motionTarget="@+id/title"
                 app:framePosition="25"
@@ -20,6 +16,22 @@
                 app:motionTarget="@+id/title"
                 app:framePosition="55"
                 app:percentX="0" />
+            <KeyPosition
+                app:motionTarget="@+id/title"
+                app:framePosition="75"
+                app:percentX=".5" />
+            <KeyAttribute
+                app:motionTarget="@+id/subtitle"
+                app:framePosition="55"
+                android:alpha="0" />
+            <KeyPosition
+                app:motionTarget="@+id/subtitle"
+                app:framePosition="55"
+                app:percentX="0" />
+            <KeyPosition
+                app:motionTarget="@+id/subtitle"
+                app:framePosition="75"
+                app:percentX=".5" />
             <KeyAttribute
                 app:motionTarget="@+id/icon"
                 app:framePosition="35"
@@ -46,10 +58,6 @@
                 android:translationY="-30dp"
                 android:translationX="20dp"
                 app:curveFit="linear" />
-            <KeyPosition
-                app:motionTarget="@+id/subtitle"
-                app:framePosition="55"
-                app:percentX="0" />
             <KeyAttribute
                 app:motionTarget="@id/background"
                 app:framePosition="60">
@@ -61,14 +69,6 @@
                 <CustomAttribute app:attributeName="endCutSize" app:customDimension="200dp" />
             </KeyAttribute>
             <KeyPosition
-                app:motionTarget="@+id/title"
-                app:framePosition="75"
-                app:percentX=".5" />
-            <KeyPosition
-                app:motionTarget="@+id/subtitle"
-                app:framePosition="75"
-                app:percentX=".5" />
-            <KeyPosition
                 app:motionTarget="@+id/systembar_overlay"
                 app:framePosition="45"
                 app:percentY=".50"
@@ -77,25 +77,6 @@
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
-        <Constraint
-            android:id="@+id/icon"
-            app:layout_constraintTop_toTopOf="@id/expanded_bottom"
-            app:layout_constraintBottom_toTopOf="@id/expanded_bottom"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            />
-
-        <Constraint
-            android:id="@+id/subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/title"
-            app:layout_constraintStart_toStartOf="@id/title"
-            android:visibility="invisible"
-            android:layout_marginTop="8dp"
-            android:alpha="0" />
         <Constraint
             android:id="@+id/title"
             android:layout_width="wrap_content"
@@ -106,6 +87,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="16dp"
             android:layout_marginTop="0dp"
+            />
+        <Constraint
+            android:id="@+id/subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintStart_toStartOf="@id/title"
+            android:visibility="invisible"
+            android:layout_marginTop="8dp"
+            android:alpha="0" />
+        <Constraint
+            android:id="@+id/icon"
+            app:layout_constraintTop_toTopOf="@id/expanded_bottom"
+            app:layout_constraintBottom_toTopOf="@id/expanded_bottom"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             />
         <Constraint
             android:id="@+id/background"
@@ -131,15 +130,6 @@
 
     <ConstraintSet android:id="@+id/end" >
         <Constraint
-            android:id="@+id/icon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="@id/inset"
-            android:layout_marginEnd="16dp" />
-
-        <Constraint
             android:id="@+id/title"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
@@ -162,6 +152,14 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="0dp"
             android:layout_marginTop="0dp" />
+        <Constraint
+            android:id="@+id/icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/inset"
+            android:layout_marginEnd="16dp" />
         <Constraint
             android:id="@+id/background"
             app:layout_constraintEnd_toEndOf="parent"
