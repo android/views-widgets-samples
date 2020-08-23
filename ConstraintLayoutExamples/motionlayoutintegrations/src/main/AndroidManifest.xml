@@ -11,7 +11,10 @@
         android:name=".IntegrationApplication"
         android:theme="@style/AppTheme">
         <activity android:name=".ViewPagerCarousel" />
-        <activity android:name=".Entrance" />
+        <activity android:name=".Entrance"
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
+            />
         <activity android:name=".CollapsingToolbar"
             android:exported="true"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"

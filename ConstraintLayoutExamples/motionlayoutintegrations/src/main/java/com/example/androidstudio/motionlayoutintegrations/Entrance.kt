@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.androidstudio.motionlayoutintegrations.databinding.ActivityEntranceBinding
 
-private val SIS_MOTION_LAYOUT_STATE: String = "sis_motion_layout_start"
-
 class Entrance : AppCompatActivity() {
 
     private lateinit var binding: ActivityEntranceBinding
