@@ -3,35 +3,42 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Transition
-        app:constraintSetEnd="@+id/end"
-        app:constraintSetStart="@id/start"
+        app:constraintSetEnd="@+id/collapsed"
+        app:constraintSetStart="@id/expanded"
         >
         <KeyFrameSet >
+            <!-- Hold title in place -->
             <KeyPosition
                 app:motionTarget="@+id/title"
                 app:framePosition="25"
                 app:percentX="0.0"
                 app:percentY=".2" />
+            <!-- At 55, title should still be in place -->
             <KeyPosition
                 app:motionTarget="@+id/title"
                 app:framePosition="55"
                 app:percentX="0" />
+            <!-- at 75, title is 50% to destination -->
             <KeyPosition
                 app:motionTarget="@+id/title"
                 app:framePosition="75"
                 app:percentX=".5" />
+            <!-- Hide subtitle until 55 -->
             <KeyAttribute
                 app:motionTarget="@+id/subtitle"
                 app:framePosition="55"
                 android:alpha="0" />
+            <!-- Hold subtitle in place until 55 -->
             <KeyPosition
                 app:motionTarget="@+id/subtitle"
                 app:framePosition="55"
                 app:percentX="0" />
+            <!-- at 55, subtitle is 50% to destination -->
             <KeyPosition
                 app:motionTarget="@+id/subtitle"
                 app:framePosition="75"
                 app:percentX=".5" />
+            <!-- "pop" icon out at 35, with some translation to make it visually stay in place -->
             <KeyAttribute
                 app:motionTarget="@+id/icon"
                 app:framePosition="35"
@@ -40,34 +47,40 @@
                 android:translationY="30dp"
                 android:translationX="0dp"
                 app:curveFit="linear" />
+            <!-- Don't move icon along curve until 35 -->
             <KeyPosition
                 app:motionTarget="@+id/icon"
                 app:framePosition="35"
                 app:percentX="0"
                 app:percentY="0"
                 app:curveFit="linear" />
+            <!-- Between 35 and 36 while icon is not visible, jump icon to it's final location -->
             <KeyPosition
                 app:motionTarget="@+id/icon"
                 app:framePosition="36"
                 app:percentX="1"
                 app:percentY="1"
                 app:curveFit="linear" />
+            <!-- Translate icon a bit to make it "fill in" after jump -->
             <KeyAttribute
                 app:motionTarget="@+id/icon"
                 app:framePosition="36"
                 android:translationY="-30dp"
                 android:translationX="20dp"
                 app:curveFit="linear" />
+            <!-- Animate the bottomCutSize to 0 -->
             <KeyAttribute
                 app:motionTarget="@id/background"
                 app:framePosition="60">
                 <CustomAttribute app:attributeName="bottomCutSize" app:customDimension="0dp" />
             </KeyAttribute>
+            <!-- animate the endCutSize to 200, a little before the end of animation -->
             <KeyAttribute
                 app:motionTarget="@id/background"
                 app:framePosition="80">
                 <CustomAttribute app:attributeName="endCutSize" app:customDimension="200dp" />
             </KeyAttribute>
+            <!-- bring the system bar overlay in slightly early (numbers decided visually) -->
             <KeyPosition
                 app:motionTarget="@+id/systembar_overlay"
                 app:framePosition="45"
@@ -76,7 +89,8 @@
         </KeyFrameSet>
     </Transition>
 
-    <ConstraintSet android:id="@+id/start">
+    <!-- Start constraint set uses expanded_bottom and parent as bottom and top bounds -->
+    <ConstraintSet android:id="@+id/expanded">
         <Constraint
             android:id="@+id/title"
             android:layout_width="wrap_content"
@@ -128,7 +142,9 @@
             app:layout_constraintEnd_toEndOf="parent" />
     </ConstraintSet>
 
-    <ConstraintSet android:id="@+id/end" >
+    <!-- end constraint set uses collapsed_top and parent as top and bottom, with inset as
+         guideline -->
+    <ConstraintSet android:id="@+id/collapsed" >
         <Constraint
             android:id="@+id/title"
             android:layout_height="wrap_content"

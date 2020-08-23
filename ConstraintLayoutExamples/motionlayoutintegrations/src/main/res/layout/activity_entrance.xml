@@ -14,13 +14,13 @@
     <ImageView
         android:id="@+id/scrolling_background"
         android:layout_width="0dp"
-        android:layout_height="4478px"
+        android:layout_height="wrap_content"
         android:scaleType="centerCrop"
         android:src="@drawable/star_paralax"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="PxUsage" />
+        />
 
 
     <TextView

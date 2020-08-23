@@ -14,7 +14,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.androidstudio.motionlayoutintegrations.databinding.ActivityCollapsingToolbarBinding
 import com.google.android.material.appbar.AppBarLayout
-import kotlinx.android.synthetic.main.activity_entrance.*
 
 class CollapsingToolbar : AppCompatActivity() {
 
@@ -50,7 +49,7 @@ class CollapsingToolbar : AppCompatActivity() {
             binding.motionLayout.minimumHeight = desiredToolbarHeight + insetTopHeight
 
             // modify the end ConstraintSet to set a guideline at the top and bottom of inset
-            val endConstraintSet = binding.motionLayout.getConstraintSet(R.id.end)
+            val endConstraintSet = binding.motionLayout.getConstraintSet(R.id.collapsed)
             // this guideline is the bottom of the inset area
             endConstraintSet.setGuidelineEnd(R.id.inset, desiredToolbarHeight)
             // this guideline is the top of the inset area (top of screen)

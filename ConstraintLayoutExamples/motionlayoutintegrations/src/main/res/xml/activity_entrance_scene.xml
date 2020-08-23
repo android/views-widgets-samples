@@ -3,14 +3,22 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
-    <ConstraintSet android:id="@+id/Welcome" >
+    <!-- This animation uses a series of autoprogress between different ConstraintSet to build
+    keyframes of the animation.
+
+    As the animation plays, MotionLayout will display each ConstraintSet in turn.
+
+    Each ConstraintSet uses deriveConstraintsFrom the previous constraint set to only specify the
+    changes needed for the next KeyFrame.
+    -->
+    <ConstraintSet android:id="@+id/initial" >
         <Constraint
             android:id="@+id/scrolling_background"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="0dp"
-            android:layout_height="4478px"
+            android:layout_height="wrap_content"
             android:alpha="0"
             />
     </ConstraintSet>
@@ -172,8 +180,10 @@
             android:layout_marginEnd="16dp"
             />
     </ConstraintSet>
+    <!-- Each transition uses animateToEnd to combine a sequence of smaller animations into one
+    big entrance animation. -->
     <Transition
-        motion:constraintSetStart="@+id/Welcome"
+        motion:constraintSetStart="@+id/initial"
         motion:constraintSetEnd="@+id/empty"
         motion:motionInterpolator="linear"
         motion:autoTransition="animateToEnd"
