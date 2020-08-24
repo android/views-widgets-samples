@@ -25,13 +25,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.example.androidstudio.motionlayoutintegrations.databinding.ActivityViewPagerCarouselBinding
+import com.example.androidstudio.motionlayoutintegrations.databinding.ActivityViewPagerIntegrationBinding
 
-class ViewPagerCarousel : AppCompatActivity() {
+class ViewPagerIntegration : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityViewPagerCarouselBinding.inflate(layoutInflater)
+        val binding = ActivityViewPagerIntegrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val adapter = ViewPagerAdapter(supportFragmentManager)
@@ -62,7 +62,10 @@ class ViewPagerCarousel : AppCompatActivity() {
 }
 
 
-class ViewPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class ViewPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(
+    fragmentManager,
+    BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+) {
 
     private val fragmentList = ArrayList<Fragment>()
     private val fragmentTitleList = ArrayList<String>()
