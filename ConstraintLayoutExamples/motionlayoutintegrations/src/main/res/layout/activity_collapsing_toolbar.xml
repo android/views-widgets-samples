@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2020 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -32,13 +47,13 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/star_paralax"
+                android:src="@drawable/star_parallax"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="@id/expanded_bottom"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:bottomCut="120dp"
-                app:cutoutColor="#FFFFFFFF"
+                app:cutoutColor="@color/white"
                 app:layout_constraintVertical_bias="0.52" />
 
             <TextView
@@ -48,8 +63,8 @@
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="16dp"
                 android:gravity="center_vertical"
-                android:textColor="#FFFFFFFF"
-                android:text="Ringed Planet"
+                android:textColor="@color/white"
+                android:text="@string/ringed_planet"
                 android:textAppearance="?attr/textAppearanceHeadline5"
                 app:layout_constraintBottom_toTopOf="@id/icon"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -62,8 +77,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textColor="#FFFFFFFF"
-                android:text="Added in 2019 in Unicode 12.0"
+                android:textColor="@color/white"
+                android:text="@string/added_in_2019_in_unicode_12_0"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="@id/title"
@@ -90,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_end="0dp"
+                app:layout_constraintGuide_begin="0dp"
                 />
 
             <TextView
@@ -98,7 +113,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:gravity="center"
-                android:text="🪐"
+                android:text="@string/ringed_planet_emoji"
                 app:autoSizeTextType="uniform" />
 
             <View

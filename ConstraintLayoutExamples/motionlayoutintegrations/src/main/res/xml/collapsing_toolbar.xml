@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2020 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
 <MotionScene xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -74,11 +90,11 @@
                 app:framePosition="60">
                 <CustomAttribute app:attributeName="bottomCutSize" app:customDimension="0dp" />
             </KeyAttribute>
-            <!-- animate the endCutSize to 200, a little before the end of animation -->
+            <!-- overshoot endCutSize -->
             <KeyAttribute
                 app:motionTarget="@id/background"
                 app:framePosition="80">
-                <CustomAttribute app:attributeName="endCutSize" app:customDimension="200dp" />
+                <CustomAttribute app:attributeName="endCutSize" app:customDimension="220dp" />
             </KeyAttribute>
             <!-- bring the system bar overlay in slightly early (numbers decided visually) -->
             <KeyPosition
@@ -185,7 +201,7 @@
             app:layout_constraintTop_toTopOf="@id/collapsed_top"
             app:layout_constraintStart_toStartOf="parent">
             <CustomAttribute app:attributeName="bottomCutSize" app:customDimension="0dp" />
-            <CustomAttribute app:attributeName="endCutSize" app:customDimension="140dp" />
+            <CustomAttribute app:attributeName="endCutSize" app:customDimension="180dp" />
         </Constraint>
         <Constraint
             android:id="@id/systembar_overlay"

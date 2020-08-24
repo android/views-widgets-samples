@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2020 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
 <androidx.constraintlayout.motion.widget.MotionLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,7 +23,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/activity_entrance_scene"
-    app:motionDebug="SHOW_ALL"
     android:background="?attr/colorPrimary"
     tools:context=".Entrance">
 
@@ -16,11 +31,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
-        android:src="@drawable/star_paralax"
+        android:src="@drawable/star_parallax"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        android:contentDescription="@string/star_background" />
 
 
     <TextView
@@ -32,7 +47,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="24dp"
         android:alpha="0"
-        android:text="Spacemoji"
+        android:text="@string/spacemoji"
         android:textColor="?attr/colorOnPrimary"
         style="?attr/textAppearanceHeadline2" />
 
@@ -45,7 +60,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:alpha="0"
         android:layout_marginTop="16dp"
-        android:text="Quick access to space themed emoji"
+        android:text="@string/quick_access_to_space_themed_emoji"
         android:textColor="?attr/colorOnPrimary"
         style="?attr/textAppearanceSubtitle1" />
 
@@ -75,7 +90,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginVertical="16dp"
-                android:text="🪐"
+                android:text="@string/ringed_planet_emoji"
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
                 />
@@ -88,7 +103,7 @@
                 app:layout_constraintStart_toEndOf="@id/image"
                 app:layout_constraintTop_toTopOf="@id/image"
                 android:layout_marginStart="16dp"
-                android:text="Ringed Planet"
+                android:text="@string/ringed_planet"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 />
             <TextView
@@ -98,7 +113,7 @@
                 app:layout_constraintTop_toBottomOf="@id/title"
                 app:layout_constraintStart_toStartOf="@id/title"
                 android:layout_marginTop="8dp"
-                android:text="Added in 2019 in Unicode 12.0"
+                android:text="@string/added_in_2019_in_unicode_12_0"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="?android:attr/textColorSecondary"
                 />
@@ -129,7 +144,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginVertical="16dp"
-                android:text="🚀"
+                android:text="@string/rocket_emoji"
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
                 />
@@ -142,7 +157,7 @@
                 app:layout_constraintStart_toEndOf="@id/image2"
                 app:layout_constraintTop_toTopOf="@id/image2"
                 android:layout_marginStart="16dp"
-                android:text="Rocket"
+                android:text="@string/rocket"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 />
             <TextView
@@ -152,7 +167,7 @@
                 app:layout_constraintTop_toBottomOf="@id/title2"
                 app:layout_constraintStart_toStartOf="@id/title2"
                 android:layout_marginTop="8dp"
-                android:text="Added in 2010 in Unicode 6.0"
+                android:text="@string/added_in_2010_in_unicode_6_0"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="?android:attr/textColorSecondary"
                 />
@@ -183,7 +198,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginVertical="16dp"
-                android:text="👾"
+                android:text="@string/space_moster_emoji"
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
                 />
@@ -196,7 +211,7 @@
                 app:layout_constraintStart_toEndOf="@id/image3"
                 app:layout_constraintTop_toTopOf="@id/image3"
                 android:layout_marginStart="16dp"
-                android:text="Space Monster"
+                android:text="@string/space_monster"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 />
             <TextView
@@ -206,7 +221,7 @@
                 app:layout_constraintTop_toBottomOf="@id/title3"
                 app:layout_constraintStart_toStartOf="@id/title3"
                 android:layout_marginTop="8dp"
-                android:text="Added in 2010 in Unicode 6.0"
+                android:text="@string/added_in_2010_in_unicode_6_0"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="?android:attr/textColorSecondary"
                 />
