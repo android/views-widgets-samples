@@ -1,34 +1,43 @@
+<!--
+  ~ Copyright (C) 2020 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
 <resources>
     <string name="app_name">MotionLayoutIntegrations</string>
     <string name="view_pager">View Pager</string>
     <string name="entrance">Entrance</string>
     <string name="toolbar">Toolbar</string>
-    <string name="long_text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua. Proin nibh nisl condimentum id venenatis a. Est placerat in
-        egestas erat imperdiet sed. Ut lectus arcu bibendum at varius. Purus in mollis nunc sed id
-        semper risus in hendrerit. Volutpat est velit egestas dui. Id diam vel quam elementum
-        pulvinar etiam non. Tristique magna sit amet purus gravida quis blandit. Gravida in
-        fermentum et sollicitudin ac orci. Sed augue lacus viverra vitae congue eu. Sapien nec
-        sagittis aliquam malesuada bibendum. Tortor aliquam nulla facilisi cras fermentum odio.
-        Egestas sed tempus urna et pharetra pharetra massa. Amet purus gravida quis blandit. Orci a
-        scelerisque purus semper eget duis at tellus.
-
-        Volutpat lacus laoreet non curabitur.
-        Urna cursus eget nunc scelerisque viverra mauris. Turpis massa sed elementum tempus egestas
-        sed sed risus pretium. Quam nulla porttitor massa id neque aliquam. Tempus quam pellentesque
-        nec nam aliquam sem et. Ut eu sem integer vitae justo. Commodo sed egestas egestas fringilla
-        phasellus faucibus scelerisque eleifend donec. Cras fermentum odio eu feugiat pretium nibh
-        ipsum. Posuere morbi leo urna molestie at elementum eu facilisis sed. Augue eget arcu dictum
-        varius duis at. Lacinia at quis risus sed vulputate odio. Massa tincidunt dui ut ornare.
-        Auctor augue mauris augue neque gravida in fermentum et. Varius vel pharetra vel turpis nunc
-        eget. Condimentum mattis pellentesque id nibh tortor id aliquet. In massa tempor nec feugiat
-        nisl pretium fusce. Dolor sed viverra ipsum nunc aliquet bibendum. Potenti nullam ac tortor
-        vitae purus faucibus ornare suspendisse sed. Mauris a diam maecenas sed. Tortor aliquam
-        nulla facilisi cras fermentum. Mattis rhoncus urna neque viverra. Dui sapien eget mi proin
-        sed.
-    </string>
     <string name="entrance_secondary_text">Display a complex entrance animation when entering a screen</string>
     <string name="view">View</string>
     <string name="toolbar_secondary_text">Display a complex collapsing toolbar with insets</string>
+    <string name="star_background_content_description">Star background</string>
+    <string name="prepare_to_launch">launch</string>
+    <string name="ringed_planet">Ringed Planet</string>
+    <string name="added_in_2019_in_unicode_12_0">Added in 2019 in Unicode 12.0</string>
+    <string name="ringed_planet_emoji">🪐</string>
+    <string name="spacemoji">Spacemoji</string>
+    <string name="quick_access_to_space_themed_emoji">Quick access to space themed emoji</string>
+    <string name="rocket_emoji">🚀</string>
+    <string name="rocket">Rocket</string>
+    <string name="added_in_2010_in_unicode_6_0">Added in 2010 in Unicode 6.0</string>
+    <string name="space_moster_emoji">👾</string>
+    <string name="space_monster">Space Monster</string>
+    <string name="view_pager_text">View Pager</string>
+    <string name="pager_secondary_text">Display a dynamic header driven by a ViewPager</string>
+    <string name="view_pager_sample_preview">View pager sample preview</string>
+    <string name="entrace_sample_preview">Entrace sample preview</string>
+    <string name="collapsing_toolbar_screen_preview">Collapsing toolbar screen preview</string>
+    <string name="star_background">star background</string>
 </resources>

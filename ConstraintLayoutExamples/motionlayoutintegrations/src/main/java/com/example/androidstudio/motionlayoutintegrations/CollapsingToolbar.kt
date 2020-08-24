@@ -1,15 +1,34 @@
+/*
+ * Copyright (C) 2020 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.example.androidstudio.motionlayoutintegrations
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.RectF
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.androidstudio.motionlayoutintegrations.databinding.ActivityCollapsingToolbarBinding
@@ -40,9 +59,6 @@ class CollapsingToolbar : AppCompatActivity() {
 
         // Set two guidelines in the collapsed state for displaying a scrim based on the inset. Also
         // resize the MotionLayout when collapsed to add the inset height.
-        //
-        // You could also set a similar inset guide for the expanded state if your animation uses
-        // the top of the screen when expanded.
         ViewCompat.setOnApplyWindowInsetsListener(binding.motionLayout) { _, insets: WindowInsetsCompat ->
             // resize the motionLayout in collapsed state to add the needed inset height
             val insetTopHeight = insets.systemWindowInsetTop
@@ -54,6 +70,10 @@ class CollapsingToolbar : AppCompatActivity() {
             endConstraintSet.setGuidelineEnd(R.id.inset, desiredToolbarHeight)
             // this guideline is the top of the inset area (top of screen)
             endConstraintSet.setGuidelineEnd(R.id.collapsed_top, desiredToolbarHeight + insetTopHeight)
+
+            // set the guideline for the start constraint set as well
+            val startConstraintSet = binding.motionLayout.getConstraintSet(R.id.expanded)
+            startConstraintSet.setGuidelineBegin(R.id.collapsed_top, insetTopHeight)
 
             insets
         }
