@@ -17,31 +17,26 @@
 package com.android.samples.webviewdemo
 
 import android.content.Context
-import android.os.Handler
 import android.os.Looper
-import android.util.Log
-import android.webkit.WebChromeClient
 import android.webkit.WebView
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.web.assertion.WebViewAssertions.webMatches
 import androidx.test.espresso.web.model.Atoms.castOrDie
 import androidx.test.espresso.web.model.Atoms.script
 import androidx.test.espresso.web.sugar.Web.onWebView
-import androidx.test.espresso.web.webdriver.DriverAtoms.findElement
-import androidx.test.espresso.web.webdriver.DriverAtoms.getText
-import androidx.test.espresso.web.webdriver.DriverAtoms.webClick
+import androidx.test.espresso.web.webdriver.DriverAtoms.*
 import androidx.test.espresso.web.webdriver.Locator
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.LargeTest
+import androidx.test.filters.MediumTest
 import androidx.test.rule.ActivityTestRule
-import junit.framework.Assert.assertEquals
-import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.containsString
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -50,7 +45,7 @@ import org.junit.runner.RunWith
  * Launch, interact, and verify conditions in an activity that has a WebView instance.
  */
 @RunWith(AndroidJUnit4::class)
-@LargeTest
+@MediumTest
 class MainActivityTest {
 
     private val context = ApplicationProvider.getApplicationContext<Context>()
@@ -58,18 +53,12 @@ class MainActivityTest {
     @Rule
     @JvmField
     val mainActivityRule = ActivityTestRule(MainActivity::class.java)
-    fun afterActivityLaunched() {
-        // Technically we do not need to do this - MainActivity has javascript turned on.
-        // Other WebViews in your app may have javascript turned off, however since the only way
-        // to automate WebViews is through javascript, it must be enabled.
-        onWebView().forceJavascriptEnabled()
-    }
 
     // Test to check that the drop down menu behaves as expected
     @Test
     fun dropDownMenu_SanFran() {
-        mainActivityRule.getActivity()
         onWebView()
+            .forceJavascriptEnabled()
             .withElement(findElement(Locator.ID, "location"))
             .perform(webClick()) // Similar to perform(click())
             .withElement(findElement(Locator.ID, "SF"))
@@ -96,40 +85,36 @@ class MainActivityTest {
 
     @Test
     fun valueInCallback_compareValueInput_returnsTrue() = runBlocking {
-        mainActivityRule.activity
         // Setup
         val jsObjName = "jsObject"
         val allowedOriginRules = setOf("https://example.com")
         val expectedMessage = "hello"
-        val onMessageReceived = CompletableDeferred<String>()
-        // Get a handler that can be used to post to the main thread
-        val mainHandler = Handler(Looper.getMainLooper())
-        mainHandler.post {
-            run {
-                val webView = WebView(context)
-                // Create JsObject
-                createJsObject(
-                    webView,
-                    jsObjName,
-                    allowedOriginRules
-                ) { message ->
-                    onMessageReceived.complete(message)
-                }
-                webView.loadDataWithBaseURL(
-                    "https://example.com",
-                    "<html><script>${jsObjName}.postMessage(`${expectedMessage}`)</script></html>",
-                    "text/html",
-                    null,
-                    null
-                )
+        val onMessageReceived = CompletableDeferred<String?>()
+        launch(Dispatchers.Main) {
+            val webView = WebView(context).apply {
+                settings.javaScriptEnabled = true
             }
+            // Create & inject JsObject
+            createJsObject(
+                webView,
+                jsObjName,
+                allowedOriginRules
+            ) { message ->
+                onMessageReceived.complete(message)
+            }
+            webView.loadDataWithBaseURL(
+                "https://example.com",
+                "<html><script>${jsObjName}.postMessage('${expectedMessage}')</script></html>",
+                "text/html",
+                "UTF-8",
+                null
+            )
         }
         // evaluate argument being passed into onMessageReceived
         assertEquals(expectedMessage, onMessageReceived.await())
     }
 
     @Test
-    // Checks that postMessage runs on the UI thread
     fun checkingThreadCallbackRunsOn() = runBlocking {
         // Setup
         val jsObjName = "jsObject"
@@ -137,33 +122,24 @@ class MainActivityTest {
         val expectedMessage = "hello"
         val onMessageReceived = CompletableDeferred<Looper?>()
         launch(Dispatchers.Main) {
-            Log.d("nicole", "Creating WebView...")
-            val webView = WebView(context)
+            val webView = WebView(context).apply {
+                settings.javaScriptEnabled = true
+            }
             // Create & inject JsObject
             createJsObject(
                 webView,
                 jsObjName,
                 allowedOriginRules
             ) {
-                Log.d("nicole", "Posting message")
                 onMessageReceived.complete(Looper.myLooper())
             }
-            webView.webChromeClient = object : WebChromeClient() {
-                override fun onConsoleMessage(message: String, lineNumber: Int, sourceID: String) {
-                    Log.d("nicole", "$message -- From line $lineNumber of $sourceID")
-                }
-            }
-
-            val jsCode = "console.log(\"This is a test\")"
             webView.loadDataWithBaseURL(
                 "https://example.com",
-//                "<html><script>${jsObjName}.postMessage('${expectedMessage}'); console.log('This is a test');</script></html>",
-                "<html><script>${jsCode}</script></html>",
+                "<html><script>${jsObjName}.postMessage('${expectedMessage}')</script></html>",
                 "text/html",
                 "UTF-8",
                 null
             )
-            Log.d("nicole", "Loaded URL")
         }
         assertTrue(onMessageReceived.await() == Looper.getMainLooper())
     }
