@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.viewPagerButton.setOnClickListener {
-            val intent = Intent(this, ViewPagerCarousel::class.java)
+            val intent = Intent(this, ViewPagerIntegration::class.java)
             startActivity(intent)
         }
     }
