@@ -29,7 +29,7 @@
     <ImageView
         android:id="@+id/scrolling_background"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="2000dp"
         android:scaleType="centerCrop"
         android:src="@drawable/star_parallax"
         app:layout_constraintBottom_toBottomOf="parent"
