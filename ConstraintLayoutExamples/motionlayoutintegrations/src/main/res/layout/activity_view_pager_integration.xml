@@ -27,8 +27,7 @@
         android:id="@+id/motion_layout"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        app:layoutDescription="@xml/viewpager"
-        >
+        app:layoutDescription="@xml/activity_view_pager_integration_scene">
 
         <ImageView
             android:id="@+id/background"
@@ -47,7 +46,7 @@
             android:textColor="?colorSecondary"
             android:rotation="30"/>
     </androidx.constraintlayout.motion.widget.MotionLayout>
-
+    
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"

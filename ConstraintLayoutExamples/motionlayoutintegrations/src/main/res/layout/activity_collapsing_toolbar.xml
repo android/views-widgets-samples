@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:minHeight="100dp"
-            app:layoutDescription="@xml/collapsing_toolbar"
+            app:layoutDescription="@xml/activity_collapsing_toolbar_scene"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <com.example.androidstudio.motionlayoutintegrations.CutoutImage
