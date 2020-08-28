@@ -23,6 +23,7 @@
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@+id/start">
         <KeyFrameSet>
+            <!-- Add some curve from the first to second tab (framePosition: 0 to 50) -->
             <KeyPosition
                 motion:motionTarget="@+id/ship_emoji"
                 motion:keyPositionType="parentRelative"
@@ -39,6 +40,7 @@
                 android:rotation="40"
                 motion:framePosition="50"
                 />
+            <!-- framePosition 50 describes the screen at the middle tab-->
             <KeyPosition
                 motion:motionTarget="@+id/ship_emoji"
                 motion:keyPositionType="parentRelative"
@@ -54,6 +56,7 @@
     </Transition>
 
     <ConstraintSet android:id="@+id/start" >
+        <!-- Rotate the ship_emoji and use bias to move it-->
         <Constraint
             android:id="@+id/ship_emoji"
             android:layout_width="wrap_content"
@@ -65,6 +68,7 @@
             motion:layout_constraintHorizontal_bias="0.07"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />
+        <!-- animate background from bottom constraint at start -->
         <Constraint
             android:id="@+id/background"
             android:layout_width="0dp"
@@ -75,6 +79,7 @@
             />
     </ConstraintSet>
     <ConstraintSet android:id="@+id/end">
+        <!-- Rotate the ship_emoji and use bias to move it-->
         <Constraint
             android:id="@+id/ship_emoji"
             android:layout_width="wrap_content"
@@ -86,7 +91,7 @@
             motion:layout_constraintHorizontal_bias="0.93"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />
-
+        <!-- animate background to top constraint at end -->
         <Constraint
             android:id="@+id/background"
             android:layout_width="0dp"
