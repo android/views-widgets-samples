@@ -45,7 +45,7 @@ animation.
 | ----------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
 | [Activity](src/main/java/com/example/androidstudio/motionlayoutintegrations/Entrance.kt)  | Regular Activity (no extra code)                               |
 | [layout](src/main/res/layout/activity_entrance.xml)                                       | Layout all Views used in this animation                        |
-| [scene](src/main/res/xml/activity_entrance_sceen.xml)                                     | Scene containing multiple ConstraintSet and Transition         |
+| [scene](src/main/res/xml/activity_entrance_scene.xml)                                     | Scene containing multiple ConstraintSet and Transition         |
 
 ## CollapsingToolbar
 Build a collapsing toolbar with support for insets using MotionLayout.
