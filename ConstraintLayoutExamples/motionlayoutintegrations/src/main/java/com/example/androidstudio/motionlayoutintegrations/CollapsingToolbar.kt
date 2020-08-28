@@ -34,6 +34,9 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.androidstudio.motionlayoutintegrations.databinding.ActivityCollapsingToolbarBinding
 import com.google.android.material.appbar.AppBarLayout
 
+/**
+ * Display a collapsing toolbar built using MotionLayout that handles insets and uses a custom view
+ */
 class CollapsingToolbar : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,14 +82,15 @@ class CollapsingToolbar : AppCompatActivity() {
         }
     }
 
+    /**
+     * Set various flags to go edge to edge
+     */
     private fun Window.goEdgeToEdge() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             statusBarColor = Color.TRANSPARENT
         }
+        // TODO: replace this with non-deprecated edge to edge option
         decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
     }
 }
@@ -97,7 +101,9 @@ class CollapsingToolbar : AppCompatActivity() {
  * Animation of this view is driven by motionLayout controlling [bottomCutSize] and [endCutSize]
  * and [translationProgress].
  *
- * This View will overwrite scaleType from XML to be matrix to allow custom translation.
+ * This View will overwrite scaleType from XML to be matrix to allow custom translation. This is
+ * a slightly more efficient way to translate a background than oversizing the view and changing
+ * constraints as is done in [Entrance].
  */
 class CutoutImage @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

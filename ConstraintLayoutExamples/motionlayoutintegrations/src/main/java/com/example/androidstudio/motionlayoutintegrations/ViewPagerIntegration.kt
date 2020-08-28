@@ -27,6 +27,10 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.androidstudio.motionlayoutintegrations.databinding.ActivityViewPagerIntegrationBinding
 
+/**
+ * Demonstrate driving an animated header built using MotionLayout from a user swiping in a
+ * ViewPager
+ */
 class ViewPagerIntegration : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +38,7 @@ class ViewPagerIntegration : AppCompatActivity() {
         val binding = ActivityViewPagerIntegrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // set up view pager to have three tabs
         val adapter = ViewPagerAdapter(supportFragmentManager)
 
         adapter.addPageFragment(Page1(), "List")
@@ -43,9 +48,13 @@ class ViewPagerIntegration : AppCompatActivity() {
         binding.pager.adapter = adapter
         binding.tabs.setupWithViewPager(binding.pager)
 
+        // use a page change listener to transfer swipe progress to MotionLayout
         binding.pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                // calculate the swipe progress to a percent between 0f and 1f, where 0f is the
+                // first tab and 1f is the last tab
                 val progress = (position + positionOffset) / (adapter.count - 1)
+                // ask MotionLayout to snap to the current progress
                 binding.motionLayout.progress = progress
             }
 
@@ -61,7 +70,9 @@ class ViewPagerIntegration : AppCompatActivity() {
     }
 }
 
-
+/**
+ * Adapter needed for ViewPager
+ */
 class ViewPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(
     fragmentManager,
     BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
@@ -88,18 +99,27 @@ class ViewPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(
     }
 }
 
+/**
+ * Fragments for ViewPager
+ */
 class Page1 : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.page_1, container, false)
     }
 }
 
+/**
+ * Fragments for ViewPager
+ */
 class Page2 : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.page_2, container, false)
     }
 }
 
+/**
+ * Fragments for ViewPager
+ */
 class Page3 : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.page_3, container, false)
