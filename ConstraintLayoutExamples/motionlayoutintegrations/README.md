@@ -63,4 +63,4 @@ circular coutouts and animates the background.
 | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
 | [Activity](src/main/java/com/example/androidstudio/motionlayoutintegrations/CollapsingToolbar.kt)  | Integrate MotionLayout, CoordanatorLayout, and Custom View, and Insets               |
 | [layout](src/main/res/layout/activity_collapsing_toolbar.xml)                                      | Layout all Views used in this animation, including inset guidelines & custom view    |
-| [scene](src/main/res/xml/activity_collapsing_toolbar_sceen.xml)                                    | Scene showing how to integrate with custom views using CustomAttribute               |
+| [scene](src/main/res/xml/activity_collapsing_toolbar_scene.xml)                                    | Scene showing how to integrate with custom views using CustomAttribute               |
