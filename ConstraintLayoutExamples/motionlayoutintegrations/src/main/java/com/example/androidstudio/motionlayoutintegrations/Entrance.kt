@@ -20,6 +20,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.androidstudio.motionlayoutintegrations.databinding.ActivityEntranceBinding
 
+/**
+ * Show an entrance animation built using MotionLayout
+ */
 class Entrance : AppCompatActivity() {
 
     private lateinit var binding: ActivityEntranceBinding
