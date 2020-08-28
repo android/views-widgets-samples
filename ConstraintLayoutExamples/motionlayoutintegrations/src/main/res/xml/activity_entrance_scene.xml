@@ -26,6 +26,9 @@
 
     Each ConstraintSet uses deriveConstraintsFrom the previous constraint set to only specify the
     changes needed for the next KeyFrame.
+
+    The structure of this animation is best viewed and edited in the Motion
+    Editor in Android Studio
     -->
     <ConstraintSet android:id="@+id/initial" >
         <Constraint
