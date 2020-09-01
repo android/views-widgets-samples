@@ -70,12 +70,11 @@ class MainActivityTest {
     // Test for checking createJsObject
     @Test
     fun jsObjectIsInjectedAndContainsPostMessage() {
-        mainActivityRule.getActivity()
         onWebView()
             .check(
                 webMatches(
                     script(
-                        "return jsObject && jsObject.postMessage != null;",
+                        "return jsObject && typeof jsObject.postMessage == \"function\"",
                         castOrDie(Boolean::class.javaObjectType)
                     ),
                     `is`(true)
@@ -84,7 +83,7 @@ class MainActivityTest {
     }
 
     @Test
-    fun valueInCallback_compareValueInput_returnsTrue() = runBlocking {
+    fun valueInCallback_compareValueInput() = runBlocking {
         // Setup
         val jsObjName = "jsObject"
         val allowedOriginRules = setOf("https://example.com")
@@ -106,7 +105,7 @@ class MainActivityTest {
                 "https://example.com",
                 "<html><script>${jsObjName}.postMessage('${expectedMessage}')</script></html>",
                 "text/html",
-                "UTF-8",
+                null,
                 null
             )
         }
@@ -137,10 +136,10 @@ class MainActivityTest {
                 "https://example.com",
                 "<html><script>${jsObjName}.postMessage('${expectedMessage}')</script></html>",
                 "text/html",
-                "UTF-8",
+                null,
                 null
             )
         }
-        assertTrue(onMessageReceived.await() == Looper.getMainLooper())
+        assertEquals(onMessageReceived.await(), Looper.getMainLooper())
     }
 }
