@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Google Inc. All rights reserved.
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,12 +22,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class FlowerAdapter(val flowerList: Array<String>) : RecyclerView.Adapter<FlowerAdapter.FlowerViewHolder>() {
+class FlowerAdapter(val flowerList: Array<String>) :
+    RecyclerView.Adapter<FlowerAdapter.FlowerViewHolder>() {
 
-    class FlowerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        private val flowerTextView:TextView = itemView.findViewById(R.id.flower_text)
+    class FlowerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val flowerTextView: TextView = itemView.findViewById(R.id.flower_text)
 
-        fun bind(word: String){
+        fun bind(word: String) {
             flowerTextView.text = word
         }
     }
