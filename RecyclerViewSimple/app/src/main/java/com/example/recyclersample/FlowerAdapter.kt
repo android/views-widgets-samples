@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView
 class FlowerAdapter(val flowerList: Array<String>) :
     RecyclerView.Adapter<FlowerAdapter.FlowerViewHolder>() {
 
+    // Describes an item view and its place within the RecyclerView
     class FlowerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val flowerTextView: TextView = itemView.findViewById(R.id.flower_text)
 
@@ -33,6 +34,7 @@ class FlowerAdapter(val flowerList: Array<String>) :
         }
     }
 
+    // Returns a new ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FlowerViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.flower_item, parent, false)
@@ -40,10 +42,12 @@ class FlowerAdapter(val flowerList: Array<String>) :
         return FlowerViewHolder(view)
     }
 
+    // Returns size of data list
     override fun getItemCount(): Int {
         return flowerList.size
     }
 
+    // Displays data at a certain position
     override fun onBindViewHolder(holder: FlowerViewHolder, position: Int) {
         holder.bind(flowerList[position])
     }

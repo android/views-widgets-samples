@@ -14,30 +14,14 @@
  * limitations under the License.
  */
 
-
 package com.example.recyclersample
 
-class Datasource {
-    fun getFlowerList(): Array<String> {
-        return flowers
-    }
+import android.content.Context
 
-    companion object {
-        private val flowers = arrayOf(
-            "Rose",
-            "Freesia",
-            "Lily",
-            "Sunflower",
-            "Peony",
-            "Daisy",
-            "Lilac",
-            "Marigold",
-            "Posy",
-            "Poppy",
-            "Daffodil",
-            "Dahlia",
-            "Tulip",
-            "Dandelion"
-        )
+class Datasource(val context: Context) {
+    fun getFlowerList(): Array<String> {
+
+        // Return flower list from string resources
+        return context.resources.getStringArray(R.array.flower_array)
     }
 }

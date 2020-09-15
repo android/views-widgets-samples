@@ -25,7 +25,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val flowerList = Datasource().getFlowerList()
+        // Retrieves data from datasource
+        val flowerList = Datasource(this).getFlowerList()
 
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
         recyclerView.adapter = FlowerAdapter(flowerList)
