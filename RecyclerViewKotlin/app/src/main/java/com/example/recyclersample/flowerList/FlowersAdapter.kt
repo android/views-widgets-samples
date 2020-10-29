@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Google Inc. All rights reserved.
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,32 +25,29 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclersample.R
+import com.example.recyclersample.data.Flower
 
-private const val HEADER_TYPE = 0
-private const val FLOWER_TYPE = 1
+class FlowersAdapter(private val onClick: (Flower) -> Unit) :
+    ListAdapter<Flower, FlowersAdapter.FlowerViewHolder>(FlowerDiffCallback()) {
 
-class FlowersAdapter(private val onClick: (DataItem.FlowerItem) -> Unit) :
-    ListAdapter<DataItem, RecyclerView.ViewHolder>(
-        FlowerDiffCallback()
-    ) {
-
-    class FlowerViewHolder(itemView: View, val onClick: (DataItem.FlowerItem) -> Unit) :
+    /* ViewHolder for Flower, takes in the inflated view and the onClick behavior. */
+    class FlowerViewHolder(itemView: View, val onClick: (Flower) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         private val flowerTextView: TextView = itemView.findViewById(R.id.flower_text)
         private val flowerImageView: ImageView = itemView.findViewById(R.id.flower_image)
-        private var currentDataItem: DataItem.FlowerItem? = null
+        private var currentFlower: Flower? = null
 
         init {
             itemView.setOnClickListener {
-                currentDataItem?.let {
+                currentFlower?.let {
                     onClick(it)
                 }
             }
         }
 
-        fun bind(dataItem: DataItem.FlowerItem) {
-            val flower = dataItem.flower
-            currentDataItem = dataItem
+        /* Bind flower name and image. */
+        fun bind(flower: Flower) {
+            currentFlower = flower
 
             flowerTextView.text = flower.name
             if (flower.image != null) {
@@ -61,45 +58,27 @@ class FlowersAdapter(private val onClick: (DataItem.FlowerItem) -> Unit) :
         }
     }
 
-    class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when(viewType){
-            HEADER_TYPE -> {
-                val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.header_item, parent, false)
-                HeaderViewHolder(view)
-            }
-            FLOWER_TYPE -> {
-                val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.flower_item, parent, false)
-                FlowerViewHolder(view, onClick)
-            }
-            else -> { throw Exception("Invalid viewType") }
-        }
+    /* Creates and inflates view and return FlowerViewHolder. */
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FlowerViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.flower_item, parent, false)
+        return FlowerViewHolder(view, onClick)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is FlowerViewHolder) {
-            val flower = getItem(position) as DataItem.FlowerItem
-            holder.bind(flower)
-        }
-    }
+    /* Gets current flower and uses it to bind view. */
+    override fun onBindViewHolder(holder: FlowerViewHolder, position: Int) {
+        val flower = getItem(position)
+        holder.bind(flower)
 
-    override fun getItemViewType(position: Int): Int {
-        return when (getItem(position)) {
-            is DataItem.HeaderItem -> HEADER_TYPE
-            is DataItem.FlowerItem -> FLOWER_TYPE
-        }
     }
 }
 
-private class FlowerDiffCallback : DiffUtil.ItemCallback<DataItem>() {
-    override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+private class FlowerDiffCallback : DiffUtil.ItemCallback<Flower>() {
+    override fun areItemsTheSame(oldItem: Flower, newItem: Flower): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+    override fun areContentsTheSame(oldItem: Flower, newItem: Flower): Boolean {
         return oldItem.id == newItem.id
     }
 }

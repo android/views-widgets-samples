@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Google Inc. All rights reserved.
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,14 +20,16 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.recyclersample.R
 import com.example.recyclersample.flowerList.FLOWER_ID
 
 class FlowerDetailActivity : AppCompatActivity() {
 
-    private lateinit var flowerDetailViewModel: FlowerDetailViewModel
+    private val flowerDetailViewModel by viewModels<FlowerDetailViewModel> {
+        FlowerDetailViewModelFactory(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,11 +37,7 @@ class FlowerDetailActivity : AppCompatActivity() {
 
         var currentFlowerId: Long? = null
 
-        flowerDetailViewModel = ViewModelProvider(
-            this,
-            FlowerDetailViewModelFactory(this.applicationContext)
-        ).get(FlowerDetailViewModel::class.java)
-
+        /* Connect variables to UI elements. */
         val flowerName: TextView = findViewById(R.id.flower_detail_name)
         val flowerImage: ImageView = findViewById(R.id.flower_detail_image)
         val flowerDescription: TextView = findViewById(R.id.flower_detail_description)
@@ -50,6 +48,8 @@ class FlowerDetailActivity : AppCompatActivity() {
             currentFlowerId = bundle.getLong(FLOWER_ID)
         }
 
+        /* If currentFlowerId is not null, get corresponding flower and set name, image and
+        description */
         currentFlowerId?.let {
             val currentFlower = flowerDetailViewModel.getFlowerForId(it)
             flowerName.text = currentFlower?.name

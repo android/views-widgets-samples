@@ -54,6 +54,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
     implementation "androidx.core:core-ktx:$rootProject.coreKtxVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
+    implementation "androidx.activity:activity-ktx:$rootProject.activityVersion"
 
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"

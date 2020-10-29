@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Google Inc. All rights reserved.
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,6 +24,7 @@ class DataSource(resources: Resources) {
     private val initialFlowerList = flowerList(resources)
     private val flowersLiveData = MutableLiveData(initialFlowerList)
 
+    /* Adds flower to liveData and posts value. */
     fun addFlower(flower: Flower) {
         val currentList = flowersLiveData.value
         if (currentList == null) {
@@ -35,6 +36,7 @@ class DataSource(resources: Resources) {
         }
     }
 
+    /* Removes flower from liveData and posts value. */
     fun removeFlower(flower: Flower) {
         val currentList = flowersLiveData.value
         if (currentList != null) {
@@ -44,6 +46,7 @@ class DataSource(resources: Resources) {
         }
     }
 
+    /* Returns flower given an ID. */
     fun getFlowerForId(id: Long): Flower? {
         flowersLiveData.value?.let { flowers ->
             return flowers.firstOrNull{ it.id == id}
@@ -55,7 +58,8 @@ class DataSource(resources: Resources) {
         return flowersLiveData
     }
 
-    fun getRandomFlowerAsset(): Int? {
+    /* Returns a random flower asset for flowers that are added. */
+    fun getRandomFlowerImageAsset(): Int? {
         val randomNumber = (initialFlowerList.indices).random()
         return initialFlowerList[randomNumber].image
     }
