@@ -28,7 +28,7 @@ import com.example.recyclersample.R
 import com.example.recyclersample.data.Flower
 
 class FlowersAdapter(private val onClick: (Flower) -> Unit) :
-    ListAdapter<Flower, FlowersAdapter.FlowerViewHolder>(FlowerDiffCallback()) {
+    ListAdapter<Flower, FlowersAdapter.FlowerViewHolder>(FlowerDiffCallback) {
 
     /* ViewHolder for Flower, takes in the inflated view and the onClick behavior. */
     class FlowerViewHolder(itemView: View, val onClick: (Flower) -> Unit) :
@@ -73,7 +73,7 @@ class FlowersAdapter(private val onClick: (Flower) -> Unit) :
     }
 }
 
-private class FlowerDiffCallback : DiffUtil.ItemCallback<Flower>() {
+object FlowerDiffCallback : DiffUtil.ItemCallback<Flower>() {
     override fun areItemsTheSame(oldItem: Flower, newItem: Flower): Boolean {
         return oldItem == newItem
     }
