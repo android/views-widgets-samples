@@ -20,6 +20,7 @@ import android.content.res.Resources
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
+/* Handles operations on flowersLiveData and holds details about it. */
 class DataSource(resources: Resources) {
     private val initialFlowerList = flowerList(resources)
     private val flowersLiveData = MutableLiveData(initialFlowerList)

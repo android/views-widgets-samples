@@ -47,6 +47,6 @@ ext {
     recyclerViewVersion = '1.2.0-alpha06'
     appCompatVersion = '1.2.0'
     coreKtxVersion = '1.3.2'
-    constraintLayoutVersion = '2.0.2'
+    constraintLayoutVersion = '2.0.4'
     activityVersion = '1.1.0'
 }

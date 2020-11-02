@@ -47,16 +47,16 @@ class AddFlowerActivity : AppCompatActivity() {
     to cancelled. */
 
     private fun addFlower() {
-        val addFlowerIntent = Intent()
+        val resultIntent = Intent()
 
         if (addFlowerName.text.isNullOrEmpty() || addFlowerDescription.text.isNullOrEmpty()) {
-            setResult(Activity.RESULT_CANCELED, addFlowerIntent)
+            setResult(Activity.RESULT_CANCELED, resultIntent)
         } else {
             val name = addFlowerName.text.toString()
             val description = addFlowerDescription.text.toString()
-            addFlowerIntent.putExtra(FLOWER_NAME, name)
-            addFlowerIntent.putExtra(FLOWER_DESCRIPTION, description)
-            setResult(Activity.RESULT_OK, addFlowerIntent)
+            resultIntent.putExtra(FLOWER_NAME, name)
+            resultIntent.putExtra(FLOWER_DESCRIPTION, description)
+            setResult(Activity.RESULT_OK, resultIntent)
         }
         finish()
     }
