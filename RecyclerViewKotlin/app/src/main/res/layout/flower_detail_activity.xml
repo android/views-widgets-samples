@@ -22,16 +22,16 @@
         android:id="@+id/flower_detail_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="50dp"
-        android:paddingBottom="20dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp"
         android:text="@string/flower1_name"
         android:textAlignment="center"
         android:textAppearance="?attr/textAppearanceHeadline3" />
 
     <ImageView
         android:id="@+id/flower_detail_image"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
         android:layout_gravity="center"
         android:contentDescription="@string/flower_image_content_description"
         app:srcCompat="@drawable/rose" />
@@ -40,13 +40,13 @@
         android:id="@+id/flower_detail_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
+        android:padding="16dp"
         android:text="@string/flower1_description" />
 
     <Button
         android:id="@+id/remove_button"
         style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="250dp"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/remove_this_flower" />

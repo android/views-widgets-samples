@@ -69,7 +69,7 @@ class FlowersListActivity : AppCompatActivity() {
     private fun adapterOnClick(flower: Flower) {
         val intent = Intent(this, FlowerDetailActivity()::class.java)
         intent.putExtra(FLOWER_ID, flower.id)
-        this.startActivity(intent)
+        startActivity(intent)
     }
 
     /* Adds flower to flowerList when FAB is clicked. */

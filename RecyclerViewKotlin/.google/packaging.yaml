@@ -1,0 +1,19 @@
+
+# GOOGLE SAMPLE PACKAGING DATA
+#
+# This file is used by Google as part of our samples packaging process.
+# End users may safely ignore this file. It has no relevance to other systems.
+---
+status:       PUBLISHED
+technologies: [Android]
+categories:   [Views Widgets]
+languages:    [Kotlin]
+solutions:    [Mobile]
+github:       android/views-widgets
+level:        INTERMEDIATE
+icon:         screenshots/icon-web.png
+apiRefs:
+    - androidx.recyclerview.widget.RecyclerView
+    - androidx.recyclerview.widget.RecyclerView.LayoutManager
+    - androidx.recyclerview.widget.RecyclerView.ViewHolder
+license:      apache2
