@@ -13,8 +13,7 @@ github:       android/views-widgets
 level:        INTERMEDIATE
 icon:         screenshots/icon-web.png
 apiRefs:
-    - android:android.support.v7.widget.RecyclerView
-    - android:android.support.v7.widget.LinearLayoutManager
-    - android:android.support.v7.widget.GridLayoutManager
-    - android:android.support.v7.widget.RecyclerView.ViewHolder
+    - androidx.recyclerview.widget.RecyclerView
+    - androidx.recyclerview.widget.RecyclerView.LayoutManager
+    - androidx.recyclerview.widget.RecyclerView.ViewHolder
 license:      apache2

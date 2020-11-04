@@ -1,31 +1,27 @@
-
 Android RecyclerView Sample (Kotlin)
 ====================================
 
-Sample demonstrating the use of RecyclerView to layout elements with a
-LinearLayoutManager and with a GridLayoutManager. It also demonstrates
-how to handle touch events on elements.
+This application implements a RecyclerView in Kotlin with ListAdapter, onClickListener 
+and Headers. If you are looking for a simpler sample, look at the RecyclerViewSimple sample
+in the directory.
 
 
 Introduction
 ------------
 
 Sample demonstrating the use of [RecyclerView][1] to layout elements with a
-[LinearLayoutManager][2] or with a [GridLayoutManager][3].
+[LinearLayoutManager][2].
 
 [RecyclerView][1] can display large datasets that can be scrolled
-efficiently by recycling a limited number of views. Click listeners can be
-defined when [ViewHolder][4] views are instantiated. [RecyclerView][1] is
-available in the v7 Support Library, thus compatible with API level 7 and above.
+efficiently by recycling a limited number of views. [ListAdapter][3] is used to 
+efficiently compute diffs when items are added/removed from the list. Click listeners can be
+defined when [ViewHolder][4] views are instantiated. 
 
-Tap "Show Log" menu item to display log of elements as they are laid out and
-tapped. Use radio buttons to toggle between [LinearLayoutManager][2] and
-[GridLayoutManager][3].
 
-[1]: https://developer.android.com/reference/android/support/v7/widget/RecyclerView.html
-[2]: https://developer.android.com/reference/android/support/v7/widget/LinearLayoutManager.html
-[3]: https://developer.android.com/reference/android/support/v7/widget/GridLayoutManager.html
-[4]: https://developer.android.com/reference/android/support/v7/widget/RecyclerView.ViewHolder.html
+[1]: https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/RecyclerView
+[2]: https://developer.android.com/reference/androidx/recyclerview/widget/LinearLayoutManager
+[3]: https://developer.android.com/reference/androidx/recyclerview/widget/ListAdapter
+[4]: https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder
 
 Pre-requisites
 --------------
@@ -37,13 +33,12 @@ Pre-requisites
 Screenshots
 -------------
 
-<img src="../RecyclerView/screenshots/1-linear.png" height="400" alt="Screenshot"/> <img src="../RecyclerView/screenshots/2-grid.png" height="400" alt="Screenshot"/>
+![image](https://user-images.githubusercontent.com/46006059/98028846-8b6df700-1dc3-11eb-9f0b-ad93569be189.png)
 
 Getting Started
 ---------------
 
-This sample uses the Gradle build system. To build this project, use the
-"gradlew build" command or use "Import Project" in Android Studio.
+To build this project, use "Import Project" in Android Studio.
 
 Support
 -------

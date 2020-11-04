@@ -1,22 +1,61 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!--
- Copyright 2014 The Android Open Source Project
+     Copyright (C) 2020 The Android Open Source Project
 
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
 
-     http://www.apache.org/licenses/LICENSE-2.0
+          http://www.apache.org/licenses/LICENSE-2.0
 
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
 -->
 
 <resources>
-    <string name="element_text">Element</string>
-    <string name="grid_layout_manager">Grid Layout Manager</string>
-    <string name="linear_layout_manager">Linear Layout Manager</string>
+    <string name="app_name">RecyclerView Sample</string>
+    <string name="add_flower">Add Flower</string>
+
+    <string name="flower1_name">Rose</string>
+    <string name="flower2_name">Freesia</string>
+    <string name="flower3_name">Lily</string>
+    <string name="flower4_name">Sunflower</string>
+    <string name="flower5_name">Peony</string>
+    <string name="flower6_name">Daisy</string>
+    <string name="flower7_name">Lilac</string>
+    <string name="flower8_name">Marigold</string>
+    <string name="flower9_name">Poppy</string>
+    <string name="flower10_name">Daffodil</string>
+    <string name="flower11_name">Dahlia</string>
+    <string name="flower12_name">Tulip</string>
+
+    <string name="flower1_description">Rose comes from the Latin word Rosa. There are over 100
+        species of the rose. </string>
+    <string name="flower2_description">Freesias bloom during spring and are native to
+        Africa.</string>
+    <string name="flower3_description">Lilies have the longest in vase lifespan of any cut
+        bloom.</string>
+    <string name="flower4_description">Mature Sunflowers face east and are native too the United
+        States.</string>
+    <string name="flower5_description">Peony plants can live to be 100 years old.</string>
+    <string name="flower6_description">Daisies are cousins with Sunflowers.</string>
+    <string name="flower7_description">Lilacs belong to the olive family.</string>
+    <string name="flower8_description">Marigolds come in orange, reed, maroon and yellow.</string>
+    <string name="flower9_description">Poppies can be over 3 feet tall.</string>
+    <string name="flower10_description">Daffodils are referred to as Lent Lilies in England</string>
+    <string name="flower11_description">Dahlia is named after the Swedish botanist Anders
+        Dahl</string>
+    <string name="flower12_description">There are over 150 species of tulips.</string>
+
+    <string name="flower_string">Flowers</string>
+    <string name="flower_finder">Flower finder</string>
+    <string name="flower_description_edit_text">Flower Description</string>
+    <string name="flower_name_edit_text">Flower Name</string>
+    <string name="done_button_text">Done</string>
+    <string name="fab_content_description">fab</string>
+    <string name="flower_image_content_description">Image of flower</string>
+    <string name="remove_this_flower">Remove this flower</string>
+
 </resources>
