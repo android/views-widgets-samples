@@ -25,7 +25,7 @@ function sendAndroidMessage() {
 
 function getData() {
     // This JSON files is hosted over the web
-   	fetch("https://raw.githubusercontent.com/android/views-widgets-samples/master/WebView/sampleData/weather.json").then(function(resp) {
+   	fetch("https://raw.githubusercontent.com/android/views-widgets-samples/main/WebView/sampleData/weather.json").then(function(resp) {
 		return resp.json();
 	}).then(function(data) {
 		var form = document.getElementById("location");
