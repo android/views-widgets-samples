@@ -26,7 +26,7 @@ import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.androidstudio.motionlayoutexample.R
-import kotlinx.android.synthetic.main.histogram_layout.*
+import com.google.androidstudio.motionlayoutexample.databinding.HistogramLayoutBinding
 import java.lang.RuntimeException
 import java.util.*
 import kotlin.collections.ArrayList
@@ -46,10 +46,13 @@ class HistogramActivity : AppCompatActivity() {
 
     private val animationGuard: HistogramAnimationGuard = HistogramAnimationGuard()
 
+    private lateinit var binding: HistogramLayoutBinding
+
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.histogram_layout)
-        widget = histogram
+        binding = HistogramLayoutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        widget = binding.histogram
         restoreView(savedInstanceState)
         widget!!.setTransitionListener(animationGuard.animationListener)
     }
@@ -126,7 +129,7 @@ class HistogramActivity : AppCompatActivity() {
                     throw RuntimeException("Restoring array doesn't match the view size.")
                 }
 
-                bars = ArrayList(bars.mapIndexed{ i, metaData ->
+                bars = ArrayList(bars.mapIndexed { i, metaData ->
                     HistogramBarMetaData(widget!!.barIds[i], metaData)
                 })
                 widget!!.setData(bars)
@@ -150,8 +153,8 @@ class HistogramActivity : AppCompatActivity() {
          * for each bars. It means you cannot use chain feature of constraint layout. You'll need
          * to calculate the after-sorted x location of each bars manually and animate them.
          */
-        sort.setEnabledAndChangeColor(!animationInterruptible)
-        both.setEnabledAndChangeColor(!animationInterruptible)
+        binding.sort.setEnabledAndChangeColor(!animationInterruptible)
+        binding.both.setEnabledAndChangeColor(!animationInterruptible)
     }
 }
 
