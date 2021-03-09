@@ -24,4 +24,4 @@ submitting a pull request through GitHub. Please see [CONTRIBUTING.md][4] for mo
 [1]: https://developer.android.com/reference/androidx/webkit/package-summary
 [2]: https://github.com/android/views-widgets-samples
 [3]: http://stackoverflow.com/questions/tagged/android
-[4]: https://github.com/android/views-widgets-samples/blob/master/CONTRIBUTING.md
+[4]: https://github.com/android/views-widgets-samples/blob/main/CONTRIBUTING.md
