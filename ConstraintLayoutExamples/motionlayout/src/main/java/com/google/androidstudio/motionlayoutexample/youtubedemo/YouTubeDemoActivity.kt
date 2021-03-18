@@ -28,9 +28,7 @@ class YouTubeDemoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.motion_24_youtube)
-        val motionLayout = findViewById<MotionLayout>(R.id.motionLayout).apply {
-            savedInstanceState
-        }
+        val motionLayout = findViewById<MotionLayout>(R.id.motionLayout)
         findViewById<RecyclerView>(R.id.recyclerview_front).apply {
             adapter = FrontPhotosAdapter()
             isNestedScrollingEnabled = false
