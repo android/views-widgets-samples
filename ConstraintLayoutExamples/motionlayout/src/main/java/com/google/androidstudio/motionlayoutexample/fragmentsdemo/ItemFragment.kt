@@ -23,6 +23,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.androidstudio.motionlayoutexample.R
+import com.google.androidstudio.motionlayoutexample.databinding.ItemLayoutBinding
 
 class ItemFragment : Fragment() {
 
@@ -32,15 +33,15 @@ class ItemFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.item_layout, container, false)
+        return ItemLayoutBinding.inflate(inflater, container, false).root
     }
 
     private lateinit var myHolder: CustomAdapter.ViewHolder
 
     fun update(holder: CustomAdapter.ViewHolder) {
         myHolder = holder
-        view?.findViewById<TextView>(R.id.txtTitle)?.text = holder.txtTitle.text
-        view?.findViewById<TextView>(R.id.txtName)?.text = holder.txtName.text
+        view?.findViewById<TextView>(R.id.txtTitle)?.text = holder.binding.txtTitle.text
+        view?.findViewById<TextView>(R.id.txtName)?.text = holder.binding.txtName.text
     }
 
     override fun onStart() {

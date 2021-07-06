@@ -20,10 +20,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.constraintlayout.motion.widget.MotionScene
 import androidx.fragment.app.Fragment
 import com.google.androidstudio.motionlayoutexample.R
-import kotlinx.android.synthetic.main.main_activity.*
+import com.google.androidstudio.motionlayoutexample.databinding.MainActivityBinding
 
 class FragmentExample2Activity: AppCompatActivity(), View.OnClickListener, MotionLayout.TransitionListener {
 
@@ -74,7 +73,8 @@ class FragmentExample2Activity: AppCompatActivity(), View.OnClickListener, Motio
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
+        val binding = MainActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         if (savedInstanceState == null) {
 
             fragment = MainFragment.newInstance().also {
@@ -85,7 +85,7 @@ class FragmentExample2Activity: AppCompatActivity(), View.OnClickListener, Motio
         }
         //toggle.setOnClickListener(this)
         //toggleAnimation.setOnClickListener(this)
-        motionLayout.setTransitionListener(this)
+        binding.motionLayout.setTransitionListener(this)
     }
 
     override fun onClick(view: View?) {

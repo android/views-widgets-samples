@@ -21,13 +21,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.Fragment
-import com.google.androidstudio.motionlayoutexample.R
+import com.google.androidstudio.motionlayoutexample.databinding.Motion21SecondFragmentBinding
 
 class SecondFragment : Fragment() {
-
-    private lateinit var motionLayout: MotionLayout
 
     companion object {
         fun newInstance() = SecondFragment()
@@ -35,12 +32,7 @@ class SecondFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.motion_21_second_fragment, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        motionLayout = view.findViewById(R.id.main)
-        super.onViewCreated(view, savedInstanceState)
+        return Motion21SecondFragmentBinding.inflate(inflater, container, false).root
     }
 
     override fun onStart() {

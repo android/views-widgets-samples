@@ -21,25 +21,23 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.viewpager.widget.ViewPager
 import com.google.androidstudio.motionlayoutexample.R
-import kotlinx.android.synthetic.main.motion_16_viewpager.*
+import com.google.androidstudio.motionlayoutexample.databinding.Motion23ViewpagerBinding
 
 class ViewPagerActivity2 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val layout = R.layout.motion_23_viewpager
-        setContentView(layout)
-        val motionLayout = findViewById<MotionLayout>(R.id.motionLayout)
+        val binding = Motion23ViewpagerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        val motionLayout = binding.include.motionLayout
 
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addPage("Page 1", R.layout.motion_16_viewpager_page1)
         adapter.addPage("Page 2", R.layout.motion_16_viewpager_page2)
         adapter.addPage("Page 3", R.layout.motion_16_viewpager_page3)
-        pager.adapter = adapter
-        tabs.setupWithViewPager(pager)
-        if (motionLayout != null) {
-            pager.addOnPageChangeListener(motionLayout as ViewPager.OnPageChangeListener)
-        }
+        binding.pager.adapter = adapter
+        binding.tabs.setupWithViewPager(binding.pager)
+        binding.pager.addOnPageChangeListener(motionLayout as ViewPager.OnPageChangeListener)
 
         val debugMode = if (intent.getBooleanExtra("showPaths", false)) {
             MotionLayout.DEBUG_SHOW_PATH

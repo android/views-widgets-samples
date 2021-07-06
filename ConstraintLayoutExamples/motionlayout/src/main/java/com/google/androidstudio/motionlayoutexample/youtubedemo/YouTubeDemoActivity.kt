@@ -20,18 +20,15 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.androidstudio.motionlayoutexample.R
+import com.google.androidstudio.motionlayoutexample.databinding.Motion24YoutubeBinding
 
 class YouTubeDemoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.motion_24_youtube)
-        val motionLayout = findViewById<MotionLayout>(R.id.motionLayout).apply {
-            savedInstanceState
-        }
-        findViewById<RecyclerView>(R.id.recyclerview_front).apply {
+        val binding = Motion24YoutubeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.recyclerviewFront.apply {
             adapter = FrontPhotosAdapter()
             isNestedScrollingEnabled = false
             layoutManager = LinearLayoutManager(this@YouTubeDemoActivity)
@@ -41,6 +38,6 @@ class YouTubeDemoActivity : AppCompatActivity() {
         } else {
             MotionLayout.DEBUG_SHOW_NONE
         }
-        motionLayout.setDebugMode(debugMode)
+        binding.motionLayout.setDebugMode(debugMode)
     }
 }

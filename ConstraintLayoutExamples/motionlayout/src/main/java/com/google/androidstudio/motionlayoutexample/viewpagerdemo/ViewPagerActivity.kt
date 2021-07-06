@@ -20,25 +20,24 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.google.androidstudio.motionlayoutexample.R
-import com.google.androidstudio.motionlayoutexample.utils.ViewpagerHeader
-import kotlinx.android.synthetic.main.motion_16_viewpager.*
+import com.google.androidstudio.motionlayoutexample.databinding.Motion16ViewpagerBinding
 
 class ViewPagerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val layout = R.layout.motion_16_viewpager
-        setContentView(layout)
-        val viewPagerHeader = findViewById<ViewpagerHeader>(R.id.motionLayout)
+        val binding = Motion16ViewpagerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        val viewPagerHeader = binding.include.motionLayout
 
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addPage("Page 1", R.layout.motion_16_viewpager_page1)
         adapter.addPage("Page 2", R.layout.motion_16_viewpager_page2)
         adapter.addPage("Page 3", R.layout.motion_16_viewpager_page3)
-        pager.adapter = adapter
-        tabs.setupWithViewPager(pager)
+        binding.pager.adapter = adapter
+        binding.tabs.setupWithViewPager(binding.pager)
         if (viewPagerHeader != null) {
-            pager.addOnPageChangeListener(viewPagerHeader)
+            binding.pager.addOnPageChangeListener(viewPagerHeader)
         }
 
         val debugMode = if (intent.getBooleanExtra("showPaths", false)) {

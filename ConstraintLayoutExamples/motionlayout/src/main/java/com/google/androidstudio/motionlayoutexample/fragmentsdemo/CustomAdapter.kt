@@ -18,19 +18,18 @@ package com.google.androidstudio.motionlayoutexample.fragmentsdemo
 
 import android.graphics.Rect
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.google.androidstudio.motionlayoutexample.R
+import com.google.androidstudio.motionlayoutexample.databinding.ItemLayoutBinding
 
-class CustomAdapter(private val userList: ArrayList<User>): RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+class CustomAdapter(private val userList: ArrayList<User>) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.txtName.text = userList[position].name
-        holder.txtTitle.text = userList[position].title
+        holder.binding.txtName.text = userList[position].name
+        holder.binding.txtTitle.text = userList[position].title
         holder.itemView.setOnClickListener {
             val parent = it?.parent?.parent?.parent?.parent
             if (parent is MotionLayout) {
@@ -48,17 +47,14 @@ class CustomAdapter(private val userList: ArrayList<User>): RecyclerView.Adapter
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
-        return ViewHolder(v)
+        val binding = ItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
         return userList.size
     }
 
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        val txtName = itemView.findViewById(R.id.txtName) as TextView
-        val txtTitle = itemView.findViewById(R.id.txtTitle) as TextView
-    }
+    class ViewHolder(val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
 }

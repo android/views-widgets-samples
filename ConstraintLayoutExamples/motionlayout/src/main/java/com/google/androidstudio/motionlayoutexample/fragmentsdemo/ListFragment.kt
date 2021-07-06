@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.androidstudio.motionlayoutexample.R
+import com.google.androidstudio.motionlayoutexample.databinding.Motion22ListFragmentBinding
 
 class ListFragment : Fragment() {
 
@@ -37,7 +38,7 @@ class ListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         Log.i(ListFragment::class.java.simpleName, "onCreateView, container is $container")
-        return inflater.inflate(R.layout.motion_22_list_fragment, container, false)
+        return Motion22ListFragmentBinding.inflate(inflater, container, false).root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
