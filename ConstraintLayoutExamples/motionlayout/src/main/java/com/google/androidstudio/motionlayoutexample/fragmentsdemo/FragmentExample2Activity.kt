@@ -31,6 +31,8 @@ class FragmentExample2Activity: AppCompatActivity(), View.OnClickListener, Motio
     private var lastProgress = 0f
     private var fragment: Fragment? = null
     private var last: Float = 0f
+    private var mLastSwipe: Long = 0
+
 
     override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
         if (p3 - lastProgress > 0) {
@@ -70,6 +72,11 @@ class FragmentExample2Activity: AppCompatActivity(), View.OnClickListener, Motio
     }
 
     override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
+        //Using this way this listener will not let the execute before 250 milli seconds and the problem of multi-triggering will be solved
+        if (SystemClock.elapsedRealtime() - mLastSwipe < 250) {
+            return
+        }
+        mLastSwipe = SystemClock.elapsedRealtime()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
