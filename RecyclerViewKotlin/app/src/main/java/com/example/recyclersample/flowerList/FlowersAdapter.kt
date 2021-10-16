@@ -75,10 +75,10 @@ class FlowersAdapter(private val onClick: (Flower) -> Unit) :
 
 object FlowerDiffCallback : DiffUtil.ItemCallback<Flower>() {
     override fun areItemsTheSame(oldItem: Flower, newItem: Flower): Boolean {
-        return oldItem == newItem
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: Flower, newItem: Flower): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem == newItem
     }
 }
