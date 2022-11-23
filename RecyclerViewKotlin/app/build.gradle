@@ -19,6 +19,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+//    compileSdkVersion 33
     compileSdkVersion 30
 
     defaultConfig {

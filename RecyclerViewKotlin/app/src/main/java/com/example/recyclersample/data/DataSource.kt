@@ -33,7 +33,12 @@ class DataSource(resources: Resources) {
         } else {
             val updatedList = currentList.toMutableList()
             updatedList.add(0, flower)
-            flowersLiveData.postValue(updatedList)
+            val map = updatedList.map {
+                it.copy(
+                    lastUpdatedTimeStamp = System.currentTimeMillis()
+                )
+            }
+            flowersLiveData.postValue(map)
         }
     }
 

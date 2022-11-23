@@ -15,7 +15,7 @@
  */
 
 buildscript {
-    ext.kotlin_version = '1.4.10'
+    ext.kotlin_version = '1.6.0'
     repositories {
         google()
         jcenter()
@@ -45,6 +45,7 @@ ext {
     materialVersion = '1.2.1'
     liveDataVersion = '2.2.0'
     recyclerViewVersion = '1.2.0-alpha06'
+//    recyclerViewVersion = '1.3.0-rc01'
     appCompatVersion = '1.2.0'
     coreKtxVersion = '1.3.2'
     constraintLayoutVersion = '2.0.4'

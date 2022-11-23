@@ -17,6 +17,7 @@
 package com.example.recyclersample.flowerList
 
 import android.content.Context
+import android.os.SystemClock
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.recyclersample.data.DataSource
@@ -38,7 +39,8 @@ class FlowersListViewModel(val dataSource: DataSource) : ViewModel() {
             Random.nextLong(),
             flowerName,
             image,
-            flowerDescription
+            flowerDescription,
+            System.currentTimeMillis(),
         )
 
         dataSource.addFlower(newFlower)

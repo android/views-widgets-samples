@@ -23,5 +23,6 @@ data class Flower(
     val name: String,
     @DrawableRes
     val image: Int?,
-    val description: String
+    val description: String,
+    val lastUpdatedTimeStamp: Long,
 )
