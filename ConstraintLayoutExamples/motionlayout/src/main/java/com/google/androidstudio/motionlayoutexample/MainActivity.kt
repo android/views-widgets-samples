@@ -6,13 +6,13 @@ import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.androidstudio.motionlayoutexample.databinding.ActivityMainBinding
 import com.google.androidstudio.motionlayoutexample.fragmentsdemo.FragmentExample2Activity
 import com.google.androidstudio.motionlayoutexample.fragmentsdemo.FragmentExampleActivity
 import com.google.androidstudio.motionlayoutexample.histogramdemo.HistogramActivity
 import com.google.androidstudio.motionlayoutexample.viewpagerdemo.ViewPagerActivity
 import com.google.androidstudio.motionlayoutexample.viewpagerdemo.ViewPagerActivity2
 import com.google.androidstudio.motionlayoutexample.youtubedemo.YouTubeDemoActivity
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener {
     private lateinit var recyclerView: RecyclerView
@@ -53,16 +53,17 @@ class MainActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         viewManager = LinearLayoutManager(this)
         viewAdapter = DemosAdapter(dataset)
-        recyclerView = findViewById<RecyclerView>(R.id.recyclerview).apply {
+        recyclerView = binding.recyclerview.apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = viewAdapter
         }
 
-        showPaths.setOnCheckedChangeListener(this)
+        binding.showPaths.setOnCheckedChangeListener(this)
     }
 
     override fun onCheckedChanged(p0: CompoundButton?, value: Boolean) {
