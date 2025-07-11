@@ -39,6 +39,7 @@ class ParallelNestedScrollingActivity : Activity() {
             layoutParams = matchParent()
             orientation = ORIENTATION_HORIZONTAL
             adapter = VpAdapter()
+            offscreenPageLimit = 1
         }
         setContentView(viewPager)
     }
